@@ -1,11 +1,34 @@
-const express = require('express'); //Line 1
-const app = express(); //Line 2
-const port = process.env.PORT || 5000; //Line 3
+const express = require('express'); 
+const path = require("path");
+require('dotenv').config(); // Load environment variables from .env file
+const sqlite3 = require('sqlite3').verbose();
 
-// This displays message that the server running and listening to specified port
-app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
+const app = express();
+const port = process.env.PORT || 5000; 
 
-// create a GET route
-app.get('/express_backend', (req, res) => { //Line 9
-  res.send({ express: 'YOUddR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
-}); //Line 11
+/*let db = new sqlite3.Database('./filmie.db', (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to database');
+});*/
+
+app.use(require('./routes/homepage'))
+app.use(require('./routes/profile'))
+app.use(require('./routes/login'))/*
+app.use(require('./routes/register'))
+app.use(require('./routes/search'))*/
+
+
+app.use(
+  express.static(path.join(__dirname, "./client/build"))
+);
+
+app.get('/', (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"));
+});
+
+
+
+app.listen(port, () => console.log(`Listening on port ${port}`)); 
