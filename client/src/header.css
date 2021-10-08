@@ -1,0 +1,24 @@
+.containerHeader{
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0 40px 0 40px;
+    background-color: #ccc8a0;
+}
+
+.title{
+    display: flex;
+    color: white;
+    margin-top:18px;
+    justify-content: flex-start;
+    overflow: visible;
+    
+}
+
+.end{
+    color: white;
+    margin-top:18px;
+}

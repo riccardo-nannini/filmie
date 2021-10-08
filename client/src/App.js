@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+/*import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -23,9 +23,9 @@ function App() {
 }
 
 export default App;
+*/
 
-
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -41,7 +41,7 @@ state = {
   }
     // fetching the GET route from the Express server which matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+    const response = await fetch('/Test2');
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -63,4 +63,4 @@ state = {
   }
 }
 
-export default App;*/
+export default App;
