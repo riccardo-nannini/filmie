@@ -11,49 +11,39 @@ export default function Register() {
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
 
-
-    function handleSubmit() {
-        return;
-    }
-
-    useEffect(() => {
-        console.log(email)
-        console.log(password)
-    }, [email, password])
-
     return (
         <div className="container">
             <Header></Header>
             <div className="middleContainer">
                 <h1 className="formTitle">Sign up</h1>
-                <form className="loginForm" onSubmit={handleSubmit}>
+                <form className="loginForm" action="/register" method="post">
 
-                    <div class="col-3 input-effect">
-                        <input className={name === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setName(e.target.value)} />
+                    <div class="col-4 input-effect">
+                        <input name="name" className={name === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setName(e.target.value)} />
                         <label>Name</label>
                         <span class="focus-border">
                             <i></i>
                         </span>
                     </div>
 
-                    <div class="col-3 input-effect">
-                        <input className={surname === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setSurname(e.target.value)} />
+                    <div class="col-4 input-effect">
+                        <input name="surname" className={surname === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setSurname(e.target.value)} />
                         <label>Surname</label>
                         <span class="focus-border">
                             <i></i>
                         </span>
                     </div>
 
-                    <div class="col-3 input-effect">
-                        <input className={email === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setEmail(e.target.value)} />
+                    <div class="col-4 input-effect">
+                        <input name="email" className={email === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setEmail(e.target.value)} />
                         <label>E-mail</label>
                         <span class="focus-border">
                             <i></i>
                         </span>
                     </div>
 
-                    <div class="col-3 input-effect">
-                        <input class={password === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setPassword(e.target.value)} />
+                    <div class="col-4 input-effect">
+                        <input name="password" class={password === "" ? "effect-20" : "effect-20 has-content"} type="password" placeholder="" onChange={(e) => setPassword(e.target.value)} />
                         <label>Password</label>
                         <span class="focus-border">
                             <i></i>
