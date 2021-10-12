@@ -1,13 +1,9 @@
 const express    = require('express'); 
 const path       = require("path");
-const sqlite3    = require('sqlite3').verbose();
-const conn       = require('./dao/db_connection.js');
 const user       = require('./dao/user.js');
 const session    = require("express-session");
 const passport   = require('passport');
-const cors       = require('cors');
 const LocalStrategy = require("passport-local").Strategy;
-const { User }   = require('./dao/user.js');
 var SQLiteStore  = require('connect-sqlite3')(session);
 require('dotenv').config();
 
@@ -15,7 +11,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000; 
 
-app.use(cors());
+//app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -68,6 +64,7 @@ app.use(passport.session());
 app.use(require('./routes/homepage'))
 app.use(require('./routes/profile'))
 app.use(require('./routes/login'))
+app.use(require('./routes/loginFail'))
 app.use(require('./routes/register'))/*
 app.use(require('./routes/search'))*/
 
@@ -75,6 +72,5 @@ app.get('/', (req, res) => {
   res.sendFile(
     path.join(__dirname, "../client/build/index.html"));
 });
-
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); 

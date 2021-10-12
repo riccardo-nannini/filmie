@@ -15,10 +15,17 @@ export default function Login() {
     const formBody = encodeURIComponent("email")+'='+encodeURIComponent(email)+'&'
       +encodeURIComponent("password")+'='+encodeURIComponent(password);
     console.log(email, " ", password)
-    fetch("http://localhost/8080/login", {
+    fetch("/login", {
       method: "POST",
       headers: {"Content-Type": "application/x-www-form-urlencoded"},
       body: formBody,
+    }).then(response => {
+      if (response.status === 403) {
+        //handle error message
+      }
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
     });
 
   }
@@ -29,10 +36,10 @@ export default function Login() {
       <div className="middleContainer">
         <h1 className="formTitle">Sign in</h1>
         <div className="loginForm">
-          <form action="/login" method="post">
+          <form onSubmit={handleSubmit}>
 
             <div className="col-3 input-effect">
-              <input name="email" className={email === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setEmail(e.target.value)} />
+              <input name="email" className={email === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setEmail(e.target.value)} required/>
               <label>E-mail</label>
               <span class="focus-border">
                 <i></i>
@@ -40,7 +47,7 @@ export default function Login() {
 
             </div>
             <div class="col-3 input-effect">
-              <input name="password" class={password === "" ? "effect-20" : "effect-20 has-content"} type="password" placeholder="" onChange={(e) => setPassword(e.target.value)} />
+              <input name="password" class={password === "" ? "effect-20" : "effect-20 has-content"} type="password" placeholder="" onChange={(e) => setPassword(e.target.value)} required />
               <label>Password</label>
               <span class="focus-border">
                 <i></i>

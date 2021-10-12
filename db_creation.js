@@ -16,5 +16,46 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
         salt TEXT
     )`);
 
-db.run('INSERT into users (name, surname, email, hash, salt) VALUES ("riccardo", "nannini", "riccardo@mail.com", "password", "salt");')
+db.run(`CREATE TABLE IF NOT EXISTS movies (
+      movieid INTEGER PRIMARY KEY AUTOINCREMENT,
+      rating DOUBLE
+  )`);
+
+db.run(`CREATE TABLE IF NOT EXISTS comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movieid INTEGER,
+    userid  INTEGER,
+    comment TEXT,
+    FOREIGN KEY (movieid) REFERENCES movies (movieid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+    FOREIGN KEY (userid) REFERENCES users (id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)`);
+
+db.run(`CREATE TABLE IF NOT EXISTS favorite (
+  userid INTEGER ,
+  movieid INTEGER,
+  PRIMARY KEY (userid, movieid),
+  FOREIGN KEY (movieid) REFERENCES movies (movieid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+    FOREIGN KEY (userid) REFERENCES users (id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)`);
+
+db.run(`CREATE TABLE IF NOT EXISTS watchlist (
+  userid INTEGER ,
+  movieid INTEGER,
+  PRIMARY KEY (userid, movieid),
+  FOREIGN KEY (movieid) REFERENCES movies (movieid)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
+    FOREIGN KEY (userid) REFERENCES users (id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)`);
+
 db.close();

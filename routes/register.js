@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
 
     user.addUser(req.body.name, req.body.surname, req.body.email, hash, salt)
 
-    res.redirect("/");
+    res.redirect("/login");
 }
 );
   
