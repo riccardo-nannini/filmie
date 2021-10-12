@@ -1,5 +1,4 @@
 var crypto = require("crypto");
-const e = require("express");
 const conn = require('./db_connection.js')
 
 
@@ -12,16 +11,17 @@ class User {
   }
 }
 
-function register(name, surname, email, password) {
-  console.log(email);
-}
-
 function findById(id, cb) {
   db = conn.db_connection.getConnection();
   db.get("SELECT * FROM users WHERE id = ?;", [id], (err, user) => {
     if (!user) return cb(null, false);
     return cb(null, user);
   });
+}
+
+function findByEmail(email) {
+  db = conn.db_connection.getConnectionAsync();
+  return db.get("SELECT * FROM users WHERE email = ?;", [email]);
 }
 
 function authenticate(email, password, cb) {
@@ -67,9 +67,9 @@ function genPassword(password) {
 
 module.exports = {
         User: User,
-        register: register,
         findById: findById,
         authenticate: authenticate,
         genPassword: genPassword,
-        addUser: addUser
+        addUser: addUser,
+        findByEmail: findByEmail,
       };

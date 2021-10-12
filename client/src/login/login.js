@@ -8,26 +8,30 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const formBody = encodeURIComponent("email")+'='+encodeURIComponent(email)+'&'
       +encodeURIComponent("password")+'='+encodeURIComponent(password);
-    console.log(email, " ", password)
+    
     fetch("/login", {
       method: "POST",
       headers: {"Content-Type": "application/x-www-form-urlencoded"},
       body: formBody,
     }).then(response => {
       if (response.status === 403) {
-        //handle error message
+        setErrorMessage("Incorrect password or email");
+        setError(true);
+        return;
       }
       if (response.redirected) {
         window.location.href = response.url;
+        return;
       }
     });
-
   }
 
   return (
@@ -38,7 +42,7 @@ export default function Login() {
         <div className="loginForm">
           <form onSubmit={handleSubmit}>
 
-            <div className="col-3 input-effect">
+            <div className="input1 input-effect">
               <input name="email" className={email === "" ? "effect-20" : "effect-20 has-content"} type="text" placeholder="" onChange={(e) => setEmail(e.target.value)} required/>
               <label>E-mail</label>
               <span class="focus-border">
@@ -46,7 +50,7 @@ export default function Login() {
               </span>
 
             </div>
-            <div class="col-3 input-effect">
+            <div className={error? "input2 input-effect":"input1 input-effect"}>
               <input name="password" class={password === "" ? "effect-20" : "effect-20 has-content"} type="password" placeholder="" onChange={(e) => setPassword(e.target.value)} required />
               <label>Password</label>
               <span class="focus-border">
@@ -54,6 +58,7 @@ export default function Login() {
               </span>
 
             </div>
+            {error? <div className="errorMessageLogin">{errorMessage}</div> : null}
             <button type="submit" value="Submit">Login</button>
           </form>
           <Link className="signUp" to="/register">Don't have an account? Sign up</Link>

@@ -14,6 +14,11 @@
     background: linear-gradient(45deg, rgba(70,52,78,1) 0%, rgba(77,68,87,1) 79%, rgba(84,85,96,1) 100%); 
   }
 
+  .errorMessageLogin{
+    margin: 0px 16px 20px 16px;
+    color: red;
+    font-weight: 350;
+  }
 
 .middleContainer{
     margin: 0;
@@ -44,7 +49,8 @@
 
 :focus{outline: none;}
 
-.col-3{ width: 93%; margin: 32px 3%; position: relative;} /* necessary to give position: relative to parent. */
+.input1{ width: 93%; margin: 32px 3%; position: relative;} /* necessary to give position: relative to parent. */
+.input2{ width: 93%; margin: 32px 3% 18px 3%; position: relative;} /* necessary to give position: relative to parent. */
 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 
