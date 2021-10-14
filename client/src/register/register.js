@@ -3,6 +3,7 @@ import './register.css'
 import Header from '../header.js';
 import { useState, useEffect } from 'react';
 import { Link, withRouter } from "react-router-dom";
+import isInputValid from './inputValidation';
 
 export default function Register() {
 
@@ -13,27 +14,12 @@ export default function Register() {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-
-    function isInputValid() {
-        if (!validateEmail(email)) {
-            setErrorMessage("Please insert a correct email address")
-            return false;
-        }
-        if (password.length < 8) {
-            setErrorMessage("Password must be at least 8 characters long")
-            return false;
-        }
-        return true;
-    }
-
-    function validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!isInputValid()) {
+    const [errorMessage, result] = isInputValid(email, password);
+    if (!result) {
+        setErrorMessage(errorMessage);
         setError(true);
         return;
     }
@@ -100,7 +86,7 @@ export default function Register() {
                     </div>
                     {error? <div className="errorMessage">{errorMessage}</div> : null}
                     <button type="submit" value="Submit">Register</button>
-                    <Link className="sign" to="/">Already have an account? Sign in</Link>
+                    <Link className="sign" to="/login">Already have an account? Sign in</Link>
                     <div className="copyright">Copyright @ <Link to="/home">Filmie</Link> 2021</div>
                 </form>
             </div>

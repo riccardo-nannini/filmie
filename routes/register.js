@@ -1,19 +1,8 @@
+import inputValidation from '../utils/inputValidation.js';
 var express = require('express');
 const path = require("path");
 var router = express.Router();
 const user = require('../dao/user.js');
-
-function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
-
-function inputValidation(user) {
-  //TODO check che tutti i campi siano presenti
-  if (!validateEmail(user.email)) return false;
-  if (String(user.password).length < 8) return false;
-  return true;
-}
 
 router.get('/register', (req, res) => {
   res.sendFile(
