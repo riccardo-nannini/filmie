@@ -4,10 +4,10 @@ import './index.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import SignInSide from './login/login.js';
-import Home from './App.js'
+import Home from './home/home.js'
 import Register from './register/register.js'
 import LoginFail from './loginFail.js'
-import Protected from './protected.js'
+import Profile from './profile/profile.js'
 
 
 ReactDOM.render(
@@ -18,7 +18,7 @@ ReactDOM.render(
         <Route path="/login" exact component={() => <SignInSide/>}></Route>
         <Route path="/register" exact component={() => <Register/>}></Route>
         <Route path="/loginFail" exact component={() => <LoginFail/>}></Route>
-        <Route path="/protected" exact component={() => <Protected/>}></Route>
+        <Route path="/profile" exact component={() => <Profile/>}></Route>
       </Switch>
     </Router>
   </React.StrictMode>,

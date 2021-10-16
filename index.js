@@ -70,12 +70,12 @@ passport.deserializeUser((userId, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(require('./routes/homepage'))
+app.use(require('./routes/logout'))
 app.use(require('./routes/profile'))
 app.use(require('./routes/login'))
 app.use(require('./routes/loginFail'))
-app.use(require('./routes/register'))/*
-app.use(require('./routes/search'))*/
+app.use(require('./routes/register'))
+app.use(require('./routes/user'))
 
 app.get('/', (req, res) => {
   res.sendFile(

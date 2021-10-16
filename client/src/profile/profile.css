@@ -1,0 +1,17 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: rgb(70,52,78);
+    background: linear-gradient(45deg, rgba(70,52,78,1) 0%, rgba(77,68,87,1) 79%, rgba(84,85,96,1) 100%); 
+  }
+
+.page {
+  margin: 50px 20px 20px 300px;
+  float: left;
+  color: white;
+  font-size: 25px;
+}

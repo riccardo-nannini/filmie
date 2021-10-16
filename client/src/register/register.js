@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './register.css'
-import Header from '../header.js';
+import Header from '../header/header.js';
 import { useState, useEffect } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import isInputValid from './inputValidation';
