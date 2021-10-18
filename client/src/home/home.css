@@ -4,7 +4,23 @@
     left: 0;
     bottom: 0;
     right: 0;
+    height: 1000px;
     overflow: auto;
     background: rgb(70,52,78);
     background: linear-gradient(45deg, rgba(70,52,78,1) 0%, rgba(77,68,87,1) 79%, rgba(84,85,96,1) 100%); 
+  }
+
+  .core {
+    background-color: aqua;
+    height: 800px;
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 170px;
+    background-color: red;
+    color: white;
+    text-align: center;
   }

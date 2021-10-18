@@ -19,6 +19,11 @@ function findById(id, cb) {
   });
 }
 
+function findByIdAsync(id) {
+  db = conn.db_connection.getConnectionAsync();
+  return db.get("SELECT * FROM users WHERE id = ?;", [id])
+}
+
 function findByEmail(email) {
   db = conn.db_connection.getConnectionAsync();
   return db.get("SELECT * FROM users WHERE email = ?;", [email]);
@@ -68,6 +73,7 @@ function genPassword(password) {
 module.exports = {
         User: User,
         findById: findById,
+        findByIdAsync: findByIdAsync,
         authenticate: authenticate,
         genPassword: genPassword,
         addUser: addUser,

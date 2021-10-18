@@ -17,7 +17,7 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     )`);
 
 db.run(`CREATE TABLE IF NOT EXISTS movies (
-      movieid INTEGER PRIMARY KEY AUTOINCREMENT,
+      movieid INTEGER PRIMARY KEY,
       rating DOUBLE
   )`);
 

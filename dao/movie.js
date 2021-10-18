@@ -5,6 +5,11 @@ function findById(movieid) {
     return db.get("SELECT * FROM movies WHERE movieid = ?",[movieid]);
 }
 
+function createMovie(movieid) {
+    db = conn.db_connection.getConnectionAsync();
+    return db.run("INSERT INTO movies (movieid) VALUES (?)", [movieid]);
+}
+
 function addRating(movieid, rating) {
     db = conn.db_connection.getConnectionAsync();
     return db.get("SELECT * FROM movies WHERE movieid = ?", [movieid])
@@ -19,5 +24,6 @@ function addRating(movieid, rating) {
 
 module.exports = {
     findById: findById,
+    createMovie: createMovie,
     addRating: addRating
 }

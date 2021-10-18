@@ -23,6 +23,8 @@ export default function Home() {
   return (
     <div className="container">
       <Header></Header>
+      <div className="core"></div>
+      <div className="footer"></div>
     </div>
   );
 
