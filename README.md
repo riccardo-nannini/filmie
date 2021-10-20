@@ -25,7 +25,7 @@ Unit tests that will be implemented include, but not limit to:
 
 - **FavoriteDAO**: checks insertion/deletion/retrieval of movies from the favorite list
 
-- **WatchlistDAO**: checks insertion/deletion/retrieval of movies from the favorite list
+- **WatchlistDAO**: checks insertion/deletion/retrieval of movies from the watchlist
 
 - **UserDAO**: validates the update/deletion of users account
 
