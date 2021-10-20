@@ -213,3 +213,21 @@ test('Ok #3', () => {
         password: "dsa73HSD&£"
     })).toBe(true);
 });
+
+test('Ok #4', () => {
+    expect(inputValidation({
+        name: "Riccardo",
+        surname: "Nannini",
+        email: "riccardo@mymail.it",
+        password: "superSecret0"
+    })).toBe(true);
+});
+
+test('Ok #5', () => {
+    expect(inputValidation({
+        name: "Elena",
+        surname: "Mininni",
+        email: "elena@mail.io",
+        password: "14Ottobre2020"
+    })).toBe(true);
+});

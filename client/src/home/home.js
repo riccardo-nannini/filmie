@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Footer from '../footer/footer.js';
 import Header from '../header/header.js';
 import './home.css';
 
@@ -21,10 +22,10 @@ export default function Home() {
   }, []);*/
 
   return (
-    <div className="container">
+    <div>
       <Header></Header>
       <div className="core"></div>
-      <div className="footer"></div>
+      <Footer></Footer>
     </div>
   );
 

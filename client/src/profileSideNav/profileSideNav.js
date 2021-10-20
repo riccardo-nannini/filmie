@@ -18,8 +18,6 @@ export default function ProfileNav() {
   
   return (
     <div class="sidenav">
-        <a href="#">Watchlist</a>
-        <a href="#">Favorites</a>
         <a href="#">Update profile</a>
         <a href="#">Delete account</a>
         <a onClick={logout}>Logout</a>

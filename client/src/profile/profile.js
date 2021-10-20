@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from '../header/header.js';
+import Footer from '../footer/footer.js';
 import ProfileNav from '../profileSideNav/profileSideNav.js';
 import './profile.css';
 
@@ -24,8 +25,13 @@ export default function Profile() {
   return (
     <div className="container">
       <Header></Header>
-      <ProfileNav></ProfileNav>
-      <div className="page">Hi {user.name}</div>
+      <div className="middle">
+        <ProfileNav></ProfileNav>
+        <div className="page">
+          <span className="mainText">Hi {user.name}</span>
+        </div>
+      </div>
+      <Footer></Footer>
     </div>
   );
 
