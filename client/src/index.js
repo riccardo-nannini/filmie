@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import SignInSide from './login/login.js';
 import Home from './home/home.js'
 import Register from './register/register.js'
-import LoginFail from './loginFail.js'
 import Profile from './profile/profile.js'
 
 
@@ -17,7 +16,6 @@ ReactDOM.render(
         <Route path="/" exact component={() => <Home/>}></Route>
         <Route path="/login" exact component={() => <SignInSide/>}></Route>
         <Route path="/register" exact component={() => <Register/>}></Route>
-        <Route path="/loginFail" exact component={() => <LoginFail/>}></Route>
         <Route path="/profile" exact component={() => <Profile/>}></Route>
       </Switch>
     </Router>

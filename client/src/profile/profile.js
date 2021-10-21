@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from '../header/header.js';
 import Footer from '../footer/footer.js';
-import ProfileNav from '../profileSideNav/profileSideNav.js';
+import ProfileNav from './profileSideNav/profileSideNav.js';
 import './profile.css';
 
 export default function Profile() {

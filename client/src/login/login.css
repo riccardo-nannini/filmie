@@ -51,7 +51,7 @@
 
 .input1{ width: 93%; margin: 32px 3%; position: relative;} /* necessary to give position: relative to parent. */
 .input2{ width: 93%; margin: 32px 3% 18px 3%; position: relative;} /* necessary to give position: relative to parent. */
-input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+.input1 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 
 

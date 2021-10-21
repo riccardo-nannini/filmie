@@ -51,7 +51,7 @@
 
 .inputNormal{ width: 93%; margin: 21px 3%; position: relative;}
 .inputError{ width: 93%; margin: 21px 3% 12px 3%; position: relative;} 
-input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+.inputNormal input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 
 
