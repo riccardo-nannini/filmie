@@ -56,10 +56,9 @@ export default function Login() {
               <span class="focus-border">
                 <i></i>
               </span>
-
             </div>
             {error? <div className="errorMessageLogin">{errorMessage}</div> : null}
-            <button type="submit" value="Submit">Login</button>
+            <button className="loginButton" type="submit" value="Submit">Login</button>
           </form>
           <Link className="signUp" to="/register">Don't have an account? Sign up</Link>
           <div className="copyright">Copyright @ <Link to="/home">Filmie</Link> 2021</div>

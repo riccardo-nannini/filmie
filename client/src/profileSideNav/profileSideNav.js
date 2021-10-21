@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './profileSideNav.css'
 
-export default function ProfileNav() {
+export default function ProfileNav(props) {
 
     function logout(e) {
         e.preventDefault();
@@ -18,8 +18,9 @@ export default function ProfileNav() {
   
   return (
     <div class="sidenav">
-        <a href="#">Update profile</a>
-        <a href="#">Delete account</a>
+        <a onClick={props.overview}>Overview</a>
+        <a onClick={props.update}>Update profile</a>
+        <a onClick={props.delete}>Delete account</a>
         <a onClick={logout}>Logout</a>
       </div>
   );
