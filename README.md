@@ -1,6 +1,5 @@
 # CS484 Secure Web Application Development
 
-<<<<<<< HEAD
 ### Team 28 - Fall 2021 
 
 ## Developer :bust_in_silhouette:
