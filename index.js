@@ -42,11 +42,9 @@ var session_config = {
 };
 
 session_config.cookie.secure = false;
-//IMPORTANT REVIEW IN CLASS - https://expressjs.com/en/resources/middleware/session.html
 
 //Express Sessions
 app.use(session(session_config))
-//Reference for above - https://www.section.io/engineering-education/session-management-in-nodejs-using-expressjs-and-express-session/
 
 passport.use(
   new LocalStrategy({
@@ -73,7 +71,6 @@ app.use(passport.session());
 app.use(require('./routes/logout'))
 app.use(require('./routes/profile'))
 app.use(require('./routes/login'))
-app.use(require('./routes/loginFail'))
 app.use(require('./routes/register'))
 app.use(require('./routes/user'))
 

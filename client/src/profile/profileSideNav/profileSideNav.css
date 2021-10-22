@@ -1,7 +1,7 @@
 /* The sidebar menu */
 .sidenav {
     width: 190px; 
-    background-color: #111; /* Black */
+    background-color: rgb(23, 10, 31); /* Black */
     overflow-x: hidden; 
     padding-top: 20px;
     flex-grow: 0.5;

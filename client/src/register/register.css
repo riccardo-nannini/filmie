@@ -27,7 +27,6 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background-color: white;
     width: 500px;
     display: flex;
     flex-direction: column;

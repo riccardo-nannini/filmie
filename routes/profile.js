@@ -13,7 +13,7 @@ router.get('/profile', (req, res) => {
     res.sendFile(
       path.join(__dirname, "../client/build/index.html"));
   } else {
-    res.send("<h1>You are not authenticated</h1>");
+    res.redirect("/login");
   }
 });
 

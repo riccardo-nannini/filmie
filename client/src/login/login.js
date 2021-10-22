@@ -3,6 +3,7 @@ import './login.css'
 import Header from '../header/header.js';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import Footer from '../footer/footer';
 
 export default function Login() {
 
@@ -65,6 +66,7 @@ export default function Login() {
 
         </div>
       </div>
+      <Footer isFixed={true}></Footer>
     </div>
   );
 }

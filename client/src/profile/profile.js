@@ -43,7 +43,7 @@ export default function Profile() {
 
 
   return (
-    <div className="container">
+    <div className="profileContainer">
       <Header></Header>
       <div className="middle">
         <ProfileNav overview={clickOverview} delete={clickDelete} update={clickUpdate}></ProfileNav>
