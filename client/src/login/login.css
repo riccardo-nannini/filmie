@@ -52,15 +52,15 @@
 .input1{ width: 93%; margin: 32px 3%; position: relative;} /* necessary to give position: relative to parent. */
 .input2{ width: 93%; margin: 32px 3% 18px 3%; position: relative;} /* necessary to give position: relative to parent. */
 .input1 input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
-input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
+input[type="password"]{background-color:transparent; font: 15px/24px "Lato", Arial, sans-serif; color: #333; width: 100%; box-sizing: border-box; letter-spacing: 1px;}
 
 
 .effect-20{border: 1px solid #ccc; padding: 7px 14px; transition: 0.4s; background: transparent;}
 .effect-20 ~ .focus-border:before,
-.effect-20 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #ff33dd; transition: 0.3s;}
+.effect-20 ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #3e7761; transition: 0.3s;}
 .effect-20 ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
 .effect-20 ~ .focus-border i:before,
-.effect-20 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #ffc933; transition: 0.4s;}
+.effect-20 ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #3e7761; transition: 0.4s;}
 .effect-20 ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0;}
 .effect-20:focus ~ .focus-border:before,
 .effect-20:focus ~ .focus-border:after,
@@ -74,7 +74,7 @@ input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; w
 .effect-20:focus ~ label, .has-content.effect-20 ~ label{top: -18px; left: 0; font-size: 12px; color: #63d62e; transition: 0.3s;}
 
 .loginButton {
-  background-color: #04AA6D;
+  background-color: #3e7761;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -82,7 +82,7 @@ input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; w
   cursor: pointer;
   width: 93%;
   margin:0 3% 16px 3%;
-  box-shadow: -1px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: -1px 1px 5px 0px rgba(0,0,0,0.75);
 }
 
 .signUp{
@@ -94,11 +94,11 @@ input[type="password"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; w
 }
 
 .loginButton:hover {
-  opacity: 0.8;
+  opacity: 0.92;
 }
 
 .loginButton:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  background-color: #275f4a;
+  box-shadow: 0 1px #666;
+  transform: translateY(0px);
 }
