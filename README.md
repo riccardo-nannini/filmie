@@ -2,11 +2,27 @@
 
 ### Team 28 - Fall 2021 
 
-## Developer :bust_in_silhouette:
- #### Riccardo Nannini :it:
-- Frontend, Backend, Database
-<br><br>
-[GitHub](https://github.com/riccardo-nannini), [Linkedin](https://www.linkedin.com/in/riccardo-nannini/), [Twitter](https://twitter.com/NanniniRiccardo)
+## Build and run :pager:
+
+Requirements:
+
+- [node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+
+Build the React front-end
+```
+cd client
+npm install
+npm run build
+```
+Run the back-end
+```
+cd ..
+npm install
+node index.js
+```
+
+By default the server will run on port 8080, it is possible to change the port with PORT=*yourport* in a **_.env_** file
 
 ## Test Strategy :hammer:
 **Unit tests** will be created for every meaningful part of the application.<br>
@@ -53,3 +69,10 @@ A graphic view of the workflow strategy can be observed in the image below:<br><
 - [VsCode](https://code.visualstudio.com/) Editor
 - [GitHub](https://github.com/) Repository hosting
 - [Postman](https://www.postman.com/) Testing
+
+## Developer :bust_in_silhouette:
+ #### Riccardo Nannini :it:
+- Frontend, Backend, Database
+<br><br>
+[GitHub](https://github.com/riccardo-nannini), [Linkedin](https://www.linkedin.com/in/riccardo-nannini/), [Twitter](https://twitter.com/NanniniRiccardo)
+
