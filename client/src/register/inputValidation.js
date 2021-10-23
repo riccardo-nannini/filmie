@@ -7,6 +7,10 @@ function isInputValid(email, password) {
     if (!validateEmail(email)) {
         return ["Please insert a correct email address", false]
     }
+    return isPasswordValid(password)
+}
+
+function isPasswordValid(password) {
     if (password.length < 8) {
         return ["Your password must be at least 8 characters long", false]
     }
@@ -22,4 +26,7 @@ function isInputValid(email, password) {
     return ["", true]
 }
 
-module.exports = isInputValid;
+module.exports = {
+    isInputValid: isInputValid,
+    isPasswordValid: isPasswordValid
+}

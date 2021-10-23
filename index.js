@@ -12,7 +12,7 @@ require('dotenv').config();
 
 
 const app = express();
-const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 8080; 
 
 (async () => {
   conn.db_connection.connectionAsync = await open({
@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 })
 
 var session_config = {
-  secret: 'secret', //a random unique string key used to authenticate a session
+  secret: process.env.SECRET || 'secret', //a random unique string key used to authenticate a session
   resave: true, //enables the session to be stored back to the session store, even if the session was never modified during the request
   saveUninitialized: true, //this allows any uninitialized session to be sent to the store. When a session is created but not modified, it is referred to as uninitialized.
   cookie: { secure: true }, //true is a recommended option. However, it requires an https-enabled website

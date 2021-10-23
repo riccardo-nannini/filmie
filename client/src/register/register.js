@@ -3,8 +3,8 @@ import './register.css'
 import Header from '../header/header.js';
 import { useState, useEffect } from 'react';
 import { Link, withRouter } from "react-router-dom";
-import isInputValid from './inputValidation';
 import Footer from '../footer/footer';
+const inputValidation = require('./inputValidation.js');
 
 export default function Register() {
 
@@ -18,7 +18,7 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const [errorMessage, result] = isInputValid(email, password);
+    const [errorMessage, result] = inputValidation.isInputValid(email, password);
     if (!result) {
         setErrorMessage(errorMessage);
         setError(true);

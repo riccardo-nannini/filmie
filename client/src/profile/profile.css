@@ -4,7 +4,9 @@
   flex-wrap: nowrap;
   width: 100%;
   min-height: 88vh;
-  background: rgb(70,52,78);
+}
+
+body {
   background: linear-gradient(45deg, rgba(70,52,78,1) 0%, rgba(77,68,87,1) 79%, rgba(84,85,96,1) 100%); 
 }
 
@@ -30,6 +32,13 @@
   font-size: 32px;
 }
 
+.updateText {
+  color: white;
+  font-size: 32px;
+  margin-left: 20px;
+  margin-top:10px;
+}
+
 .mainText{
   color: white;
   font-size: 26px;
@@ -48,6 +57,17 @@
   margin-top: 80px;
 }
 
+.errorMessageUpdate{
+  margin: 0px 16px 20px 16px;
+  color: rgb(243, 61, 61);
+  font-weight: 350;
+}
+
+.updateForm.effect-20:focus ~ label, .updateForm.has-content.effect-20 ~ label{top: -22px; left: 0; font-size: 15px; color: #ccc; transition: 0.3s;}
+
+.updateForm input[type="password"]{
+  color: #ccc;
+}
 .deleteButton {
   background-color: #8a8a8a;
   color: white;
@@ -58,6 +78,29 @@
   width: 20%;
   margin:0 3% 16px 3%;
   box-shadow: -1px 3px 5px 0px rgba(0,0,0,0.75);
+}
+
+.updateButton {
+  background-color: #3e7761;
+  color: white;
+  font-size: 16px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 93%;
+  margin:0 3% 16px 3%;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.397);
+}
+
+.updateButton:hover {
+  opacity: 0.92;
+}
+
+.updateButton:active {
+  background-color: #275f4a;
+  box-shadow: 0 1px rgba(102, 102, 102, 0.5);
+  transform: translateY(0px);
 }
 
 .buttonContainer {
