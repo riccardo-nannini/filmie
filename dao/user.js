@@ -1,7 +1,6 @@
 var crypto = require("crypto");
 const conn = require('./db_connection.js')
 
-
 class User {
   constructor(id, name, surname, email) {
     this.id = id;
@@ -45,20 +44,35 @@ function authenticate(email, password, cb) {
   })
 };
 
+function authenticateAsync(email, password) {
+  db = conn.db_connection.getConnectionAsync();
+  return db.get("SELECT * FROM users WHERE email=?;", [email])
+    .then((user) => {
+      return validPassword(String(password), user.hash, user.salt);
+    })
+}
+
 function addUser(name, surname, email, hash, salt) {
   db = conn.db_connection.getConnection();
   db.run("INSERT INTO users (name, surname, email, hash, salt) VALUES (?,?,?,?,?);"
     ,[name, surname, email, hash, salt]);
 }
 
-function validPassword(password, hash, salt) { 
+function validPassword(password, hash, salt) {
   var hashVerify = crypto
     .pbkdf2Sync(password, salt, 10000, 64, "sha512")
     .toString("hex");
   return hash === hashVerify;
 }
 
-function genPassword(password) {
+function updatePassword(email, password) {
+  db = conn.db_connection.getConnection();
+  const saltHash = genPassword(password);
+
+  db.run("UPDATE users SET hash = ?, salt = ? WHERE email = ?", [saltHash.hash, saltHash.salt, email]);
+}
+
+function genPassword(password) { 
         var salt = crypto.randomBytes(32).toString("hex");
         var genHash = crypto
           .pbkdf2Sync(password, salt, 10000, 64, "sha512")
@@ -68,7 +82,12 @@ function genPassword(password) {
           salt: salt,
           hash: genHash,
         };
-      }
+}
+
+function deleteUser(email) {
+  db = conn.db_connection.getConnectionAsync();
+  return db.run("DELETE FROM users WHERE email = ?", [email]);
+}  
 
 module.exports = {
         User: User,
@@ -77,5 +96,8 @@ module.exports = {
         authenticate: authenticate,
         genPassword: genPassword,
         addUser: addUser,
+        deleteUser: deleteUser,
         findByEmail: findByEmail,
+        updatePassword: updatePassword,
+        authenticateAsync: authenticateAsync,
       };

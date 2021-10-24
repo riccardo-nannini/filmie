@@ -72,7 +72,10 @@ app.use(require('./routes/logout'))
 app.use(require('./routes/profile'))
 app.use(require('./routes/login'))
 app.use(require('./routes/register'))
-app.use(require('./routes/user'))
+app.use(require('./routes/userInfo'))
+app.use(require('./routes/updateProfile'))
+app.use(require('./routes/deleteProfile'))
+
 
 app.get('/', (req, res) => {
   res.sendFile(
