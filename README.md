@@ -19,6 +19,7 @@ Run the back-end
 ```
 cd ..
 npm install
+node db_creation.js
 node index.js
 ```
 
