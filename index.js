@@ -75,6 +75,7 @@ app.use(require('./routes/register'))
 app.use(require('./routes/userInfo'))
 app.use(require('./routes/updateProfile'))
 app.use(require('./routes/deleteProfile'))
+app.use(require('./routes/movie'))
 
 
 app.get('/', (req, res) => {

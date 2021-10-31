@@ -1,0 +1,92 @@
+.movieCont {
+    display: flex;
+    flex-direction: column;
+}
+
+.moviemiddle {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-height: 88vh;
+}
+
+.movieOverlay{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-height: 88vh;
+    background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,0.4) 100%);;
+}
+
+.moviePoster{
+    border-radius: 5px;
+}
+
+.centered {
+    margin: 2% 3%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+}
+
+.movieContent {
+    margin: 150px 0px 0px 100px;
+    color: white;
+}
+
+.movieYear{
+    font-size: 29px;
+    margin-left: 7px;
+    font-weight: 500;
+}
+
+.genresInfo {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.movieDuration {
+    font-size: 20px;
+    margin-left: 15px;
+    font-weight: 300;
+}
+
+.movieTagline{
+    margin-top: 35px;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.movieOverview{
+    margin-top: 35px;
+    font-size: 17px;
+    font-weight: 500;
+    max-width: 800px;
+}
+
+.movieTitle{
+    display: flex;
+    flex-direction: row;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.noImage {
+    background-color: grey;
+    width: 400px;
+    height: 600px;
+}
+
+.brokenImage {
+    width: 140px;
+    margin-top:50%;
+    margin-left: 30%;
+    
+}

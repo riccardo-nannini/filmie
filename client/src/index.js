@@ -4,9 +4,11 @@ import './index.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import SignInSide from './login/login.js';
-import Home from './home/home.js'
-import Register from './register/register.js'
-import Profile from './profile/profile.js'
+import Home from './home/home.js';
+import Register from './register/register.js';
+import Profile from './profile/profile.js';
+import Movie from './movie/movie.js'
+import Tv from './tv/tv.js'
 
 
 ReactDOM.render(
@@ -17,6 +19,8 @@ ReactDOM.render(
         <Route path="/login" exact component={() => <SignInSide/>}></Route>
         <Route path="/register" exact component={() => <Register/>}></Route>
         <Route path="/profile" exact component={() => <Profile/>}></Route>
+        <Route path="/movie/:movieid" component={(props) => <Movie {...props}/>}></Route>
+        <Route path="/tv/:tvid" exact component={(props) => <Tv {...props}/>}></Route>
       </Switch>
     </Router>
   </React.StrictMode>,
