@@ -27,7 +27,8 @@ app.use(
   express.static(path.join(__dirname, "./client/build"))
 );
 app.use(function(req, res, next) {
-  console.log(req.body); next();
+  console.log(req.body); 
+  next();
 })
 
 var session_config = {
@@ -76,6 +77,9 @@ app.use(require('./routes/userInfo'))
 app.use(require('./routes/updateProfile'))
 app.use(require('./routes/deleteProfile'))
 app.use(require('./routes/movie'))
+app.use(require('./routes/favorite'))
+app.use(require('./routes/watchlist'))
+
 
 
 app.get('/', (req, res) => {

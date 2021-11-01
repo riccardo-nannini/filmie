@@ -18,7 +18,7 @@ function updateComment(commentID, comment) {
 
 function getCommentsByMovie(movieid) {
     db = conn.db_connection.getConnectionAsync();
-    return db.run("SELECT * FROM comments WHERE movieid = ?", [movieid])
+    return db.all("SELECT * FROM comments WHERE movieid = ?", [movieid])
 }
 
 module.exports = {

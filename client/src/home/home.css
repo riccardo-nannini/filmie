@@ -19,11 +19,20 @@ form.searchBarForm input[type=text] {
   background: #f1f1f1;
 }
 
+.movieImage{
+  width: 150px;
+  height: 225px;
+}
+
+.sliderContainer{
+  height: 225px;
+  border-radius: 8px;
+}
 form.searchBarForm button {
   width: 4%;
   min-width: 44px;
   padding: 10px;
-  background: #8a27cc;
+  background: #5f1f8a;
   color: white;
   font-size: 17px;
   border: 1px solid grey;
@@ -41,26 +50,27 @@ form.searchBarForm::after {
   display: table;
 }
 
+
 .movieContainer{
   display: flex;
   flex-direction: column;
   height: 240px;
   min-height: 240;
-  margin: 40px 50px 40px 50px;
+  margin: 40px 100px 30px 100px;
 }
 
 .slideTitle {
   color: white;
   height: 35px;
   font-size: 20px;
-  padding-left:8px;
+  padding-left:3px;
+  margin-bottom: 7px;
 }
 
 .content{
-  background-color: rgb(51, 21, 63);
-  height: 205px;
+  height: 225px;
 }
 
-.movieContainer:first-of-type{
-  margin-bottom: 0px;
+.movieContainer:last-of-type{
+  margin-bottom: 90px;
 }

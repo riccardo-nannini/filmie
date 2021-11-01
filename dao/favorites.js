@@ -12,7 +12,7 @@ function removeFavorite(userID, movieID) {
 
 function getFavorite(userID) {
     db = conn.db_connection.getConnectionAsync();
-    return db.get("SELECT movieid FROM favorite WHERE userid = ?", [userID])
+    return db.all("SELECT movieid FROM favorite WHERE userid = ?", [userID])
 }
 
 module.exports = {

@@ -13,28 +13,12 @@ export default function Movie(props) {
 
   const id = props.location.pathname.substring(7)
 
-  /*useEffect(() => {
-    setMovieInfo({
-      id: id,
-      year: "1999",
-      title: "Fight Club",
-      duration: "139",
-      rating: "8.4",
-      genres: "Drama",
-      overview: "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.",
-      tagline: "Mischief. Mayhem. Soap.",
-      poster: "https://image.tmdb.org/t/p/w400//a26cQPRhJPX6GbWfQbvZdrrp9j9.jpg",
-      backdrop: "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/3nv2TEz2u178xPXzdKlZdUh5uOI.jpg"
-    })
-  }, []);*/
-
   useEffect(() => {
     const url = "/movie/"+id
     fetch(url, {
       method: "POST"
     }).then(response => response.json())
       .then(data => {
-        console.log(data)
         setMovieInfo(data);
       });
   }, []);

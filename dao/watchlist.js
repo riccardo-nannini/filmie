@@ -12,7 +12,7 @@ function removeWatchlist(userID, movieID) {
 
 function getWatchlist(userID) {
     db = conn.db_connection.getConnectionAsync();
-    return db.get("SELECT movieid FROM watchlist WHERE userid = ?", [userID])
+    return db.all("SELECT movieid FROM watchlist WHERE userid = ?", [userID])
 }
 
 module.exports = {

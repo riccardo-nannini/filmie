@@ -2,7 +2,7 @@ const conn = require('./db_connection.js')
 
 function findById(movieid) {
     db = conn.db_connection.getConnectionAsync();
-    return db.get("SELECT * FROM movies WHERE movieid = ?",[movieid]);
+    return db.all("SELECT * FROM movies WHERE movieid = ?",[movieid]);
 }
 
 function createMovie(movieid) {

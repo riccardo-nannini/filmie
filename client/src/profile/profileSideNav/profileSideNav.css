@@ -1,12 +1,14 @@
 /* The sidebar menu */
 .sidenav {
     width: 190px; 
-    background-color: rgb(23, 10, 31); /* Black */
+    background-color: rgba(68, 146, 177, 0.2); /* Black */
     overflow-x: hidden; 
     padding-top: 20px;
     flex-grow: 0.5;
     flex-shrink: 0;
     flex-basis: 155px;
+    border-radius: 30px;
+    margin: 20px 00px 20px 20px;
   }
   
 .sidenav a{
