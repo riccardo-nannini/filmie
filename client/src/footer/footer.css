@@ -27,23 +27,15 @@
 
   .copyrightFooter{
     padding-top: 14px;
-
   }
 
+  .footerLink {
+    color: white;
+    text-decoration: inherit;
+  }
   .contact{
     padding-top: 14px;
-    color: rgb(69, 45, 114);
-
-
+    color: white;
+    text-decoration: inherit;
   }
 
-  @media screen and (max-width: 1000px) {
-    .sidenav {
-      flex-basis: 100px;
-      flex-grow: 0.2;
-    }
-    .sidenav a {
-      font-size: 18px;
-      padding-right: 2%;
-    }
-  } 

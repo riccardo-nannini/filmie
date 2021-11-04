@@ -1,0 +1,43 @@
+.searchMovieContainer {
+  display: flex;
+  flex-direction: row;
+  height: 180px;
+  margin: 20px;
+  color: white;
+}
+
+.searchMoviePoster{
+  border-radius: 5px;
+  width: 120px;
+}
+
+.searchMovieTitle{
+  display: flex;
+  flex-direction: row;
+  font-size: 27px;
+  font-weight: 600;
+  margin: 17px 0px 14px 20px;
+}
+
+.searchMovieYear{
+  font-size: 24px;
+  margin-left: 7px;
+  font-weight: 500;
+  padding-top: 2.5px;
+}
+
+.searchDescription a{
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.searchDescription{
+  display: flex;
+  flex-direction: column;
+}
+
+.searchOverview{
+  overflow: hidden;
+  overflow: hidden;
+  margin: 0px 0px 0px 20px;
+}

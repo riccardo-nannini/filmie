@@ -11,7 +11,7 @@ export default function Footer(props) {
   
   return (
     <div className={isFixed? "footerFixed" : "footer"}>
-      <div className="copyrightFooter">Copyright @ <Link to="/">Filmie</Link> 2021</div>
+      <div className="copyrightFooter">Copyright @<Link className="footerLink" to="/">Filmie</Link> 2021</div>
       <a href="mailto:riccardo.nannini.98@gmail.com"className="contact">Contact us</a>
   
     </div> 

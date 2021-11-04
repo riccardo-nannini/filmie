@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Footer from '../footer/footer.js';
 import Header from '../header/header.js';
 import Carousel from 'react-multi-carousel';
+import { Link } from "react-router-dom";
+import { CSSTransition } from 'react-transition-group';
 import 'react-multi-carousel/lib/styles.css';
 import './home.css';
 
@@ -12,6 +14,9 @@ export default function Home() {
   const [favoriteList, setFavoriteList] = useState();
   const [toWatch, setToWatch] = useState();
   const [watchList, setWatchList] = useState();
+  const [showWatchList, setShowWatchList] = useState(false);
+  const [showFavoriteList, setShowFavoriteList] = useState(false);
+  const [query, setQuery] = useState("");
 
 
   useEffect(() => {
@@ -37,12 +42,13 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < favoriteMovies.length; i++) {
       res.push(
-        <a href={"/movie/"+favoriteMovies[i].id} style={{width: '150px', height: '225px', display: 'inline-block'}}>
+        <a href={"/movie/" + favoriteMovies[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
           <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w440_and_h660_face" + favoriteMovies[i].poster}></img>
         </a>
       );
     }
     setFavoriteList(res);
+    setShowFavoriteList(true);
   }, [favoriteMovies])
 
   useEffect(() => {
@@ -50,12 +56,13 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < toWatch.length; i++) {
       res.push(
-        <a href={"/movie/"+toWatch[i].id} style={{width: '150px', height: '225px', display: 'inline-block'}}>
+        <a href={"/movie/" + toWatch[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
           <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w440_and_h660_face" + toWatch[i].poster}></img>
         </a>
       );
     }
     setWatchList(res);
+    setShowWatchList(true);
   }, [toWatch])
 
   const responsive = {
@@ -79,56 +86,74 @@ export default function Home() {
       items: 1
     }
   };
-
+  
   return (
     <div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <Header></Header>
       <div className="core">
-        <form className="searchBarForm" action="">
-          <input type="text" placeholder="Search.." name="search" />
-          <button type="submit"><i class="fa fa-search"></i></button>
+        <form className="searchBarForm">
+          <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(e.target.value)} />
+          <Link  to={"/search/"+query}><button type="submit"><i class="fa fa-search"></i></button></Link>
+          
         </form>
+
         <div className="movieContainer">
+
           <div className="slideTitle">Favourite movies:</div>
-          <div className="content">
-            <Carousel
-              responsive={responsive}
-              autoPlay={false}
-              transitionDuration={500}
-              itemClass="movieImage"
-              containerClass="sliderContainer"
-              draggable={true}
-              swipeable={true}
-              infinite={true}
-              centerMode={true}
-              autoPlay={true}
-              autoPlaySpeed={8000}
-            >
-              {favoriteList === undefined ? <div></div> : favoriteList}
-            </Carousel>
-          </div>
+          <CSSTransition
+            in={showFavoriteList}
+            timeout={300}
+            classNames="movieLoad"
+          >
+            <div className="content">
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                transitionDuration={500}
+                itemClass="movieImage"
+                containerClass="sliderContainer"
+                draggable={true}
+                swipeable={true}
+                infinite={true}
+                centerMode={true}
+                autoPlay={true}
+                autoPlaySpeed={8000}
+              >
+                {favoriteList === undefined ? <div></div> : favoriteList}
+              </Carousel>
+            </div>
+          </CSSTransition>
         </div>
+
+
         <div className="movieContainer">
           <div className="slideTitle">Watchlist:</div>
-          <div className="content">
-            <Carousel
-              responsive={responsive}
-              autoPlay={false}
-              transitionDuration={500}
-              itemClass="movieImage"
-              containerClass="sliderContainer"
-              draggable={true}
-              swipeable={true}
-              infinite={true}
-              centerMode={true}
-              autoPlay={true}
-              autoPlaySpeed={8000}
-            >
-              {watchList === undefined ? <div></div> : watchList}
-            </Carousel>
-          </div>
+          <CSSTransition
+            in={showWatchList}
+            timeout={300}
+            classNames="movieLoad"
+          >
+            <div className="content">
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                transitionDuration={500}
+                itemClass="movieImage"
+                containerClass="sliderContainer"
+                draggable={true}
+                swipeable={true}
+                infinite={true}
+                centerMode={true}
+                autoPlay={true}
+                autoPlaySpeed={8000}
+              >
+                {watchList === undefined ? <div></div> : watchList}
+              </Carousel>
+            </div>
+          </CSSTransition>
         </div>
+
       </div>
       <Footer></Footer>
     </div>

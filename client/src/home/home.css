@@ -1,9 +1,9 @@
 .core {
-  background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,1) 100%);;
-    display: flex;
+  background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,0.4) 100%);;
+  display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  }
+}
 
 
 .searchBarForm {
@@ -11,7 +11,7 @@
 }
 
 form.searchBarForm input[type=text] {
-  margin-left: 50px;
+  margin-left: 100px;
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;

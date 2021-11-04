@@ -88,7 +88,7 @@ export default function Register() {
                     {error? <div className="errorMessage">{errorMessage}</div> : null}
                     <button className="registerButton" type="submit" value="Submit">Register</button>
                     <Link className="sign" to="/login">Already have an account? Sign in</Link>
-                    <div className="copyright">Copyright @ <Link to="/home">Filmie</Link> 2021</div>
+                    <div className="copyright">Copyright @ <Link to="/">Filmie</Link> 2021</div>
                 </form>
             </div>
           <Footer isFixed={true}></Footer>

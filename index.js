@@ -79,7 +79,7 @@ app.use(require('./routes/deleteProfile'))
 app.use(require('./routes/movie'))
 app.use(require('./routes/favorite'))
 app.use(require('./routes/watchlist'))
-
+app.use(require('./routes/searchMovies'))
 
 
 app.get('/', (req, res) => {

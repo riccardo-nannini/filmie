@@ -62,7 +62,7 @@ export default function Login() {
             <button className="loginButton" type="submit" value="Submit">Login</button>
           </form>
           <Link className="signUp" to="/register">Don't have an account? Sign up</Link>
-          <div className="copyright">Copyright @ <Link to="/home">Filmie</Link> 2021</div>
+          <div className="copyright">Copyright @ <Link to="/">Filmie</Link> 2021</div>
 
         </div>
       </div>

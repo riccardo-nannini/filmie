@@ -81,14 +81,15 @@
 }
 
 .noImage {
-    background-color: grey;
     width: 400px;
     height: 600px;
 }
 
-.brokenImage {
-    width: 140px;
-    margin-top:50%;
-    margin-left: 30%;
-    
+.movieLoad-enter{
+    opacity: 0;
+}
+
+.movieLoad-enter-active{
+    opacity: 1;
+    transition: opacity 800ms;
 }
