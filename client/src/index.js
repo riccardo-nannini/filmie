@@ -21,7 +21,7 @@ ReactDOM.render(
         <Route path="/register" exact component={() => <Register/>}></Route>
         <Route path="/profile" exact component={() => <Profile/>}></Route>
         <Route path="/movie/:movieid" component={(props) => <Movie {...props}/>}></Route>
-        <Route path="/search/:query" component={(props) => <Search {...props}/>}></Route>
+        <Route path="/search" component={(props) => <Search {...props}/>}></Route>
         <Route path="/tv/:tvid" exact component={(props) => <Tv {...props}/>}></Route>
       </Switch>
     </Router>

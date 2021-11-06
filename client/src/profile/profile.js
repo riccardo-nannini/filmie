@@ -82,6 +82,7 @@ export default function Profile() {
       }
     });
   }
+  
   useEffect(() => {
     fetch("/userInfo", {
       method: "GET"

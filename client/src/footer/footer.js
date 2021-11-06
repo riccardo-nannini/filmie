@@ -13,7 +13,7 @@ export default function Footer(props) {
     <div className={isFixed? "footerFixed" : "footer"}>
       <div className="copyrightFooter">Copyright @<Link className="footerLink" to="/">Filmie</Link> 2021</div>
       <a href="mailto:riccardo.nannini.98@gmail.com"className="contact">Contact us</a>
-  
+      <div className="contact">Powered by <a className="contact" href="https://www.themoviedb.org/">TMDB API</a></div>
     </div> 
 
   );

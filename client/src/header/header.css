@@ -17,10 +17,20 @@
     padding-top:16px;
     justify-content: flex-start;
     overflow: visible;
-    
+    text-decoration: inherit;
+    font-size: 22px;
+    font-weight: 200;
 }
 
 .end{
-    color: white;
+    
     padding-top:16px;
+    font-size: 22px;
+    font-weight: 200;
+}
+
+.endFooter{
+    color: white;
+    text-decoration: inherit;
+    padding-left: 20px;
 }

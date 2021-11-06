@@ -1,16 +1,25 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import imageNotFound from '../../imageNotFound.svg';
+import { useState } from 'react';
 import './searchMovie.css';
 
 
 export default function SearchMovie(props) {
+
+  const [NoImage, setNoImage] = useState(false);
 
   let movie = props.movie;
 
   return (
     <div className="searchMovieContainer">
       <a href={"/movie/" + movie.id}>
-        <img className="searchMoviePoster" src={movie.poster}></img>
+        {NoImage === false ? 
+        <img className="searchMoviePoster" src={movie.poster} onError={()=>{setNoImage(true)}}></img>
+          :
+        <div className="imageNotFoundContainer">
+          <img className="imageNotFound" src={imageNotFound}></img>
+        </div>
+        }
       </a>
       <div className="searchDescription">
         <a href={"/movie/" + movie.id}>

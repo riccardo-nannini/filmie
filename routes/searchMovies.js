@@ -10,14 +10,14 @@ router.use(
   express.static(path.join(__dirname, "./client/build"))
 );
 
-router.get('/search/:query', (req, res) => {
+router.get('/search', (req, res) => {
   res.sendFile(
     path.join(__dirname, "../client/build/index.html"));
 });
 
-router.post('/search/:query', (req, res, next) => {
+router.post('/search', (req, res, next) => {
 
-  query = req.params.query;
+  query = encodeURI(req.query.search);
 
   let url = "https://api.themoviedb.org/3/search/movie?api_key=" + ApiKey + "&language=en-US&query=" + query + "&page=1&include_adult=false";
 
@@ -37,7 +37,6 @@ router.post('/search/:query', (req, res, next) => {
           year: year,
         });
       }
-
       res.json({
         results
       });

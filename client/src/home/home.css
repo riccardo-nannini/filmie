@@ -50,12 +50,21 @@ form.searchBarForm::after {
   display: table;
 }
 
-
 .movieContainer{
   display: flex;
   flex-direction: column;
   height: 240px;
   min-height: 240;
+  margin: 40px 100px 30px 100px;
+}
+
+.movieContainerNoAuth{
+  display: none;
+}
+
+.noList{
+  height: 240px;
+  min-height: 240px;
   margin: 40px 100px 30px 100px;
 }
 
@@ -65,6 +74,10 @@ form.searchBarForm::after {
   font-size: 20px;
   padding-left:3px;
   margin-bottom: 7px;
+}
+
+.slideTitleNotLoaded {
+  display: none;
 }
 
 .content{

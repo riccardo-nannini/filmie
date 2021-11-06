@@ -11,12 +11,35 @@
   width: 120px;
 }
 
+.imageNotFound{
+  width: 55px;
+  margin: 65px 0px 0px 32px;
+  opacity: 0.5;
+}
+
+.imageNotFoundContainer{
+  height: 180px;
+  width: 120px;
+  border-radius: 5px;
+  background-color: #a8a8a8;
+}
+
 .searchMovieTitle{
   display: flex;
   flex-direction: row;
   font-size: 27px;
   font-weight: 600;
   margin: 17px 0px 14px 20px;
+}
+
+.searchMovieTitle:hover{
+  opacity: 0.8;
+  transition: opacity .1s ease-out;
+}
+
+.searchMoviePoster:hover{
+  opacity: 0.8;
+  transition: opacity .2s ease-out;
 }
 
 .searchMovieYear{

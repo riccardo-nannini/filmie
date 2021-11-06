@@ -1,3 +1,4 @@
+const { get } = require('../routes/favorite.js');
 const conn = require('./db_connection.js');
 
 function addWatchlist(userID, movieID) {
@@ -15,8 +16,14 @@ function getWatchlist(userID) {
     return db.all("SELECT movieid FROM watchlist WHERE userid = ?", [userID])
 }
 
+function getWatchlistMovie(userID, movieID) {
+    db = conn.db_connection.getConnectionAsync();
+    return db.get("SELECT movieid FROM watchlist WHERE userid = ? and movieid= ?",[userID, movieID])
+}
+
 module.exports = {
     addWatchlist: addWatchlist,
     removeWatchlist: removeWatchlist,
-    getWatchlist: getWatchlist
+    getWatchlist: getWatchlist,
+    getWatchlistMovie: getWatchlistMovie,
 }

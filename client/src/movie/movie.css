@@ -53,6 +53,44 @@
     font-weight: 300;
 }
 
+.movieButtonsContainer{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.movieButtonNotSelected{
+    margin-left: 10px;
+    margin-right: 12px;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(81, 17, 112);
+}
+
+.movieButtonNotSelected:hover, .movieButtonSelected:hover{
+    cursor: pointer;
+}
+
+.movieButtonNotSelected img{
+    width: 24px;
+    filter: invert(100%) sepia(0%) saturate(7426%) hue-rotate(20deg) brightness(126%) contrast(115%);
+}
+
+.movieButtonSelected{
+    margin-left: 10px;
+    margin-right: 12px;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(125, 19, 179);
+}
+
+.movieButtonSelected img{
+    width: 25px;
+    filter: invert(100%) sepia(0%) saturate(7426%) hue-rotate(20deg) brightness(126%) contrast(115%);
+}
+
 .movieDuration {
     font-size: 20px;
     margin-left: 15px;
@@ -60,14 +98,14 @@
 }
 
 .movieTagline{
-    margin-top: 35px;
+    margin-top: 18px;
     font-size: 20px;
     font-style: italic;
     font-weight: 500;
 }
 
 .movieOverview{
-    margin-top: 35px;
+    margin-top: 30px;
     font-size: 17px;
     font-weight: 500;
     max-width: 800px;

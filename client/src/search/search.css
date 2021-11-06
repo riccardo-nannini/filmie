@@ -24,8 +24,14 @@ form.searchBarMovies button {
   cursor: pointer;
 }
 
+.noResults{
+  color: white;
+  font-size: 25px;
+  margin: 20px 20px 20px 20px;
+}
+
 form.searchBarMovies button:hover {
-  background: #0b7dda;
+  background: #430053;
 }
 
 form.searchBarMovies::after {

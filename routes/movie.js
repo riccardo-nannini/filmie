@@ -1,6 +1,8 @@
 var express = require('express');
 const path = require("path");
 var router = express.Router();
+const favorite = require('../dao/favorites.js');
+const watchlist = require('../dao/watchlist.js');
 const axios = require('axios');
 require('dotenv').config();
 
@@ -17,13 +19,26 @@ router.get('/movie/:movieid', (req, res) => {
 
 router.post('/movie/:movieid', (req, res, next) => {
 
-  movieid = req.params.movieid;
+  let movieid = req.params.movieid;
+  let isFavorite = false;
+  let isWatchlist = false;
+  let calls = [];
+  let resp;
 
   let url = "https://api.themoviedb.org/3/movie/"+movieid+"?api_key="+ApiKey+"&language=en-US"
-  axios.get(url)
-    .then(function (response) {
-      let movieData = response.data;
+  
+  calls.push(axios.get(url));
+  if (req.isAuthenticated()) {
+    calls.push(favorite.getFavoriteMovie(req.user.id, movieid))
+    calls.push(watchlist.getWatchlistMovie(req.user.id, movieid))
+  }
 
+  Promise.all(calls).then((response) => {
+
+      if (response[1] !== undefined) isFavorite = true;
+      if (response[2] !== undefined) isWatchlist = true;
+
+      let movieData = response[0].data;
       poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
       backdrop = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"+movieData.backdrop_path;
 
@@ -33,7 +48,8 @@ router.post('/movie/:movieid', (req, res, next) => {
         genres+=", "
       }
       genres = genres.substring(0, genres.length-2)
-      res.json({
+
+      resp = {
         id: movieid,
         year: movieData.release_date.substring(0, movieData.release_date.length-6),
         title: movieData.title,
@@ -42,17 +58,18 @@ router.post('/movie/:movieid', (req, res, next) => {
         tagline: movieData.tagline,
         poster: poster,
         backdrop: backdrop,
-        genres: genres
-      });
-    })
-    .catch(function (error) {
-      console.log("Possible 404");
-    })
-    .then(function () {
-      // always executed
+        genres: genres,
+        isAuth: req.isAuthenticated(),
+        isFavorite: isFavorite,
+        isWatchlist: isWatchlist,
+      }
+      res.json(
+        resp
+      );
+    }).catch(function (error) {
+      console.log("Possible 404 or DB constraint violated");
     });
-
-});
+  });
 
 module.exports = router;
 

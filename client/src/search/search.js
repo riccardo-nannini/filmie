@@ -13,18 +13,24 @@ export default function Search(props) {
   const [searchInfoList, setSearchInfoList] = useState();
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
+  const [noResults, setNoResults] = useState(false);
 
-  const id = props.location.pathname.substring(8)
+  const urlQuery = props.location.search;
 
   useEffect(() => {
-    const url = "/search/" + encodeURIComponent(id)
-    fetch(url, {
+    if (urlQuery === "") return;
+    const url = "/search" + urlQuery;
+    searchMovie(url);
+  }, [])
+
+  function searchMovie(query) {
+    fetch(query, {
       method: "POST"
     }).then(response => response.json())
       .then(data => {
         setSearchInfo(data.results);
       });
-  }, [])
+  }
 
   useEffect(() => {
     let list = [];
@@ -34,12 +40,19 @@ export default function Search(props) {
         <SearchMovie movie={movie}></SearchMovie>
       )
     }
-    setSearchInfoList(list);
+    if (!list.length) {
+      setNoResults(true);
+    } else {
+      setSearchInfoList(list);
+      setNoResults(false);
+    }
     setShowSearch(true);
   }, [searchInfo])
 
-  function handleSearch() {
-    console.log(query)
+  function handleSearch(e) {
+    e.preventDefault();
+    setShowSearch(false);
+    searchMovie("/search?search="+query);
   }
 
   return (
@@ -48,9 +61,9 @@ export default function Search(props) {
       <Header></Header>
       <div className="movieOverlay">
         <div className="searchCentered">
-        <form className="searchBarMovies" onSubmit={handleSearch}>
+        <form className="searchBarMovies">
           <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
-          <button type="submit"><i class="fa fa-search"></i></button>
+          <button onClick={handleSearch}><i class="fa fa-search"></i></button>
         </form>
         <CSSTransition
             in={showSearch}
@@ -59,6 +72,7 @@ export default function Search(props) {
           >
         <div>
           {searchInfoList === undefined? null : searchInfoList}
+          {noResults === false? null : <div className="noResults">No result found for {decodeURI(urlQuery.substr(8))}</div>}
         </div>
         </CSSTransition>
         </div>
