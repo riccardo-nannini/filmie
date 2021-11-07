@@ -84,7 +84,7 @@ app.use(require('./routes/removeWatchlist'))
 app.use(require('./routes/searchMovies'))
 app.use(require('./routes/getTrendingMovies'))
 app.use(require('./routes/getNowPlaying'))
-
+app.use(require('./routes/rating'))
 
 app.get('/', (req, res) => {
   res.sendFile(

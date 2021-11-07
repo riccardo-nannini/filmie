@@ -14,7 +14,7 @@ export default function SearchMovie(props) {
     <div className="searchMovieContainer">
       <a href={"/movie/" + movie.id}>
         {NoImage === false ? 
-        <img className="searchMoviePoster" src={movie.poster} onError={()=>{setNoImage(true)}}></img>
+        <img className="searchMoviePoster" src={movie.poster} onLoad={()=>{setNoImage(false)}} onError={()=>{setNoImage(true)}}></img>
           :
         <div className="imageNotFoundContainer">
           <img className="imageNotFound" src={imageNotFound}></img>

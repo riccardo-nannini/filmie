@@ -17,9 +17,21 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     )`);
 
 db.run(`CREATE TABLE IF NOT EXISTS movies (
-      movieid INTEGER PRIMARY KEY,
-      rating DOUBLE
+      movieid INTEGER PRIMARY KEY
   )`);
+
+  db.run(`CREATE TABLE IF NOT EXISTS rating (
+    userid  INTEGER,
+    movieid INTEGER,
+    rating DOUBLE,
+    PRIMARY KEY (userid, movieid)
+    FOREIGN KEY (movieid) REFERENCES movies (movieid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  FOREIGN KEY (userid) REFERENCES users (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)`);
 
 db.run(`CREATE TABLE IF NOT EXISTS comments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

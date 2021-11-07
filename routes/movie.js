@@ -3,6 +3,7 @@ const path = require("path");
 var router = express.Router();
 const favorite = require('../dao/favorites.js');
 const watchlist = require('../dao/watchlist.js');
+const rating = require('../dao/rating.js');
 const axios = require('axios');
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ router.post('/movie/:movieid', (req, res, next) => {
   let movieid = req.params.movieid;
   let isFavorite = false;
   let isWatchlist = false;
+  let isRated = false;
   let calls = [];
   let resp;
 
@@ -31,12 +33,14 @@ router.post('/movie/:movieid', (req, res, next) => {
   if (req.isAuthenticated()) {
     calls.push(favorite.getFavoriteMovie(req.user.id, movieid))
     calls.push(watchlist.getWatchlistMovie(req.user.id, movieid))
+    calls.push(rating.getRatingByMovieAndUser(req.user.id, movieid))
   }
 
   Promise.all(calls).then((response) => {
 
       if (response[1] !== undefined) isFavorite = true;
       if (response[2] !== undefined) isWatchlist = true;
+      if (response[3] !== undefined) isRated = true;
 
       let movieData = response[0].data;
       poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
@@ -62,7 +66,9 @@ router.post('/movie/:movieid', (req, res, next) => {
         isAuth: req.isAuthenticated(),
         isFavorite: isFavorite,
         isWatchlist: isWatchlist,
+        isRated: isRated
       }
+
       res.json(
         resp
       );

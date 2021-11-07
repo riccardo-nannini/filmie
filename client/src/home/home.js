@@ -167,6 +167,65 @@ export default function Home() {
           <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
           <Link to={"/search?search=" + query}><button type="submit"><i class="fa fa-search"></i></button></Link>
         </form>
+        <div className={favoriteList === undefined ? "noList" : null}></div>
+        <div className="movieContainer">
+
+          <div className="slideTitle">Favourite movies:</div>
+          <CSSTransition
+            in={showFavoriteList}
+            timeout={300}
+            classNames="movieLoad"
+          >
+            <div className="content">
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                itemClass="movieImage"
+                containerClass="sliderContainer"
+                draggable={true}
+                swipeable={true}
+                infinite={true}
+                partialVisible={false}
+                centerMode={true}
+                autoPlay={true}
+                showDots={false}
+                autoPlaySpeed={8000}
+              >
+                {favoriteList === undefined ? <div></div> : favoriteList}
+              </Carousel>
+            </div>
+          </CSSTransition>
+        </div>
+
+        <div className={watchList === undefined ? "noList" : null}></div>
+        <div className="movieContainer">
+          <div className="slideTitle">Watchlist:</div>
+          <CSSTransition
+            in={showWatchList}
+            timeout={300}
+            classNames="movieLoad"
+          >
+            <div className="content">
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                itemClass="movieImage"
+                containerClass="sliderContainer"
+                draggable={true}
+                swipeable={true}
+                infinite={true}
+                partialVisible={false}
+                centerMode={true}
+                autoPlay={true}
+                showDots={false}
+                autoPlaySpeed={8000}
+              >
+                {watchList === undefined ? <div></div> : watchList}
+
+              </Carousel>
+            </div>
+          </CSSTransition>
+        </div>
 
         <div className="movieContainer">
           <div className={nowPlayingList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Now playing in theaters:</div>
@@ -219,68 +278,6 @@ export default function Home() {
                 autoPlaySpeed={8000}
               >
                 {trendingMoviesList === undefined ? <div></div> : trendingMoviesList}
-              </Carousel>
-            </div>
-          </CSSTransition>
-        </div>
-
-
-        <div className={favoriteList === undefined ? "noList" : null}></div>
-        <div className={favoriteList === undefined ? "movieContainerNoAuth" : "movieContainer"}>
-
-          <div className="slideTitle">Favourite movies:</div>
-          <CSSTransition
-            in={showFavoriteList}
-            timeout={300}
-            classNames="movieLoad"
-          >
-            <div className="content">
-              <Carousel
-                responsive={responsive}
-                autoPlay={false}
-                itemClass="movieImage"
-                containerClass="sliderContainer"
-                draggable={true}
-                swipeable={true}
-                infinite={true}
-                partialVisible={false}
-                centerMode={true}
-                autoPlay={true}
-                showDots={false}
-                autoPlaySpeed={8000}
-              >
-                {favoriteList === undefined ? <div></div> : favoriteList}
-              </Carousel>
-            </div>
-          </CSSTransition>
-        </div>
-
-
-        <div className={watchList === undefined ? "noList" : null}></div>
-        <div className={watchList === undefined ? "movieContainerNoAuth" : "movieContainer"}>
-          <div className="slideTitle">Watchlist:</div>
-          <CSSTransition
-            in={showWatchList}
-            timeout={300}
-            classNames="movieLoad"
-          >
-            <div className="content">
-              <Carousel
-                responsive={responsive}
-                autoPlay={false}
-                itemClass="movieImage"
-                containerClass="sliderContainer"
-                draggable={true}
-                swipeable={true}
-                infinite={true}
-                partialVisible={false}
-                centerMode={true}
-                autoPlay={true}
-                showDots={false}
-                autoPlaySpeed={8000}
-              >
-                {watchList === undefined ? <div></div> : watchList}
-
               </Carousel>
             </div>
           </CSSTransition>
