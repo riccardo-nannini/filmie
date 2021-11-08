@@ -38,7 +38,7 @@ var session_config = {
   cookie: { secure: true }, //true is a recommended option. However, it requires an https-enabled website
   store: new SQLiteStore({db:"filmie.db"}), //store  parameter when saving session to database
   cookie: {
-    maxAge: 604800 * 4,
+    maxAge: 1000*60*60*24*20,
   },
 };
 
