@@ -19,12 +19,11 @@ export default function Home() {
   const [watchList, setWatchList] = useState();
   const [trendingMoviesList, setTrendingMoviesList] = useState();
   const [nowPlayingList, setNowPlayingList] = useState();
-  const [showWatchList, setShowWatchList] = useState(false);
-  const [showFavoriteList, setShowFavoriteList] = useState(false);
+  const [showWatchList, setShowWatchList] = useState(true);
+  const [showFavoriteList, setShowFavoriteList] = useState(true);
   const [showTrendingMovies, setShowTrendingMovies] = useState(false);
   const [showNowPlaying, setShowNowPlaying] = useState(false);
   const [query, setQuery] = useState("");
-
 
   useEffect(() => {
     fetch("/favorite", {
@@ -63,7 +62,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (favoriteMovies === undefined) return;
+    if (favoriteMovies === undefined || favoriteMovies.length === 0) {
+      setShowFavoriteList(false)  
+      return;
+    }
     let res = [];
     for (let i = 0; i < favoriteMovies.length; i++) {
       res.push(
@@ -77,7 +79,10 @@ export default function Home() {
   }, [favoriteMovies])
 
   useEffect(() => {
-    if (toWatch === undefined) return;
+    if (toWatch === undefined || toWatch.length === 0) {
+      setShowWatchList(false)  
+      return;
+    }
     let res = [];
     for (let i = 0; i < toWatch.length; i++) {
       res.push(
@@ -167,9 +172,8 @@ export default function Home() {
           <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
           <Link to={"/search?search=" + query}><button type="submit"><i class="fa fa-search"></i></button></Link>
         </form>
-        <div className={favoriteList === undefined ? "noList" : null}></div>
-        <div className="movieContainer">
 
+        <div className={showFavoriteList === false ? "movieContainerNoAuth": "movieContainer"}>
           <div className="slideTitle">Favourite movies:</div>
           <CSSTransition
             in={showFavoriteList}
@@ -197,8 +201,7 @@ export default function Home() {
           </CSSTransition>
         </div>
 
-        <div className={watchList === undefined ? "noList" : null}></div>
-        <div className="movieContainer">
+        <div className={showWatchList === false? "movieContainerNoAuth": "movieContainer"}>
           <div className="slideTitle">Watchlist:</div>
           <CSSTransition
             in={showWatchList}

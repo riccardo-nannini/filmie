@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import favorite from '../favorite.svg';
 import watchlist from '../watchlist.svg';
 import star from '../star.svg';
+import imageNotFound from '../imageNotFound.svg';
 import ReactStars from "react-rating-stars-component";
 import { useHistory } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
@@ -131,7 +132,12 @@ export default function Movie(props) {
                   <div className="noImage">
                   </div>
                   :
+                  movieInfo.poster === null? 
+                  <div className="brokenImageContainer">
+                    <img className="brokenImage" src={imageNotFound}></img>
 
+                  </div>
+                  :
                   <img className="moviePoster" src={movieInfo.poster}></img>
 
                 }

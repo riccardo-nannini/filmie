@@ -33,9 +33,14 @@
     color: white;
     text-decoration: inherit;
   }
-  .contact{
+  .contact, .powered{
     padding-top: 14px;
     color: white;
     text-decoration: inherit;
   }
 
+  @media screen and (max-width: 730px) {
+    .contact{
+      display: none;
+    }
+  }

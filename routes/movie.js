@@ -26,6 +26,8 @@ router.post('/movie/:movieid', (req, res, next) => {
   let isRated = false;
   let calls = [];
   let resp;
+  let poster = null;
+  let backdrop = null;
 
   let url = "https://api.themoviedb.org/3/movie/"+movieid+"?api_key="+ApiKey+"&language=en-US"
   
@@ -43,8 +45,8 @@ router.post('/movie/:movieid', (req, res, next) => {
       if (response[3] !== undefined) isRated = true;
 
       let movieData = response[0].data;
-      poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
-      backdrop = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"+movieData.backdrop_path;
+      if (movieData.poster_path !== null) poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
+      if (movieData.backdrop_path !== null) backdrop = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"+movieData.backdrop_path;
 
       genres = ""
       for (genre in movieData.genres) {

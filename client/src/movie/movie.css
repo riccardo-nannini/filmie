@@ -128,6 +128,19 @@
     height: 600px;
 }
 
+.brokenImageContainer {
+    width: 400px;
+    height: 600px;
+    border-radius: 5px;
+    background-color: #a8a8a8;
+}
+
+.brokenImage{
+    width: 200px;
+    margin: 200px 0px 0px 90px;
+    opacity: 0.5;
+}
+
 .movieLoad-enter{
     opacity: 0;
 }
