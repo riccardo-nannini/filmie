@@ -21,8 +21,15 @@ function addRating(movieid, userid, rating) {
             }
         })
 }
+
+function getRatingDistribution(movieid) {
+    db = conn.db_connection.getConnectionAsync();
+    return db.all("SELECT rating, count(rating) as count FROM rating WHERE movieid=? GROUP BY rating", [movieid])
+}
+
 module.exports = {
     getRatingByMovie: getRatingByMovie,
     getRatingByMovieAndUser: getRatingByMovieAndUser,
     addRating: addRating,
+    getRatingDistribution: getRatingDistribution
 }

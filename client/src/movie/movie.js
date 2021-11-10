@@ -10,6 +10,7 @@ import imageNotFound from '../imageNotFound.svg';
 import ReactStars from "react-rating-stars-component";
 import { useHistory } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './movie.css';
@@ -23,6 +24,7 @@ export default function Movie(props) {
   const [isWatchlist, setIsWatchlist] = useState(false);
   const [isRated, setIsRated] = useState(false);
   const [rating, setRating] = useState(0);
+  const [ratingDistribution, setRatingDistribution] = useState();
 
   const history = useHistory();
   const id = props.location.pathname.substring(7)
@@ -36,18 +38,33 @@ export default function Movie(props) {
         setMovieInfo(data);
         setIsFavorite(data.isFavorite);
         setIsWatchlist(data.isWatchlist)
-        setIsRated(data.isRated);
-        setRating(0)
         setShowMovie(true);
+        setIsRated(data.isRated);
       });
   }, []);
 
   useEffect(() => {
-    updateRating()
+    updateRatingDistribution();
+  }, []);
+
+  useEffect(() => {
+    setRating(0)
+    setTimeout(function () { updateRating(); }, 100);
   }, [isRated]);
 
-  function updateRating(){
-    const url = "/rating?movieid="+encodeURIComponent(id)
+  function updateRatingDistribution() {
+    const url = "/getRatingDistribution?movieid=" + encodeURIComponent(id)
+    fetch(url, {
+      method: "GET"
+    }).then(response => response.json())
+      .then(data => {
+        console.log(data.distribution)
+        setRatingDistribution(data.distribution);
+      });
+  }
+
+  function updateRating() {
+    const url = "/rating?movieid=" + encodeURIComponent(id)
     fetch(url, {
       method: "GET",
     }).then(response => response.json())
@@ -113,32 +130,32 @@ export default function Movie(props) {
     });
 
     setIsRated(true);
-    updateRating();
+    setTimeout(function () { updateRating(); updateRatingDistribution();}, 200);    
   }
 
   return (
-    <div className="movieCont">
+    <div className="movieCont" onClick={() => ReactTooltip.hide()}>
       <Header></Header>
       <div className="moviemiddle" style={movieInfo === undefined ? null : { backgroundImage: `url(${movieInfo.backdrop})` }}>
-        <div className="movieOverlay">
+        <div className="movieOverlay" >
           <CSSTransition
             in={showMovie}
             timeout={300}
             classNames="movieLoad"
           >
-            <div className="centered">
+            <div className="centered" >
               <div className="poster">
                 {movieInfo === undefined ?
                   <div className="noImage">
                   </div>
                   :
-                  movieInfo.poster === null? 
-                  <div className="brokenImageContainer">
-                    <img className="brokenImage" src={imageNotFound}></img>
+                  movieInfo.poster === null ?
+                    <div className="brokenImageContainer">
+                      <img className="brokenImage" src={imageNotFound}></img>
 
-                  </div>
-                  :
-                  <img className="moviePoster" src={movieInfo.poster}></img>
+                    </div>
+                    :
+                    <img className="moviePoster" src={movieInfo.poster}></img>
 
                 }
               </div>
@@ -154,7 +171,7 @@ export default function Movie(props) {
                 {movieInfo === undefined ? null
                   :
                   <div className="movieButtonsContainer">
-                    <div className="ratingBar">
+                    <div data-tip data-for="ratingDist" className="ratingBar">
                       <CircularProgressbar styles={{
                         path: {
                           stroke: `${rating < 33 ? '#eb1313' : rating < 66 ? '#fcd703' : '#3cab5d'}`,
@@ -174,6 +191,34 @@ export default function Movie(props) {
                         },
                       }} strokeWidth={9} text={rating === 0 ? "NA" : rating + "%"} value={rating} />
                     </div>
+                    <ReactTooltip className="ratingChart" place="bottom" type="light" effect="solid" id='ratingDist' event="click hover">
+                      <VictoryChart
+                        domainPadding={20}
+                        title="Test"
+                      >
+                        <VictoryAxis
+                          tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                          tickFormat={["1\u2605", "2\u2605", "3\u2605", "4\u2605", "5\u2605", "6\u2605", "7\u2605", "8\u2605", "9\u2605", "10\u2605" ]}
+                        />
+                        <VictoryLabel style={{
+                          fontSize:20,
+                          fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"}} 
+                          text="Rating distribution"
+                          x={225} 
+                          y={30} 
+                          textAnchor="middle"
+                          />
+                        <VictoryAxis
+                          dependentAxis
+                        />
+                        <VictoryBar
+                          data={ratingDistribution}
+                          x="rating"
+                          y="count"
+                          barWidth={20}
+                        />
+                      </VictoryChart>
+                    </ReactTooltip>
                     <button data-tip data-for="fav" className={isFavorite ? "movieButtonSelected" : "movieButtonNotSelected"} onClick={movieInfo.isAuth ? handleClickFavoriteAuth : handleClickNotAuth}>
                       <img src={favorite}></img>
                     </button>
@@ -189,7 +234,7 @@ export default function Movie(props) {
                     <button data-tip data-for="rate" className={isRated ? "movieButtonSelected" : "movieButtonNotSelected"}>
                       <img src={star}></img>
                     </button>
-                    <ReactTooltip clickable={true} place="bottom" event="click" type="dark" effect="solid" id='rate' >
+                    <ReactTooltip className="movieRate" clickable={true} place="bottom" event="click" type="dark" effect="solid" id='rate' >
                       <ReactStars
                         count={5}
                         isHalf={true}

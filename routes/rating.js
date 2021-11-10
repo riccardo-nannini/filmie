@@ -5,14 +5,16 @@ require('dotenv').config();
 
 router.get('/rating', (req, res) => {
 
-  if (req.query.movieid === undefined) res.status(400).send();
-
+  if (req.query.movieid === undefined) {
+    res.status(400).send();
+    return;
+  }
     rating.getRatingByMovie(req.query.movieid).then((result) => {
       
       let rating = Object.values(result)[0];
       if (rating === null) rating = 0;
       res.json({
-        rating: rating,
+        rating: Math.round(rating),
       })
     }).catch(function (error) {
       console.log("DB conflict");

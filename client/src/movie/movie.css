@@ -67,6 +67,15 @@
     background-color: rgb(81, 17, 112);
 }
 
+.ratingChart{
+    opacity: 1 !important;
+}
+
+.movieRate{
+    opacity: 0.96 !important;
+    border-radius: 5px !important;
+}
+
 .movieButtonNotSelected:hover, .movieButtonSelected:hover{
     cursor: pointer;
 }
@@ -81,6 +90,7 @@
     width: 50px;
     margin-left: 10px;
     margin-right: 12px;
+    cursor: pointer;
 }
 
 .movieButtonSelected{
