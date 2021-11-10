@@ -18,6 +18,7 @@
     color: #818181;
     display: block;
     cursor: pointer;
+    transition: 0.2s;
   }
 
 .sidenav a:hover {

@@ -191,14 +191,16 @@ export default function Movie(props) {
                         },
                       }} strokeWidth={9} text={rating === 0 ? "NA" : rating + "%"} value={rating} />
                     </div>
-                    <ReactTooltip className="ratingChart" place="bottom" type="light" effect="solid" id='ratingDist' event="click hover">
+                    <ReactTooltip backgroundColor="" className="ratingChart" place="bottom" type="light" effect="solid" id='ratingDist' event="click hover">
                       <VictoryChart
                         domainPadding={20}
+                        padding={25}
+                        backgroundComponent={<div className="chartBackground"></div>}
                         title="Test"
                       >
                         <VictoryAxis
                           tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                          tickFormat={["1\u2605", "2\u2605", "3\u2605", "4\u2605", "5\u2605", "6\u2605", "7\u2605", "8\u2605", "9\u2605", "10\u2605" ]}
+                          tickFormat={["0.5\u2605", "1\u2605", "1.5\u2605", "2\u2605", "2.5\u2605", "3\u2605", "3.5\u2605", "4\u2605", "4.5\u2605", "5\u2605" ]}
                         />
                         <VictoryLabel style={{
                           fontSize:20,
@@ -210,12 +212,19 @@ export default function Movie(props) {
                           />
                         <VictoryAxis
                           dependentAxis
+                          tickFormat={(y) => (`${y%1 !== 0? "" : Math.floor(y) }`)}
                         />
                         <VictoryBar
                           data={ratingDistribution}
                           x="rating"
                           y="count"
                           barWidth={20}
+                          style={{
+                            data:{
+                              fill:"#511170",
+                              fillOpacity:0.8,
+                            }
+                          }}
                         />
                       </VictoryChart>
                     </ReactTooltip>

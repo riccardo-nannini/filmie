@@ -14,7 +14,6 @@ export default function Header() {
         <a className="endFooter" href="/profile">
           Profile
         </a>
-        
       </div>
     </div>
   );

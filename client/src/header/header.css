@@ -1,6 +1,6 @@
 .containerHeader{
-    font-size: 20px;
-    height: 60px;
+    font-size: 21px;
+    height: 50px;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -8,29 +8,33 @@
     left: 0;
     padding: 0 40px 0 40px;
     background-color: #4492b1;
-    transition: top 0.3s; /* Transition effect when sliding down (and up) */
+    transition: top 0.3s;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2)
 }
 
 .title{
     display: flex;
     color: white;
-    padding-top:16px;
+    padding-top:11px;
     justify-content: flex-start;
     overflow: visible;
     text-decoration: inherit;
-    font-size: 22px;
     font-weight: 200;
+    transition: 0.2s;
 }
 
 .end{
-    
-    padding-top:16px;
-    font-size: 22px;
+    padding-top:11px;
     font-weight: 200;
+    transition: 0.2s;
 }
 
 .endFooter{
     color: white;
     text-decoration: inherit;
     padding-left: 20px;
+}
+
+.endFooter:hover, .title:hover {
+    opacity: 0.75;
 }
