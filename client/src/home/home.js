@@ -69,8 +69,17 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < favoriteMovies.length; i++) {
       res.push(
-        <a href={"/movie/" + favoriteMovies[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
-          <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + favoriteMovies[i].poster}></img>
+        <a href={"/movie/" + favoriteMovies[i].id} style={{ 
+          width: '150px',
+          height: '225px',
+          display: 'inline-block',
+          boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)"
+         }}
+          >
+          <img style={{ 
+            width: '150px',
+            borderRadius: '5px',  
+          }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + favoriteMovies[i].poster}></img>
         </a>
       );
     }
@@ -86,7 +95,7 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < toWatch.length; i++) {
       res.push(
-        <a href={"/movie/" + toWatch[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
+        <a href={"/movie/" + toWatch[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
           <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + toWatch[i].poster}></img>
         </a>
       );
@@ -101,7 +110,7 @@ export default function Home() {
     shuffleArray(trendingMovies)
     for (let i = 0; i < trendingMovies.length; i++) {
       res.push(
-        <a href={"/movie/" + trendingMovies[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
+        <a href={"/movie/" + trendingMovies[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
           <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + trendingMovies[i].poster}></img>
         </a>
       );
@@ -116,7 +125,7 @@ export default function Home() {
     shuffleArray(nowPlaying)
     for (let i = 0; i < nowPlaying.length; i++) {
       res.push(
-        <a href={"/movie/" + nowPlaying[i].id} style={{ width: '150px', height: '225px', display: 'inline-block' }}>
+        <a href={"/movie/" + nowPlaying[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
           <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + nowPlaying[i].poster}></img>
         </a>
       );
