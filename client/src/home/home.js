@@ -202,7 +202,7 @@ export default function Home() {
                 centerMode={true}
                 autoPlay={true}
                 showDots={false}
-                autoPlaySpeed={8000}
+                autoPlaySpeed={7000}
               >
                 {favoriteList === undefined ? <div></div> : favoriteList}
               </Carousel>
@@ -230,7 +230,7 @@ export default function Home() {
                 centerMode={true}
                 autoPlay={true}
                 showDots={false}
-                autoPlaySpeed={8000}
+                autoPlaySpeed={7000}
               >
                 {watchList === undefined ? <div></div> : watchList}
 

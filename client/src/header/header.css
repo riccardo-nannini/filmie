@@ -6,10 +6,15 @@
     position: relative;
     top: 0;
     left: 0;
-    padding: 0 40px 0 40px;
+    padding: 0 45px 0 40px;
     background-color: #4492b1;
     transition: top 0.3s;
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2)
+}
+
+.containerHeader img {
+    width: 26px;
+    filter: invert(100%) sepia(0%) saturate(7426%) hue-rotate(20deg) brightness(126%) contrast(115%);
 }
 
 .title{
@@ -24,7 +29,7 @@
 }
 
 .end{
-    padding-top:11px;
+    padding-top:13px;
     font-weight: 200;
     transition: 0.2s;
 }
@@ -32,7 +37,7 @@
 .endFooter{
     color: white;
     text-decoration: inherit;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 
 .endFooter:hover, .title:hover {

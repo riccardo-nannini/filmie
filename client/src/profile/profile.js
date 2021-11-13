@@ -74,7 +74,7 @@ export default function Profile() {
     e.preventDefault();
 
     fetch("/deleteProfile", {
-      method: "POST"
+      method: "DELETE"
     }).then(response => {
       if (response.redirected) {
         window.location.href = response.url;

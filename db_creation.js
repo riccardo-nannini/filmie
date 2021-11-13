@@ -9,11 +9,11 @@ let db = new sqlite3.Database('./filmie.db', (err) => {
 
 db.run(`CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        surname TEXT,
-        email TEXT,
-        hash TEXT,
-        salt TEXT
+        name TEXT NOT NULL,
+        surname TEXT NOT NULL,
+        email TEXT NOT NULL,
+        hash TEXT NOT NULL,
+        salt TEXT NOT NULL
     )`);
 
 db.run(`CREATE TABLE IF NOT EXISTS movies (
@@ -23,7 +23,7 @@ db.run(`CREATE TABLE IF NOT EXISTS movies (
   db.run(`CREATE TABLE IF NOT EXISTS rating (
     userid  INTEGER,
     movieid INTEGER,
-    rating DOUBLE,
+    rating DOUBLE NOT NULL,
     PRIMARY KEY (userid, movieid)
     FOREIGN KEY (movieid) REFERENCES movies (movieid)
     ON DELETE CASCADE
@@ -33,7 +33,7 @@ db.run(`CREATE TABLE IF NOT EXISTS movies (
     ON UPDATE CASCADE
 )`);
 
-db.run(`CREATE TABLE IF NOT EXISTS comments (
+/*db.run(`CREATE TABLE IF NOT EXISTS comments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     movieid INTEGER,
     userid  INTEGER,
@@ -44,10 +44,10 @@ db.run(`CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (userid) REFERENCES users (id)
       ON DELETE CASCADE
       ON UPDATE CASCADE
-)`);
+)`);*/
 
 db.run(`CREATE TABLE IF NOT EXISTS favorite (
-  userid INTEGER ,
+  userid INTEGER,
   movieid INTEGER,
   PRIMARY KEY (userid, movieid),
   FOREIGN KEY (movieid) REFERENCES movies (movieid)
