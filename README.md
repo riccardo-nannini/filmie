@@ -25,6 +25,13 @@ node index.js
 
 By default the server will run on port 8080, it is possible to change the port with PORT=*yourport* in a **_.env_** file
 
+## Chart  :chart_with_upwards_trend:
+<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/chart.gif?raw=true" width="600">
+
+The rate distribution chart has been implemented using the [Victory React.js components](https://formidable.com/open-source/victory/).
+
+This chart let users know how the different ratings that contribute to the final rate of a movie are distributed. Given two equal final rates, say 50%, there are countless distribution that can create such a score. For instance in one case the majority of the ratings could be around 40%-60% while another case would have ratings polarized through the ends (the typical situation for the 'you hate it or you love it' movies).
+
 ## ERD  :floppy_disk:
 <br>
 <img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/ERD.png?raw=true" width="800">
