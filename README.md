@@ -25,6 +25,10 @@ node index.js
 
 By default the server will run on port 8080, it is possible to change the port with PORT=*yourport* in a **_.env_** file
 
+## ERD  :floppy_disk:
+<br>
+<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/ERD.png?raw=true" width="800">
+
 ## Test Strategy :hammer:
 **Unit tests** will be created for every meaningful part of the application.<br>
 _Stubs_ and _mocks_ are going to be implemented in order to execute unit tests that require networking or database access.
