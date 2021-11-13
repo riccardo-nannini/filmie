@@ -17,17 +17,15 @@ router.get('/watchlist', (req, res) => {
         let url = "https://api.themoviedb.org/3/movie/" + result[i].movieid + "?api_key=" + ApiKey + "&language=en-US"
         calls.push(axios.get(url))
       }
-      
+
       let wlist = []
       Promise.all(calls).then((response) => {
         for (i in response) {
-          //console.log(" data: ",response[i].data)
           wlist.push({
             id: response[i].data.id,
             poster: response[i].data.poster_path
           });
         }
-        console.log(wlist)
 
         res.json({
           watchlist: wlist
@@ -40,5 +38,16 @@ router.get('/watchlist', (req, res) => {
     res.status(401).send();
   }
 });
+
+router.post('/watchlist', (req, res) => {
+  if (req.isAuthenticated()) {
+    watchlist.addWatchlist(req.user.id, req.body.movieid).then(() => {
+      res.status(200).send();
+    })
+  } else {
+    res.status(401).send();
+  }
+});
+
 
 module.exports = router;

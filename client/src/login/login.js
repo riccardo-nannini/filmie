@@ -2,7 +2,7 @@ import * as React from 'react';
 import './login.css'
 import Header from '../header/header.js';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Footer from '../footer/footer';
 
 export default function Login() {
@@ -11,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const history = useHistory();
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,7 +31,11 @@ export default function Login() {
         return;
       }
       if (response.redirected) {
-        window.location.href = response.url;
+        if (history.location.state === undefined) {
+          window.location.href = response.url;
+        } else {
+          history.goBack();
+        }
         return;
       }
     });
@@ -62,7 +68,7 @@ export default function Login() {
             <button className="loginButton" type="submit" value="Submit">Login</button>
           </form>
           <Link className="signUp" to="/register">Don't have an account? Sign up</Link>
-          <div className="copyright">Copyright @ <Link to="/home">Filmie</Link> 2021</div>
+          <div className="copyright">Copyright @ <Link className="linkCopyright" to="/">Filmie</Link> 2021</div>
 
         </div>
       </div>

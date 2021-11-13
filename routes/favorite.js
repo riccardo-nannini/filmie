@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const favorite = require('../dao/favorites.js');
 const axios = require('axios');
-const { response } = require('express');
 require('dotenv').config();
 
 const ApiKey = process.env.APIKEY
@@ -21,13 +20,11 @@ router.get('/favorite', (req, res) => {
       let fav = []
       Promise.all(calls).then((response) => {
         for (i in response) {
-          //console.log(" data: ",response[i].data)
           fav.push({
             id: response[i].data.id,
             poster: response[i].data.poster_path
           });
         }
-        console.log(fav)
 
         res.json({
           favorite: fav
@@ -36,6 +33,16 @@ router.get('/favorite', (req, res) => {
 
     })
 
+  } else {
+    res.status(401).send();
+  }
+});
+
+router.post('/favorite', (req, res) => {
+  if (req.isAuthenticated()) {
+    favorite.addFavorite(req.user.id, req.body.movieid).then(() => {
+      res.status(200).send();
+    })
   } else {
     res.status(401).send();
   }

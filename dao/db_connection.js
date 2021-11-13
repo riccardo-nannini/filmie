@@ -9,7 +9,7 @@ class db_connection {
         console.log('Connected to database');
       });
 
-    static connectionAsync;
+    static connectionAsync = null;
 
     static getConnection() {
         return this.connection;

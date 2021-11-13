@@ -1,9 +1,9 @@
 .core {
-  background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,1) 100%);;
-    display: flex;
+  background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,0.4) 100%);;
+  display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  }
+}
 
 
 .searchBarForm {
@@ -11,11 +11,11 @@
 }
 
 form.searchBarForm input[type=text] {
-  margin-left: 50px;
+  margin-left: 100px;
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
-  width: 20%;
+  width: 300px;
   background: #f1f1f1;
 }
 
@@ -25,23 +25,23 @@ form.searchBarForm input[type=text] {
 }
 
 .sliderContainer{
-  height: 225px;
+  height: 260px;
   border-radius: 8px;
 }
 form.searchBarForm button {
-  width: 4%;
+  width: 44px;
   min-width: 44px;
   padding: 10px;
   background: #5f1f8a;
   color: white;
   font-size: 17px;
-  border: 1px solid grey;
+  border: 1px solid #8c449e;
   border-left: none;
   cursor: pointer;
 }
 
 form.searchBarForm button:hover {
-  background: #0b7dda;
+  background: #430053;
 }
 
 form.searchBarForm::after {
@@ -49,7 +49,6 @@ form.searchBarForm::after {
   clear: both;
   display: table;
 }
-
 
 .movieContainer{
   display: flex;
@@ -59,12 +58,20 @@ form.searchBarForm::after {
   margin: 40px 100px 30px 100px;
 }
 
+.movieContainerNoAuth{
+  display: none;
+}
+
 .slideTitle {
   color: white;
   height: 35px;
   font-size: 20px;
   padding-left:3px;
-  margin-bottom: 7px;
+  margin-bottom: 0px;
+}
+
+.slideTitleNotLoaded {
+  display: none;
 }
 
 .content{
@@ -74,3 +81,19 @@ form.searchBarForm::after {
 .movieContainer:last-of-type{
   margin-bottom: 90px;
 }
+
+@media screen and (max-width: 730px) {
+  .movieContainer{
+    margin: 40px 20px 30px 20px;
+  }
+
+  form.searchBarForm input[type=text] {
+    margin-left: 20px;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    width: 300px;
+    background: #f1f1f1;
+  }
+}
+

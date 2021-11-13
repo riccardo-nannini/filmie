@@ -38,7 +38,7 @@ var session_config = {
   cookie: { secure: true }, //true is a recommended option. However, it requires an https-enabled website
   store: new SQLiteStore({db:"filmie.db"}), //store  parameter when saving session to database
   cookie: {
-    maxAge: 604800 * 4,
+    maxAge: 1000*60*60*24*20,
   },
 };
 
@@ -78,9 +78,14 @@ app.use(require('./routes/updateProfile'))
 app.use(require('./routes/deleteProfile'))
 app.use(require('./routes/movie'))
 app.use(require('./routes/favorite'))
+app.use(require('./routes/removeFavorite'))
 app.use(require('./routes/watchlist'))
-
-
+app.use(require('./routes/removeWatchlist'))
+app.use(require('./routes/searchMovies'))
+app.use(require('./routes/getTrendingMovies'))
+app.use(require('./routes/getNowPlaying'))
+app.use(require('./routes/rating'))
+app.use(require('./routes/getRatingDistribution'))
 
 app.get('/', (req, res) => {
   res.sendFile(

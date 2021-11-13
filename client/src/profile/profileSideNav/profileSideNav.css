@@ -18,12 +18,17 @@
     color: #818181;
     display: block;
     cursor: pointer;
+    transition: 0.2s;
   }
 
 .sidenav a:hover {
     color: #f1f1f1;
   }
   
+.sidenav a:active {
+  color: #5e5e5e;
+}
+
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}

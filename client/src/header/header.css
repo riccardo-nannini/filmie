@@ -1,26 +1,45 @@
 .containerHeader{
-    font-size: 20px;
-    height: 60px;
+    font-size: 21px;
+    height: 50px;
     display: flex;
     justify-content: space-between;
     position: relative;
     top: 0;
     left: 0;
-    padding: 0 40px 0 40px;
-    background-color: #4492b1;;
-    transition: top 0.3s; /* Transition effect when sliding down (and up) */
+    padding: 0 45px 0 40px;
+    background-color: #4492b1;
+    transition: top 0.3s;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2)
+}
+
+.containerHeader img {
+    width: 26px;
+    filter: invert(100%) sepia(0%) saturate(7426%) hue-rotate(20deg) brightness(126%) contrast(115%);
 }
 
 .title{
     display: flex;
     color: white;
-    padding-top:16px;
+    padding-top:11px;
     justify-content: flex-start;
     overflow: visible;
-    
+    text-decoration: inherit;
+    font-weight: 200;
+    transition: 0.2s;
 }
 
 .end{
+    padding-top:13px;
+    font-weight: 200;
+    transition: 0.2s;
+}
+
+.endFooter{
     color: white;
-    padding-top:16px;
+    text-decoration: inherit;
+    padding-left: 30px;
+}
+
+.endFooter:hover, .title:hover {
+    opacity: 0.75;
 }
