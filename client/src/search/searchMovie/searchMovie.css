@@ -9,6 +9,7 @@
 .searchMoviePoster{
   border-radius: 5px;
   width: 120px;
+  box-shadow: -5px 7px 10px 1px rgba(0, 0, 0, 0.24);
 }
 
 .imageNotFound{

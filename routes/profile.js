@@ -6,7 +6,6 @@ router.use(
   express.static(path.join(__dirname, "./client/build"))
 );
 
-// create a GET route
 router.get('/profile', (req, res) => {
 
   if (req.isAuthenticated()) {

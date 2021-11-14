@@ -5,20 +5,6 @@
     justify-content: flex-start;
 }
 
-
-.searchBarForm {
-  margin-top: 50px;
-}
-
-form.searchBarForm input[type=text] {
-  margin-left: 100px;
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  width: 300px;
-  background: #f1f1f1;
-}
-
 .movieImage{
   width: 150px;
   height: 225px;
@@ -66,6 +52,7 @@ form.searchBarForm::after {
   color: white;
   height: 35px;
   font-size: 20px;
+  font-weight: 300;
   padding-left:3px;
   margin-bottom: 0px;
 }
@@ -80,6 +67,15 @@ form.searchBarForm::after {
 
 .movieContainer:last-of-type{
   margin-bottom: 90px;
+}
+
+.homeMovieLoad-enter{
+  opacity: 0;
+}
+
+.homeMovieLoad-enter-active{
+  opacity: 1;
+  transition: opacity 1500ms;
 }
 
 @media screen and (max-width: 730px) {

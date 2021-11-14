@@ -7,21 +7,41 @@ form.searchBarMovies input[type=text] {
   margin-left: 20px;
   padding: 10px;
   font-size: 17px;
-  border: 1px solid grey;
-  width: 300px;
+  width: 400px;
+  height: 20px;
   background: #f1f1f1;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  border: 1px solid white;
+  border-right: none;
 }
 
 form.searchBarMovies button {
-  width: 4%;
-  min-width: 44px;
+  width: 44px;
   padding: 10px;
-  background: #5f1f8a;
+  background-color: #5f1f8a;
   color: white;
   font-size: 17px;
-  border: 1px solid grey;
+  border: 1px solid white;
   border-left: none;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
   cursor: pointer;
+}
+
+form.searchBarMovies button:active {
+  background: #9e27ee;
+}
+
+form.searchBarMovies button:hover {
+  opacity: 0.8;
+}
+
+.searchImage{
+  display: inline-block;
+  filter: invert(100%) sepia(0%) saturate(7426%) hue-rotate(20deg) brightness(126%) contrast(115%);
+  width: 15.5px;
+  margin-right: 2px;
 }
 
 .noResults{
@@ -30,9 +50,6 @@ form.searchBarMovies button {
   margin: 20px 20px 20px 20px;
 }
 
-form.searchBarMovies button:hover {
-  background: #430053;
-}
 
 form.searchBarMovies::after {
   content: "";

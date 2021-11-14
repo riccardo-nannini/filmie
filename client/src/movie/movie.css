@@ -5,19 +5,56 @@
 
 .moviemiddle {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
     min-height: 88vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .movieOverlay{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
     min-height: 88vh;
     background-image: linear-gradient(45deg, rgba(36,5,58,1) 0%, rgba(53,13,73,1) 17%, rgba(108,1,137,0.4) 100%);
+    background-attachment: fixed;
+}
+
+.movieDetails{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 3;
+}
+
+.similarMovieContainer{
+    height: 225px;
+    margin: 0 50px 90px 50px;
+}
+
+.movieTrailer{
+    height: 337.5px;
+    width: 600px;
+}
+
+.movieTrailerContainer{
+    margin: 80px 80px 100px 0px;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+.movieSecondRow{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+.movieButtonIcon{
+    margin-top: 3px;
 }
 
 .moviePoster{
@@ -28,7 +65,6 @@
 
 .centered {
     margin: 2% 3%;
-    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -75,7 +111,6 @@
 
 .ratingChart{
     opacity: 1 !important;
-    /*background-image: linear-gradient(45deg, rgba(36,5,58,0.2) 0%, rgba(53,13,73,0.2) 17%, rgba(108,1,137,0.2) 100%) !important;*/
 }
 
 .movieRate{
@@ -165,4 +200,13 @@
 .movieLoad-enter-active{
     opacity: 1;
     transition: opacity 800ms;
+}
+
+.similarMoviesLoad-enter{
+    opacity: 0;
+  }
+  
+.similarMoviesLoad-enter-active{
+    opacity: 1;
+    transition: opacity 2000ms;
 }

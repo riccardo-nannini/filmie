@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Footer from '../footer/footer.js';
 import Header from '../header/header.js';
 import Carousel from 'react-multi-carousel';
-import { Link } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import 'react-multi-carousel/lib/styles.css';
 import './home.css';
@@ -177,17 +176,14 @@ export default function Home() {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <Header></Header>
       <div className="core">
-        <form className="searchBarForm">
-          <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
-          <Link to={"/search?search=" + query}><button type="submit"><i class="fa fa-search"></i></button></Link>
-        </form>
+
 
         <div className={showFavoriteList === false ? "movieContainerNoAuth": "movieContainer"}>
-          <div className="slideTitle">Favourite movies:</div>
+          <div className="slideTitle">Favourite movies</div>
           <CSSTransition
             in={showFavoriteList}
             timeout={300}
-            classNames="movieLoad"
+            classNames="homeMovieLoad"
           >
             <div className="content">
               <Carousel
@@ -211,11 +207,11 @@ export default function Home() {
         </div>
 
         <div className={showWatchList === false? "movieContainerNoAuth": "movieContainer"}>
-          <div className="slideTitle">Watchlist:</div>
+          <div className="slideTitle">Watchlist</div>
           <CSSTransition
             in={showWatchList}
             timeout={300}
-            classNames="movieLoad"
+            classNames="homeMovieLoad"
           >
             <div className="content">
               <Carousel
@@ -240,11 +236,11 @@ export default function Home() {
         </div>
 
         <div className="movieContainer">
-          <div className={nowPlayingList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Now playing in theaters:</div>
+          <div className={nowPlayingList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Now playing in theaters</div>
           <CSSTransition
             in={showNowPlaying}
             timeout={300}
-            classNames="movieLoad"
+            classNames="homeMovieLoad"
           >
             <div className="content">
               <Carousel
@@ -268,11 +264,11 @@ export default function Home() {
         </div>
 
         <div className="movieContainer">
-          <div className={trendingMoviesList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Trending movies:</div>
+          <div className={trendingMoviesList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Trending movies</div>
           <CSSTransition
             in={showTrendingMovies}
             timeout={300}
-            classNames="movieLoad"
+            classNames="homeMovieLoad"
           >
             <div className="content">
               <Carousel

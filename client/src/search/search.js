@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Header from '../header/header.js';
 import Footer from '../footer/footer.js';
 import SearchMovie from './searchMovie/searchMovie.js';
+import search from '../search.svg'
+import { useHistory } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import './search.css';
 
@@ -16,6 +18,7 @@ export default function Search(props) {
   const [noResults, setNoResults] = useState(false);
 
   const urlQuery = props.location.search;
+  const history = useHistory();
 
   useEffect(() => {
     if (urlQuery === "") return;
@@ -52,29 +55,30 @@ export default function Search(props) {
   function handleSearch(e) {
     e.preventDefault();
     setShowSearch(false);
-    searchMovie("/search?search="+query);
+    history.push("/search?search=" + query);
+    searchMovie("/search?search=" + query);
   }
 
   return (
     <div className="movieCont">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <Header></Header>
       <div className="movieOverlay">
         <div className="searchCentered">
-        <form className="searchBarMovies">
-          <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
-          <button onClick={handleSearch}><i class="fa fa-search"></i></button>
-        </form>
-        <CSSTransition
+          <form className="searchBarMovies">
+            <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />
+            <button className="searchButton" onClick={handleSearch}><img className="searchImage" src={search} /></button>
+          </form>
+
+          <CSSTransition
             in={showSearch}
             timeout={300}
             classNames="movieLoad"
           >
-        <div>
-          {searchInfoList === undefined? null : searchInfoList}
-          {noResults === false? null : <div className="noResults">No result found for {decodeURI(urlQuery.substr(8))}</div>}
-        </div>
-        </CSSTransition>
+            <div>
+              {searchInfoList === undefined ? null : searchInfoList}
+              {noResults === false ? null : <div className="noResults">No result found for {decodeURI(urlQuery.substr(8))}</div>}
+            </div>
+          </CSSTransition>
         </div>
       </div>
       <Footer></Footer>
