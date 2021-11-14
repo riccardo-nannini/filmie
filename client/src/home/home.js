@@ -4,6 +4,7 @@ import Footer from '../footer/footer.js';
 import Header from '../header/header.js';
 import Carousel from 'react-multi-carousel';
 import { CSSTransition } from 'react-transition-group';
+import MovieCard from './movieCard/movieCard.js';
 import 'react-multi-carousel/lib/styles.css';
 import './home.css';
 import { shuffleArray } from '../utils/shuffleArray.js';
@@ -14,15 +15,17 @@ export default function Home() {
   const [toWatch, setToWatch] = useState();
   const [trendingMovies, setTrendingMovies] = useState();
   const [nowPlaying, setNowPlaying] = useState();
+  const [upcoming, setUpcoming] = useState();
   const [favoriteList, setFavoriteList] = useState();
   const [watchList, setWatchList] = useState();
   const [trendingMoviesList, setTrendingMoviesList] = useState();
   const [nowPlayingList, setNowPlayingList] = useState();
+  const [upcomingList, setUpcomingList] = useState();
   const [showWatchList, setShowWatchList] = useState(true);
   const [showFavoriteList, setShowFavoriteList] = useState(true);
   const [showTrendingMovies, setShowTrendingMovies] = useState(false);
   const [showNowPlaying, setShowNowPlaying] = useState(false);
-  const [query, setQuery] = useState("");
+  const [showUpcoming, setShowUpcoming] = useState(false);
 
   useEffect(() => {
     fetch("/favorite", {
@@ -61,6 +64,15 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    fetch("/getUpcoming", {
+      method: "GET"
+    }).then(response => response.json())
+      .then(data => {
+        setUpcoming(data.upcoming)
+      });
+  }, []);
+
+  useEffect(() => {
     if (favoriteMovies === undefined || favoriteMovies.length === 0) {
       setShowFavoriteList(false)  
       return;
@@ -68,18 +80,7 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < favoriteMovies.length; i++) {
       res.push(
-        <a href={"/movie/" + favoriteMovies[i].id} style={{ 
-          width: '150px',
-          height: '225px',
-          display: 'inline-block',
-          boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)"
-         }}
-          >
-          <img style={{ 
-            width: '150px',
-            borderRadius: '5px',  
-          }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + favoriteMovies[i].poster}></img>
-        </a>
+        <MovieCard movie={{id: favoriteMovies[i].id, poster:favoriteMovies[i].poster}}></MovieCard>
       );
     }
     setFavoriteList(res);
@@ -94,9 +95,7 @@ export default function Home() {
     let res = [];
     for (let i = 0; i < toWatch.length; i++) {
       res.push(
-        <a href={"/movie/" + toWatch[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
-          <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + toWatch[i].poster}></img>
-        </a>
+        <MovieCard movie={{id: toWatch[i].id, poster:toWatch[i].poster}}></MovieCard>
       );
     }
     setWatchList(res);
@@ -109,9 +108,7 @@ export default function Home() {
     shuffleArray(trendingMovies)
     for (let i = 0; i < trendingMovies.length; i++) {
       res.push(
-        <a href={"/movie/" + trendingMovies[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
-          <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + trendingMovies[i].poster}></img>
-        </a>
+        <MovieCard movie={{id: trendingMovies[i].id, poster:trendingMovies[i].poster}}></MovieCard>
       );
     }
     setTrendingMoviesList(res);
@@ -124,14 +121,25 @@ export default function Home() {
     shuffleArray(nowPlaying)
     for (let i = 0; i < nowPlaying.length; i++) {
       res.push(
-        <a href={"/movie/" + nowPlaying[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)",width: '150px', height: '225px', display: 'inline-block' }}>
-          <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + nowPlaying[i].poster}></img>
-        </a>
+        <MovieCard movie={{id: nowPlaying[i].id, poster:nowPlaying[i].poster}}></MovieCard>
       );
     }
     setNowPlayingList(res);
     setShowNowPlaying(true);
   }, [nowPlaying])
+
+  useEffect(() => {
+    if (upcoming === undefined) return;
+    let res = [];
+    shuffleArray(upcoming)
+    for (let i = 0; i < upcoming.length; i++) {
+      res.push(
+        <MovieCard movie={{id: upcoming[i].id, poster:upcoming[i].poster}}></MovieCard>
+      );
+    }
+    setUpcomingList(res);
+    setShowUpcoming(true);
+  }, [upcoming])
 
   const responsive = {
     superLargeDesktop: {
@@ -286,6 +294,34 @@ export default function Home() {
                 autoPlaySpeed={8000}
               >
                 {trendingMoviesList === undefined ? <div></div> : trendingMoviesList}
+              </Carousel>
+            </div>
+          </CSSTransition>
+        </div>
+
+        <div className="movieContainer">
+          <div className={upcomingList === undefined? "slideTitleNotLoaded" : "slideTitle"}>Upcoming movies</div>
+          <CSSTransition
+            in={showUpcoming}
+            timeout={300}
+            classNames="homeMovieLoad"
+          >
+            <div className="content">
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                itemClass="movieImage"
+                containerClass="sliderContainer"
+                draggable={true}
+                swipeable={true}
+                infinite={true}
+                partialVisible={false}
+                centerMode={true}
+                autoPlay={true}
+                showDots={false}
+                autoPlaySpeed={8000}
+              >
+                {upcomingList === undefined ? <div></div> : upcomingList}
               </Carousel>
             </div>
           </CSSTransition>

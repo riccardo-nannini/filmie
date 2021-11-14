@@ -11,8 +11,10 @@ import ReactStars from "react-rating-stars-component";
 import { useHistory } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
 import Carousel from 'react-multi-carousel';
+import Provider from './provider/provider.js';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import MovieCard from '../home/movieCard/movieCard.js';
 import 'react-circular-progressbar/dist/styles.css';
 import './movie.css';
 
@@ -27,10 +29,11 @@ export default function Movie(props) {
   const [rating, setRating] = useState(0);
   const [ratingDistribution, setRatingDistribution] = useState();
   const [trailer, setTrailer] = useState();
-  const [showTrailer, setShowTrailer] = useState(false);
   const [similarMovies, setSimilarMovies] = useState();
   const [similarMoviesList, setSimilarMoviesList] = useState();
   const [showSimilarMovies, setShowSimilarMovies] = useState(false);
+  const [providers, setProviders] = useState();
+  const [providersList, setProvidersList] = useState();
 
   const history = useHistory();
   const id = props.location.pathname.substring(7)
@@ -56,7 +59,6 @@ export default function Movie(props) {
     }).then(response => response.json())
       .then(data => {
         setTrailer(data);
-        setShowTrailer(true);
       });
   }, []);
 
@@ -71,6 +73,16 @@ export default function Movie(props) {
   }, []);
 
   useEffect(() => {
+    const url = "/getProviders/" + id
+    fetch(url, {
+      method: "GET"
+    }).then(response => response.json())
+      .then(data => {
+        setProviders(data);
+      });
+  }, []);
+
+  useEffect(() => {
     updateRatingDistribution();
   }, []);
 
@@ -81,17 +93,49 @@ export default function Movie(props) {
 
   useEffect(() => {
     if (similarMovies === undefined) return;
+    if (similarMovies.length == 0) return
     let res = [];
     for (let i = 0; i < similarMovies.length; i++) {
       res.push(
-        <a href={"/movie/" + similarMovies[i].id} style={{ boxShadow: "7px 7px 10px 1px rgba(0, 0, 0, 0.24)", width: '150px', height: '225px', display: 'inline-block' }}>
-          <img style={{ width: '150px', borderRadius: '5px' }} src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + similarMovies[i].poster}></img>
-        </a>
+        <MovieCard movie={{id: similarMovies[i].id, poster:similarMovies[i].poster}}></MovieCard>
       );
     }
     setSimilarMoviesList(res);
     setShowSimilarMovies(true);
   }, [similarMovies])
+
+
+  useEffect(() => {
+    if (providers === undefined) return;
+    let providersBuy = [];
+
+    if (providers.buy.length == 0 && providers.rent.length == 0 && providers.flatrate.length == 0) return;
+    for (let i = 0; i < providers.buy.length && i < 9; i++) {
+      providersBuy.push(
+        <Provider provider={providers.buy[i].logo}></Provider>
+      );
+    }
+
+    let providersRent = [];
+    for (let i = 0; i < providers.rent.length && i < 9; i++) {
+      providersRent.push(
+        <Provider provider={providers.rent[i].logo}></Provider>
+      );
+    }
+
+    let providersFlatrate = [];
+    for (let i = 0; i < providers.flatrate.length && i < 9; i++) {
+      providersFlatrate.push(
+        <Provider provider={providers.flatrate[i].logo}></Provider>
+      );
+    }
+    
+    setProvidersList({
+      providersBuy: providersBuy,
+      providersRent: providersRent,
+      providersFlatrate: providersFlatrate
+    });
+  }, [providers])
 
   function updateRatingDistribution() {
     const url = "/getRatingDistribution?movieid=" + encodeURIComponent(id)
@@ -174,13 +218,22 @@ export default function Movie(props) {
   }
 
   const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 8,
+    superLargeDesktop1: {
+      breakpoint: { max: 4000, min: 2500 },
+      items: 12,
       slidesToSlide: 3
     },
-    desktop: {
+    superLargeDesktop: {
+      breakpoint: { max: 2500, min: 2048 },
+      items: 10,
+      slidesToSlide: 3
+    },
+    desktop0: {
+      breakpoint: { max: 1800, min: 1400 },
+      items: 10,
+      slidesToSlide: 2
+    },
+    desktop1: {
       breakpoint: { max: 2048, min: 1400 },
       items: 6,
       slidesToSlide: 2
@@ -348,9 +401,26 @@ export default function Movie(props) {
             classNames="movieLoad"
           >
             <div className="movieSecondRow">
-              <div className="movieDetails"></div>
+              <div className="movieDetails">
+                <div className="providersContainer">
+                {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
+                <div className="providersList">
+                {providersList === undefined ? null : providersList.providersBuy.length === 0 ? null : <div className="providersTitle">Buy</div>}
+                {providersList === undefined ? null : providersList.providersBuy}
+                </div>
+                <div className="providersList">
+                {providersList === undefined ? null : providersList.providersRent.length === 0? null : <div className="providersTitle">Rent</div>}
+                {providersList === undefined ? null : providersList.providersRent}
+                </div>
+                <div className="providersList">
+                {providersList === undefined ? null : providersList.providersFlatrate.length === 0? null : <div className="providersTitle">Stream</div>}
+                {providersList === undefined ? null : providersList.providersFlatrate}
+                </div>
+                </div>
+              </div>
+              
               <div className="movieTrailerContainer">
-                <iframe frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>
+              {trailer === undefined ? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
               </div>
             </div>
           </CSSTransition>

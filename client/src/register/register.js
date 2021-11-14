@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './register.css'
 import Header from '../header/header.js';
-import { useState, useEffect } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { useState } from 'react';
+import { Link } from "react-router-dom";
 import Footer from '../footer/footer';
 const inputValidation = require('./inputValidation.js');
 

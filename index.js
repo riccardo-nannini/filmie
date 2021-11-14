@@ -88,7 +88,8 @@ app.use(require('./routes/rating'))
 app.use(require('./routes/getRatingDistribution'))
 app.use(require('./routes/getVideos'))
 app.use(require('./routes/getSimilar'))
-
+app.use(require('./routes/getProviders'))
+app.use(require('./routes/getUpcoming'))
 
 app.get('/', (req, res) => {
   res.sendFile(

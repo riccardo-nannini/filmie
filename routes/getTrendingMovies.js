@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const favorite = require('../dao/favorites.js');
 const axios = require('axios');
 require('dotenv').config();
 

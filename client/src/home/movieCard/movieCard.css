@@ -1,0 +1,11 @@
+.movieCardContainer{
+  width: 150px;
+  height: 225px;
+  display: inline-block;
+  box-shadow: 7px 7px 10px 1px rgba(0, 0, 0, 0.24);
+}
+
+.movieCard {
+  width: 150px;
+  border-radius: 5px;
+}

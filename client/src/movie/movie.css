@@ -11,6 +11,7 @@
     min-height: 88vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size:cover;
 }
 
 .movieOverlay{
@@ -25,13 +26,29 @@
 
 .movieDetails{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-grow: 3;
+    margin-left: 3%;
+}
+
+.providersContainer{
+    
+}
+
+.providersTitle{
+    color: white;
+    margin-bottom: 5px;
+    margin-left: 2px;
+    font-size: 17px;
+}
+
+.providersList{
+    margin-bottom: 10px;
 }
 
 .similarMovieContainer{
     height: 225px;
-    margin: 0 50px 90px 50px;
+    margin: 0 3% 90px 3%;
 }
 
 .movieTrailer{
@@ -39,8 +56,23 @@
     width: 600px;
 }
 
+.streamText{
+    font-size: 22px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.streamText2{
+    font-size: 16px;
+}
+
+.streamText a{
+    color: #dfba44;
+    text-decoration: inherit;
+}
+
 .movieTrailerContainer{
-    margin: 80px 80px 100px 0px;
+    margin: 80px 3% 100px 0px;
     display: flex;
     flex-direction: row-reverse;
 
