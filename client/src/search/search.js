@@ -38,12 +38,14 @@ export default function Search(props) {
   useEffect(() => {
     let list = [];
     if (searchInfo === undefined) return;
+
     for (const movie of searchInfo) {
       list.push(
         <SearchMovie movie={movie}></SearchMovie>
       )
     }
     if (!list.length) {
+      setSearchInfoList(null);
       setNoResults(true);
     } else {
       setSearchInfoList(list);

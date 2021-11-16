@@ -4,7 +4,8 @@
   "description": "Web app for movie lovers",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "author": "Riccardo Nannini",
   "license": "ISC",
