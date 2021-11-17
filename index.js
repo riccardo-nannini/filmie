@@ -6,20 +6,23 @@ const session    = require("express-session");
 const passport   = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 var SQLiteStore  = require('connect-sqlite3')(session);
-const sqlite3    = require('sqlite3').verbose();
-const { open }   = require('sqlite');
+const Database = require('sqlite-async')
 require('dotenv').config();
 
 
 const app = express();
 const port = process.env.PORT || 8080; 
 
-(async () => {
-  conn.db_connection.connectionAsync = await open({
-    filename: './filmie.db',
-    driver: sqlite3.Database
-  })
-})()
+Database.open('./filmie.db').then((db) => {
+
+  conn.db_connection.connection = db;
+  console.log('Connected to database');
+
+}).catch(err => {
+
+  console.error(err.message);
+  
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

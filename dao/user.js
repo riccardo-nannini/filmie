@@ -12,25 +12,25 @@ class User {
 
 function findById(id, cb) {
   db = conn.db_connection.getConnection();
-  db.get("SELECT * FROM users WHERE id = ?;", [id], (err, user) => {
+  db.each("SELECT * FROM users WHERE id = ?;", [id], (err, user) => {
     if (!user) return cb(null, false);
     return cb(null, user);
   });
 }
 
 function findByIdAsync(id) {
-  db = conn.db_connection.getConnectionAsync();
+  db = conn.db_connection.getConnection();
   return db.get("SELECT * FROM users WHERE id = ?;", [id])
 }
 
 function findByEmail(email) {
-  db = conn.db_connection.getConnectionAsync();
+  db = conn.db_connection.getConnection();
   return db.get("SELECT * FROM users WHERE email = ?;", [email]);
 }
 
 function authenticate(email, password, cb) {
   db = conn.db_connection.getConnection();
-  db.get("SELECT * FROM users WHERE email = ?;", [email], (err, user) => {
+  db.each("SELECT * FROM users WHERE email = ?;", [email], (err, user) => {
     if (!user) {
       return cb(null, false);
     }
@@ -45,7 +45,7 @@ function authenticate(email, password, cb) {
 };
 
 function authenticateAsync(email, password) {
-  db = conn.db_connection.getConnectionAsync();
+  db = conn.db_connection.getConnection();
   return db.get("SELECT * FROM users WHERE email=?;", [email])
     .then((user) => {
       return validPassword(String(password), user.hash, user.salt);
@@ -85,7 +85,7 @@ function genPassword(password) {
 }
 
 function deleteUser(email) {
-  db = conn.db_connection.getConnectionAsync();
+  db = conn.db_connection.getConnection();
   return db.run("DELETE FROM users WHERE email = ?", [email]);
 }  
 

@@ -25,6 +25,7 @@
     "passport-local": "^1.0.0",
     "request-country": "^0.1.5",
     "sqlite": "^4.0.23",
+    "sqlite-async": "^1.1.2",
     "sqlite3": "^5.0.2"
   }
 }

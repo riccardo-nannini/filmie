@@ -2,7 +2,7 @@ const { get } = require('../routes/favorite.js');
 const conn = require('./db_connection.js');
 
 function addWatchlist(userID, movieID) {
-    db = conn.db_connection.getConnectionAsync();
+    db = conn.db_connection.getConnection();
     return db.get("SELECT movieid FROM watchlist WHERE userid = ? and movieid= ?",[userID, movieID])
     .then((movie) => {
         if (!movie) {
@@ -17,17 +17,17 @@ function addWatchlist(userID, movieID) {
 }
 
 function removeWatchlist(userID, movieID) {
-    db = conn.db_connection.getConnectionAsync();
+    db = conn.db_connection.getConnection();
     return db.run("DELETE FROM watchlist WHERE userid = ? AND movieid = ?", [userID, movieID])
 }
 
 function getWatchlist(userID) {
-    db = conn.db_connection.getConnectionAsync();
+    db = conn.db_connection.getConnection();
     return db.all("SELECT movieid FROM watchlist WHERE userid = ?", [userID])
 }
 
 function getWatchlistMovie(userID, movieID) {
-    db = conn.db_connection.getConnectionAsync();
+    db = conn.db_connection.getConnection();
     return db.get("SELECT movieid FROM watchlist WHERE userid = ? and movieid= ?",[userID, movieID])
 }
 
