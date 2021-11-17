@@ -38,6 +38,16 @@
     font-size: 17px;
 }
 
+.movieReleaseDate2{
+    color: white;
+    font-size: 20px;
+    padding-bottom: 0px;
+}
+
+.movieReleaseDate2 span{
+    color: #dfba44;
+}
+
 .providersList{
     margin-bottom: 10px;
 }

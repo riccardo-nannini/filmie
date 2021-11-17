@@ -57,7 +57,7 @@ router.post('/movie/:movieid', (req, res, next) => {
 
       resp = {
         id: movieid,
-        year: movieData.release_date.substring(0, movieData.release_date.length-6),
+        year: movieData.release_date,
         title: movieData.title,
         duration: movieData.runtime,
         overview: movieData.overview,

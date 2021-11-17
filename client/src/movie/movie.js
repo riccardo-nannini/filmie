@@ -36,7 +36,10 @@ export default function Movie(props) {
   const [providersList, setProvidersList] = useState();
 
   const history = useHistory();
-  const id = props.location.pathname.substring(7)
+  const id = props.location.pathname.substring(7);
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
   useEffect(() => {
     const url = "/movie/" + id
@@ -44,6 +47,16 @@ export default function Movie(props) {
       method: "POST"
     }).then(response => response.json())
       .then(data => {
+        let releaseDate = new Date(data.year);
+        let now = new Date();
+        if (releaseDate > now) {
+          data.isReleased = false
+          data.releaseDate = "" + monthNames[releaseDate.getMonth()] + " " + releaseDate.getDate() +", " + releaseDate.getFullYear();
+        } else {
+          data.isReleased = true
+          data.releaseDate = null
+        }
+        data.year = data.year.substring(0, data.year.length-6)
         setMovieInfo(data);
         setIsFavorite(data.isFavorite);
         setIsWatchlist(data.isWatchlist)
@@ -293,11 +306,12 @@ export default function Movie(props) {
               <div className="movieContent">
                 <div className="movieTitle">
                   {movieInfo === undefined ? null : movieInfo.title}
-                  <div className="movieYear">{movieInfo === undefined ? null : "(" + movieInfo.year + ")"}</div>
+                  <div className="movieYear">{movieInfo === undefined ? null : movieInfo.isReleased? "(" + movieInfo.year + ")" : null}</div>
                 </div>
+                {movieInfo === undefined? null : movieInfo.isReleased? null : <div className="movieReleaseDate2">Release date: <span>{movieInfo.releaseDate}</span></div> }
                 <div className="genresInfo">
                   {movieInfo === undefined ? null : movieInfo.genres}
-                  <span className="movieDuration"> {movieInfo === undefined ? null : +movieInfo.duration + " min"} </span>
+                  <span className="movieDuration"> {movieInfo === undefined ? null : movieInfo.duration === 0? null : +movieInfo.duration + " min"} </span>
                 </div>
                 {movieInfo === undefined ? null
                   :
