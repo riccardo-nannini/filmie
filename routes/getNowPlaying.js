@@ -9,7 +9,13 @@ const ApiKey = process.env.APIKEY
 
 router.get('/getNowPlaying', (req, res) => {
 
-  let url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + ApiKey + "&language=en-US&page=1"
+  let language = "en-US";
+
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + ApiKey + "&language="+ language +"&page=1"
   axios.get(url).then((response => {
     let movies = response.data.results;
 

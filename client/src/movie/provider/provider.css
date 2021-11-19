@@ -4,3 +4,9 @@
   border-radius: 12px;
   margin-right: 18px;
 }
+
+@media screen and (max-width: 745px) {
+  .providerLogo{
+    margin-bottom: 8px;
+  }
+}

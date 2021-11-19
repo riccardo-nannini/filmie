@@ -10,7 +10,7 @@ require('dotenv').config();
 const ApiKey = process.env.APIKEY
 
 router.use(
-  express.static(path.join(__dirname, "./client/build"))
+  express.static(path.join(__dirname, "../client/build"))
 );
 
 router.get('/movie/:movieid', (req, res) => {
@@ -24,12 +24,18 @@ router.post('/movie/:movieid', (req, res, next) => {
   let isFavorite = false;
   let isWatchlist = false;
   let isRated = false;
+  let rate = 0;
   let calls = [];
   let resp;
   let poster = null;
   let backdrop = null;
+  let language = "en-US";
 
-  let url = "https://api.themoviedb.org/3/movie/"+movieid+"?api_key="+ApiKey+"&language=en-US"
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/movie/"+movieid+"?api_key="+ApiKey+"&language="+language
   
   calls.push(axios.get(url));
   if (req.isAuthenticated()) {
@@ -42,7 +48,10 @@ router.post('/movie/:movieid', (req, res, next) => {
 
       if (response[1] !== undefined) isFavorite = true;
       if (response[2] !== undefined) isWatchlist = true;
-      if (response[3] !== undefined) isRated = true;
+      if (response[3] !== undefined) {
+        rate = response[3].rating
+        isRated = true;
+      }
 
       let movieData = response[0].data;
       if (movieData.poster_path !== null) poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
@@ -68,7 +77,8 @@ router.post('/movie/:movieid', (req, res, next) => {
         isAuth: req.isAuthenticated(),
         isFavorite: isFavorite,
         isWatchlist: isWatchlist,
-        isRated: isRated
+        isRated: isRated,
+        rate: rate
       }
 
       res.json(

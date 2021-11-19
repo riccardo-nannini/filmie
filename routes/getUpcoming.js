@@ -15,8 +15,13 @@ router.get('/getUpcoming', (req, res) => {
 
   let countryCode = req.requestCountryCode
   if (countryCode === false) countryCode = "US"
+  let language = "en-US";
 
-  let url = "https://api.themoviedb.org/3/movie/upcoming?api_key=" + ApiKey + "&language=en-US&page=1&region="+countryCode
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/movie/upcoming?api_key=" + ApiKey + "&language="+ language +"&page=1&region="+countryCode
   axios.get(url).then((response => {
     let movies = response.data.results;
 

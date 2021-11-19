@@ -27,7 +27,7 @@ Database.open('./filmie.db').then((db) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-  express.static(path.join(__dirname, "./client/build"))
+  express.static(path.join(__dirname, "../client/build"))
 );
 app.use(function(req, res, next) {
   console.log(req.body); 
@@ -96,7 +96,7 @@ app.use(require('./routes/getUpcoming'))
 
 app.get('/', (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../client/build/index.html"));
+    path.join(__dirname, "./client/build/index.html"));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); 

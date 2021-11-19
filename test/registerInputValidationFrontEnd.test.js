@@ -1,4 +1,4 @@
-const inputValidation = require("../client/src/register/inputValidation");
+const inputValidation = require("../../client/src/register/inputValidation");
 
 test('Short password', () => {
     expect(inputValidation("test@test.com", "p4SS")[1]).toBe(false);

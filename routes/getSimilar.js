@@ -9,8 +9,13 @@ router.get('/getSimilar/:movieid', (req, res, next) => {
 
   let movieid = req.params.movieid;
   let similarMovies = []
+  let language = "en-US";
 
-  let url = "https://api.themoviedb.org/3/movie/" + movieid + "/recommendations?api_key=" + ApiKey + "&language=en-US&page=1"
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/movie/" + movieid + "/recommendations?api_key=" + ApiKey + "&language="+ language +"&page=1"
 
   axios.get(url).then((response) => {
 

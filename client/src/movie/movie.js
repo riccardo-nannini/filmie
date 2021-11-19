@@ -72,6 +72,7 @@ export default function Movie(props) {
     }).then(response => response.json())
       .then(data => {
         setTrailer(data);
+        console.log(movieInfo)
       });
   }, []);
 
@@ -393,6 +394,7 @@ export default function Movie(props) {
                       <ReactStars
                         count={5}
                         isHalf={true}
+                        value={movieInfo.rate/2}
                         onChange={movieInfo.isAuth ? addRating : handleClickNotAuth}
                         size={24}
                         activeColor="#ffd700"
@@ -434,7 +436,7 @@ export default function Movie(props) {
               </div>
               
               <div className="movieTrailerContainer">
-              {trailer === undefined ? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
+              {trailer === undefined ? null : trailer === null? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
               </div>
             </div>
           </CSSTransition>

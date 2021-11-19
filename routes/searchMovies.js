@@ -7,7 +7,7 @@ require('dotenv').config();
 const ApiKey = process.env.APIKEY
 
 router.use(
-  express.static(path.join(__dirname, "./client/build"))
+  express.static(path.join(__dirname, "../client/build"))
 );
 
 router.get('/search', (req, res) => {
@@ -18,8 +18,13 @@ router.get('/search', (req, res) => {
 router.post('/search', (req, res, next) => {
 
   query = encodeURI(req.query.search);
+  let language = "en-US";
 
-  let url = "https://api.themoviedb.org/3/search/movie?api_key=" + ApiKey + "&language=en-US&query=" + query + "&page=1&include_adult=false";
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/search/movie?api_key=" + ApiKey + "&language="+ language +"&query=" + query + "&page=1&include_adult=false";
 
   axios.get(url)
     .then(function (response) {

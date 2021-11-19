@@ -5,7 +5,7 @@ const passport = require('passport');
 
 
 router.use(
-  express.static(path.join(__dirname, "./client/build"))
+  express.static(path.join(__dirname, "../client/build"))
 );
 
 router.get('/login', (req, res) => {

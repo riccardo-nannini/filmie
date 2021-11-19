@@ -20,7 +20,7 @@ router.get('/getProviders/:movieid', (req, res, next) => {
   let countryCode = req.requestCountryCode
   if (countryCode === false) countryCode = "US"
 
-  let url = "https://api.themoviedb.org/3/movie/" + movieid + "/watch/providers?api_key=" + ApiKey + "&language=en-US&page=1"
+  let url = "https://api.themoviedb.org/3/movie/" + movieid + "/watch/providers?api_key=" + ApiKey 
 
   axios.get(url).then((response) => {
 

@@ -8,7 +8,13 @@ const ApiKey = process.env.APIKEY
 
 router.get('/getTrendingMovies', (req, res) => {
 
-  let url = "https://api.themoviedb.org/3/trending/movie/day?api_key=" + ApiKey + "&language=en-US"
+  let language = "en-US";
+
+  if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
+    language = req.get("Accept-Language").substring(0,2);
+  }
+
+  let url = "https://api.themoviedb.org/3/trending/movie/day?api_key=" + ApiKey + "&language=" + language
   axios.get(url).then((response => {
     let movies = response.data.results;
 
