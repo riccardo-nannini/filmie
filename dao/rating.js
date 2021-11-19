@@ -14,11 +14,17 @@ function addRating(movieid, userid, rating) {
     db = conn.db_connection.getConnection();
     return db.get("SELECT rating from rating WHERE userid=? and movieid=?", [userid, movieid])
         .then((result) => {
-            if (!result) {
-                db.run("INSERT INTO rating (userid, movieid, rating) VALUES (?, ?, ?)", [userid, movieid, rating])
-            } else {
-                db.run("UPDATE rating SET rating=? WHERE userid=? and movieid=?", [rating, userid, movieid])
-            }
+            db.get("SELECT movieid FROM movies WHERE movieid= ?", [movieid]).then((movie) => {
+                if (!movie) {
+                    db.run("INSERT INTO movies (movieid) VALUES (?)",[movieid])
+                }
+                if (!result) {
+                    db.run("INSERT INTO rating (userid, movieid, rating) VALUES (?, ?, ?)", [userid, movieid, rating])
+                } else {
+                    db.run("UPDATE rating SET rating=? WHERE userid=? and movieid=?", [rating, userid, movieid])
+                }
+            });
+            
         })
 }
 

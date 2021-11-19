@@ -6,9 +6,9 @@ function addFavorite(userID, movieID) {
         .then((movie) => {
             if (!movie) {
                 db.run("INSERT INTO favorite (userid, movieid) VALUES (?, ?)",[userID, movieID])
-                db.run("SELECT movieid FROM movies WHERE movieid= ?", [movieID]).then((movie) => {
+                db.get("SELECT movieid FROM movies WHERE movieid= ?", [movieID]).then((movie) => {
                     if (!movie) {
-                        db.run("INSERT INTO movies (userid, movieid) VALUES (?)",[movieID])
+                        db.run("INSERT INTO movies (movieid) VALUES (?)",[movieID])
                     }
                 });
             }
