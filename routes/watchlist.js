@@ -53,5 +53,19 @@ router.post('/watchlist', (req, res) => {
   }
 });
 
+router.delete('/watchlist', (req, res) => {
+  if (req.isAuthenticated()) {
+    if (req.body.movieid === undefined) {
+      res.status(401).send();
+      return;
+    }
+    watchlist.removeWatchlist(req.user.id, req.body.movieid).then(() => {
+      res.status(200).send();
+    })
+  } else {
+    res.status(401).send();
+  }
+});
+
 
 module.exports = router;

@@ -52,4 +52,18 @@ router.post('/favorite', (req, res) => {
   }
 });
 
+router.delete('/favorite', (req, res) => {
+  if (req.isAuthenticated()) {
+    if (req.body.movieid === undefined) {
+      res.status(401).send();
+      return;
+    } 
+    favorite.removeFavorite(req.user.id, req.body.movieid).then(() => {
+      res.status(200).send();
+    })
+  } else {
+    res.status(401).send();
+  }
+});
+
 module.exports = router;

@@ -44,7 +44,7 @@ export default function Profile() {
       + encodeURIComponent("newPass") + '=' + encodeURIComponent(newPass) + '&'
       + encodeURIComponent("confOldPass") + '=' + encodeURIComponent(confNewPass);
 
-    fetch("/updateProfile", {
+    fetch("/user", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: formBody,
@@ -73,7 +73,7 @@ export default function Profile() {
   function handleDelete(e) {
     e.preventDefault();
 
-    fetch("/deleteProfile", {
+    fetch("/user", {
       method: "DELETE"
     }).then(response => {
       if (response.redirected) {
@@ -84,7 +84,7 @@ export default function Profile() {
   }
   
   useEffect(() => {
-    fetch("/userInfo", {
+    fetch("/user", {
       method: "GET"
     }).then(response => response.json())
       .then(data => {

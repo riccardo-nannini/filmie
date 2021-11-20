@@ -22,6 +22,10 @@ import './movie.css';
 export default function Movie(props) {
 
   const [movieInfo, setMovieInfo] = useState();
+  const [actors, setActors] = useState();
+  const [directors, setDirectors] = useState();
+  const [actorsList, setActorsList] = useState();
+  const [directorsList, setDirectorsList] = useState();
   const [showMovie, setShowMovie] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isWatchlist, setIsWatchlist] = useState(false);
@@ -38,8 +42,8 @@ export default function Movie(props) {
   const history = useHistory();
   const id = props.location.pathname.substring(7);
   const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+    "July", "August", "September", "October", "November", "December"
+  ];
 
   useEffect(() => {
     const url = "/movie/" + id
@@ -51,13 +55,15 @@ export default function Movie(props) {
         let now = new Date();
         if (releaseDate > now) {
           data.isReleased = false
-          data.releaseDate = "" + monthNames[releaseDate.getMonth()] + " " + releaseDate.getDate() +", " + releaseDate.getFullYear();
+          data.releaseDate = "" + monthNames[releaseDate.getMonth()] + " " + releaseDate.getDate() + ", " + releaseDate.getFullYear();
         } else {
           data.isReleased = true
           data.releaseDate = null
         }
-        data.year = data.year.substring(0, data.year.length-6)
+        data.year = data.year.substring(0, data.year.length - 6)
         setMovieInfo(data);
+        setDirectors(data.directors);
+        setActors(data.actors);
         setIsFavorite(data.isFavorite);
         setIsWatchlist(data.isWatchlist)
         setShowMovie(true);
@@ -72,7 +78,6 @@ export default function Movie(props) {
     }).then(response => response.json())
       .then(data => {
         setTrailer(data);
-        console.log(movieInfo)
       });
   }, []);
 
@@ -97,6 +102,17 @@ export default function Movie(props) {
   }, []);
 
   useEffect(() => {
+    const url = "/getCast/" + id
+    fetch(url, {
+      method: "GET"
+    }).then(response => response.json())
+      .then(data => {
+        setDirectors(data.directors);
+        setActors(data.actors);
+      });
+  }, []);
+
+  useEffect(() => {
     updateRatingDistribution();
   }, []);
 
@@ -111,7 +127,7 @@ export default function Movie(props) {
     let res = [];
     for (let i = 0; i < similarMovies.length; i++) {
       res.push(
-        <MovieCard movie={{id: similarMovies[i].id, poster:similarMovies[i].poster}}></MovieCard>
+        <MovieCard movie={{ id: similarMovies[i].id, poster: similarMovies[i].poster }}></MovieCard>
       );
     }
     setSimilarMoviesList(res);
@@ -143,13 +159,31 @@ export default function Movie(props) {
         <Provider provider={providers.flatrate[i].logo}></Provider>
       );
     }
-    
+
     setProvidersList({
       providersBuy: providersBuy,
       providersRent: providersRent,
       providersFlatrate: providersFlatrate
     });
   }, [providers])
+
+  useEffect(() => {
+    if (actors === undefined || actors.length === 0) return;
+    let act = ""
+    for (let i = 0; i < actors.length; i++) {
+      act = act + actors[i].name + " (" + actors[i].character + "), ";
+    }
+    setActorsList(act.substring(0, act.length-2))
+  }, [actors]);
+
+  useEffect(() => {
+    if (directors === undefined || directors.length === 0) return;
+    let dir = ""
+    for (let i = 0; i < directors.length; i++) {
+      dir = dir + directors[i] + ", ";
+    }
+    setDirectorsList(dir.substring(0, dir.length-2))
+  }, [directors]);
 
   function updateRatingDistribution() {
     const url = "/getRatingDistribution?movieid=" + encodeURIComponent(id)
@@ -177,8 +211,8 @@ export default function Movie(props) {
     const formBody = encodeURIComponent("movieid") + '=' + encodeURIComponent(id)
 
     if (isFavorite) {
-      fetch("/removeFavorite", {
-        method: "POST",
+      fetch("/favorite", {
+        method: "DELETE",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formBody,
       });
@@ -201,8 +235,8 @@ export default function Movie(props) {
     const formBody = encodeURIComponent("movieid") + '=' + encodeURIComponent(id)
 
     if (isWatchlist) {
-      fetch("/removeWatchlist", {
-        method: "POST",
+      fetch("/watchlist", {
+        method: "DELETE",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formBody,
       });
@@ -307,12 +341,12 @@ export default function Movie(props) {
               <div className="movieContent">
                 <div className="movieTitle">
                   {movieInfo === undefined ? null : movieInfo.title}
-                  <div className="movieYear">{movieInfo === undefined ? null : movieInfo.isReleased? "(" + movieInfo.year + ")" : null}</div>
+                  <div className="movieYear">{movieInfo === undefined ? null : movieInfo.isReleased ? "(" + movieInfo.year + ")" : null}</div>
                 </div>
-                {movieInfo === undefined? null : movieInfo.isReleased? null : <div className="movieReleaseDate2">Release date: <span>{movieInfo.releaseDate}</span></div> }
+                {movieInfo === undefined ? null : movieInfo.isReleased ? null : <div className="movieReleaseDate2">Release date: <span>{movieInfo.releaseDate}</span></div>}
                 <div className="genresInfo">
                   {movieInfo === undefined ? null : movieInfo.genres}
-                  <span className="movieDuration"> {movieInfo === undefined ? null : movieInfo.duration === 0? null : +movieInfo.duration + " min"} </span>
+                  <span className="movieDuration"> {movieInfo === undefined ? null : movieInfo.duration === 0 ? null : +movieInfo.duration + " min"} </span>
                 </div>
                 {movieInfo === undefined ? null
                   :
@@ -394,7 +428,7 @@ export default function Movie(props) {
                       <ReactStars
                         count={5}
                         isHalf={true}
-                        value={movieInfo.rate/2}
+                        value={movieInfo.rate / 2}
                         onChange={movieInfo.isAuth ? addRating : handleClickNotAuth}
                         size={24}
                         activeColor="#ffd700"
@@ -410,39 +444,43 @@ export default function Movie(props) {
               </div>
             </div>
           </CSSTransition>
-          <div className={showMovie === false? "movieContainerNoAuth" : null}>
-          <CSSTransition
-            in={showMovie}
-            timeout={300}
-            classNames="movieLoad"
-          >
-            <div className="movieSecondRow">
-              <div className="movieDetails">
-                <div className="providersContainer">
-                {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
-                <div className="providersList">
-                {providersList === undefined ? null : providersList.providersBuy.length === 0 ? null : <div className="providersTitle">Buy</div>}
-                {providersList === undefined ? null : providersList.providersBuy}
+          <div className={showMovie === false ? "movieContainerNoAuth" : null}>
+            <CSSTransition
+              in={showMovie}
+              timeout={300}
+              classNames="movieLoad"
+            >
+              <div className="movieSecondRow">
+                <div className="movieDetails">
+                  <div className="providersContainer">
+                    {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
+                    <div className="providersList">
+                      {providersList === undefined ? null : providersList.providersBuy.length === 0 ? null : <div className="providersTitle">Buy</div>}
+                      {providersList === undefined ? null : providersList.providersBuy}
+                    </div>
+                    <div className="providersList">
+                      {providersList === undefined ? null : providersList.providersRent.length === 0 ? null : <div className="providersTitle">Rent</div>}
+                      {providersList === undefined ? null : providersList.providersRent}
+                    </div>
+                    <div className="providersList">
+                      {providersList === undefined ? null : providersList.providersFlatrate.length === 0 ? null : <div className="providersTitle">Stream</div>}
+                      {providersList === undefined ? null : providersList.providersFlatrate}
+                    </div>
+                  </div>
+                  <div className="castContainer">
+                    {movieInfo === undefined? null : directorsList === undefined? null : <div>{directorsList}</div>}
+                    {movieInfo === undefined? null : actorsList === undefined? null : <div>{actorsList}</div>}
+                  </div>
                 </div>
-                <div className="providersList">
-                {providersList === undefined ? null : providersList.providersRent.length === 0? null : <div className="providersTitle">Rent</div>}
-                {providersList === undefined ? null : providersList.providersRent}
-                </div>
-                <div className="providersList">
-                {providersList === undefined ? null : providersList.providersFlatrate.length === 0? null : <div className="providersTitle">Stream</div>}
-                {providersList === undefined ? null : providersList.providersFlatrate}
-                </div>
+
+                <div className="movieTrailerContainer">
+                  {trailer === undefined ? null : trailer === null ? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
                 </div>
               </div>
-              
-              <div className="movieTrailerContainer">
-              {trailer === undefined ? null : trailer === null? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
-              </div>
-            </div>
-          </CSSTransition>
+            </CSSTransition>
           </div>
           <div className={similarMoviesList === undefined ? "movieContainerNoAuth" : "similarMovieContainer"}>
-          <div className="slideTitle">Recommended movies</div>
+            <div className="slideTitle">Recommended movies</div>
             <CSSTransition
               in={showSimilarMovies}
               timeout={300}

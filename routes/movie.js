@@ -32,12 +32,12 @@ router.post('/movie/:movieid', (req, res, next) => {
   let language = "en-US";
 
   if (req.get("Accept-Language") !== undefined && req.get("Accept-Language") !== null) {
-    language = req.get("Accept-Language").substring(0,2);
+    language = req.get("Accept-Language").substring(0, 2);
   }
 
-  let url = "https://api.themoviedb.org/3/movie/"+movieid+"?api_key="+ApiKey+"&language="+language
-  
-  calls.push(axios.get(url));
+  let urlMovie = "https://api.themoviedb.org/3/movie/" + movieid + "?api_key=" + ApiKey + "&language=" + language
+
+  calls.push(axios.get(urlMovie));
   if (req.isAuthenticated()) {
     calls.push(favorite.getFavoriteMovie(req.user.id, movieid))
     calls.push(watchlist.getWatchlistMovie(req.user.id, movieid))
@@ -46,48 +46,51 @@ router.post('/movie/:movieid', (req, res, next) => {
 
   Promise.all(calls).then((response) => {
 
-      if (response[1] !== undefined) isFavorite = true;
-      if (response[2] !== undefined) isWatchlist = true;
-      if (response[3] !== undefined) {
-        rate = response[3].rating
-        isRated = true;
-      }
+    if (response[1] !== undefined) isFavorite = true;
+    if (response[2] !== undefined) isWatchlist = true;
+    if (response[3] !== undefined) {
+      rate = response[3].rating
+      isRated = true;
+    }
 
-      let movieData = response[0].data;
-      if (movieData.poster_path !== null) poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"+movieData.poster_path;
-      if (movieData.backdrop_path !== null) backdrop = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces"+movieData.backdrop_path;
+    let movieData = response[0].data;
+    if (movieData.poster_path !== null) poster = "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + movieData.poster_path;
+    if (movieData.backdrop_path !== null) backdrop = "https://image.tmdb.org/t/p/w1920_and_h800_multi_faces" + movieData.backdrop_path;
 
-      genres = ""
-      for (genre in movieData.genres) {
-        genres+=movieData.genres[genre].name;
-        genres+=", "
-      }
-      genres = genres.substring(0, genres.length-2)
+    genres = ""
+    for (genre in movieData.genres) {
+      genres += movieData.genres[genre].name;
+      genres += ", "
+    }
+    genres = genres.substring(0, genres.length - 2)
 
-      resp = {
-        id: movieid,
-        year: movieData.release_date,
-        title: movieData.title,
-        duration: movieData.runtime,
-        overview: movieData.overview,
-        tagline: movieData.tagline,
-        poster: poster,
-        backdrop: backdrop,
-        genres: genres,
-        isAuth: req.isAuthenticated(),
-        isFavorite: isFavorite,
-        isWatchlist: isWatchlist,
-        isRated: isRated,
-        rate: rate
-      }
+    resp = {
+      id: movieid,
+      year: movieData.release_date,
+      title: movieData.title,
+      duration: movieData.runtime,
+      overview: movieData.overview,
+      tagline: movieData.tagline,
+      poster: poster,
+      backdrop: backdrop,
+      genres: genres,
+      isAuth: req.isAuthenticated(),
+      isFavorite: isFavorite,
+      isWatchlist: isWatchlist,
+      isRated: isRated,
+      rate: rate,
+      budget: movieData.budget,
+      revenue: movieData.revenue,
+    }
 
-      res.json(
-        resp
-      );
-    }).catch(function (error) {
-      console.log("Possible 404 or DB constraint violated");
-    });
+    res.json(
+      resp
+    );
+  }).catch(function (error) {
+    console.log("Possible 404 or DB constraint violated");
+    console.log(error);
   });
+});
 
 module.exports = router;
 
