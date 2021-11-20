@@ -64,7 +64,7 @@ export default function Search(props) {
   return (
     <div className="movieCont">
       <Header></Header>
-      <div className="movieOverlay">
+      <div className="background">
         <div className="searchCentered">
           <form className="searchBarMovies">
             <input type="text" placeholder="Search for movies.." name="search" onChange={(e) => setQuery(encodeURIComponent(e.target.value))} />

@@ -40,6 +40,10 @@ router.get('/favorite', (req, res) => {
 
 router.post('/favorite', (req, res) => {
   if (req.isAuthenticated()) {
+    if (req.body.movieid === undefined) {
+      res.status(401).send();
+      return;
+    }    
     favorite.addFavorite(req.user.id, req.body.movieid).then(() => {
       res.status(200).send();
     })

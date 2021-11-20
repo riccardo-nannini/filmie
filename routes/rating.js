@@ -24,8 +24,14 @@ router.get('/rating', (req, res) => {
 
 router.post('/rating', (req, res) => {
 
-  if (req.body.movieid === undefined) res.status(400).send();
-  if (req.body.rating === undefined) res.status(400).send();
+  if (req.body.movieid === undefined) {
+    res.status(400).send();
+    return;
+  }
+  if (req.body.rating === undefined) {
+    res.status(400).send();
+    return;
+  }
 
   if (req.isAuthenticated()) {
     rating.addRating(req.body.movieid, req.user.id, req.body.rating).then(() => {
