@@ -37,10 +37,9 @@ router.get('/getCast/:movieid', (req, res, next) => {
           character: cast[i].character,
         })
       }
-      if (actors.length > 8) break;
+      if (actors.length > 9) break;
     }
 
-    console.log(actors)
     res.json({
       actors : actors,
       directors : directors

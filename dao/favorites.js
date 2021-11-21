@@ -22,7 +22,7 @@ function removeFavorite(userID, movieID) {
 
 function getFavorite(userID) {
     db = conn.db_connection.getConnection();
-    return db.all("SELECT movieid FROM favorite WHERE userid = ?", [userID])
+    return db.all("SELECT movieid FROM favorite WHERE userid = ? LIMIT 15", [userID])
 }
 
 function getFavoriteMovie(userID, movieID) {

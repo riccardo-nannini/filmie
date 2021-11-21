@@ -1,3 +1,4 @@
+const numberWithCommas = require('../utils/numberWithCommas')
 var express = require('express');
 const path = require("path");
 var router = express.Router();
@@ -5,6 +6,7 @@ const favorite = require('../dao/favorites.js');
 const watchlist = require('../dao/watchlist.js');
 const rating = require('../dao/rating.js');
 const axios = require('axios');
+
 require('dotenv').config();
 
 const ApiKey = process.env.APIKEY
@@ -79,8 +81,8 @@ router.post('/movie/:movieid', (req, res, next) => {
       isWatchlist: isWatchlist,
       isRated: isRated,
       rate: rate,
-      budget: movieData.budget,
-      revenue: movieData.revenue,
+      budget: numberWithCommas(movieData.budget),
+      revenue: numberWithCommas(movieData.revenue),
     }
 
     res.json(

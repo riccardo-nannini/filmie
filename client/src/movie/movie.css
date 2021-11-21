@@ -24,11 +24,28 @@
     background-attachment: fixed;
 }
 
+.castContainer{
+    color:white;
+    margin: 0 18% 15px 0;
+    max-width: 700px;
+}
+
+.movieCast{
+    font-weight: 200;
+    margin: 0 0 9px 0;
+}
+
+.castContainer span{
+    font-size: 17px;
+    font-weight: 400;
+}
+
 .movieDetails{
     display: flex;
     flex-direction: column;
     flex-grow: 3;
     margin-left: 3%;
+    margin-top:20px
 }
 
 .providersTitle{
@@ -78,7 +95,7 @@
 }
 
 .movieTrailerContainer{
-    margin: 80px 3% 100px 0px;
+    margin: 20px 3% 0px 0px;
     display: flex;
     flex-direction: row-reverse;
 
@@ -89,6 +106,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 70px;
+    margin-bottom: 40px;
 }
 
 .movieButtonIcon{
@@ -271,7 +289,7 @@
     
     .movieSecondRow{
         flex-wrap: wrap;
-        margin: 40px 10% 0 11%;
+        margin: 40px 10% 40px 11%;
     }
 
     .movieDetails{
@@ -306,7 +324,6 @@
   @media screen and (max-width: 400px) {
     .poster{
         margin: 50px 7% 0 7%;
-        
     }
 
     .movieContent{
@@ -314,6 +331,6 @@
     }
     
     .movieSecondRow{
-        margin: 40px 7% 0 7%;
+        margin: 40px 7% 40px 7%;
     }
   }

@@ -452,6 +452,12 @@ export default function Movie(props) {
             >
               <div className="movieSecondRow">
                 <div className="movieDetails">
+                <div className="castContainer">
+                    {movieInfo === undefined? null : directorsList === undefined? null : directors === undefined ? null : directors.length >= 2 ? <div className="movieCast"><span>Directors: </span>{directorsList}</div> : <div className="movieCast"><span>Director: </span>{directorsList}</div>}
+                    {movieInfo === undefined? null : actorsList === undefined? null : <div className="movieCast"><span>Cast: </span>{actorsList}</div>}
+                    {movieInfo === undefined? null :  <div className="movieCast"><span>Budget: </span>{movieInfo.budget === '0' ? "Not available " : movieInfo.budget}</div>}
+                    {movieInfo === undefined? null :  <div className="movieCast"><span>Revenue: </span>{movieInfo.revenue === '0' ? "Not available " : movieInfo.revenue}</div>}
+                  </div>
                   <div className="providersContainer">
                     {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
                     <div className="providersList">
@@ -466,10 +472,6 @@ export default function Movie(props) {
                       {providersList === undefined ? null : providersList.providersFlatrate.length === 0 ? null : <div className="providersTitle">Stream</div>}
                       {providersList === undefined ? null : providersList.providersFlatrate}
                     </div>
-                  </div>
-                  <div className="castContainer">
-                    {movieInfo === undefined? null : directorsList === undefined? null : <div>{directorsList}</div>}
-                    {movieInfo === undefined? null : actorsList === undefined? null : <div>{actorsList}</div>}
                   </div>
                 </div>
 

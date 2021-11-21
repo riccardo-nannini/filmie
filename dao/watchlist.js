@@ -23,7 +23,7 @@ function removeWatchlist(userID, movieID) {
 
 function getWatchlist(userID) {
     db = conn.db_connection.getConnection();
-    return db.all("SELECT movieid FROM watchlist WHERE userid = ?", [userID])
+    return db.all("SELECT movieid FROM watchlist WHERE userid = ? LIMIT 15", [userID])
 }
 
 function getWatchlistMovie(userID, movieID) {
