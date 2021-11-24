@@ -26,17 +26,18 @@
 
 .castContainer{
     color:white;
-    margin: 0 18% 15px 0;
+    margin: 0 18% 25px 0;
     max-width: 700px;
 }
 
 .movieCast{
     font-weight: 200;
     margin: 0 0 9px 0;
+    font-size: 17px;
 }
 
 .castContainer span{
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 400;
 }
 
@@ -106,7 +107,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 70px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .movieButtonIcon{
@@ -219,15 +220,15 @@
 
 .movieOverview{
     margin-top: 30px;
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 300;
     max-width: 800px;
 }
 
 .movieTitle{
     display: flex;
     flex-direction: row;
-    font-size: 28px;
+    font-size:29px;
     font-weight: 700;
 }
 

@@ -29,10 +29,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   express.static(path.join(__dirname, "../client/build"))
 );
+
 app.use(function(req, res, next) {
   console.log(req.body); 
   next();
 })
+
+app.use(function(req, res, next) { //http headers
+  res.setHeader('Referrer-Policy', 'origin');
+  next();
+})
+
 
 var session_config = {
   secret: process.env.SECRET || 'secret', //a random unique string key used to authenticate a session
