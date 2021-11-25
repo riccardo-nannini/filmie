@@ -110,17 +110,17 @@ app.get('/', (req, res) => {
 //app.listen(port, () => console.log(`Listening on port ${port}`)); 
 
 // Listen both http & https ports
-const httpServer = http.createServer(app);
+//const httpServer = http.createServer(app);
 const httpsServer = https.createServer({
   key: process.env.privkey.replace(/\\n/gm, '\n'),//fs.readFileSync('./certs/privkey1.pem'),
   cert: fs.readFileSync('./certs/fullchain1.pem'),
 }, app);
 
 
-httpServer.listen(port, () => {
+/*httpServer.listen(port, () => {
   console.log('HTTP Server running on port 80');
-});
+});*/
 
-httpsServer.listen(443, () => {
-  console.log('HTTPS Server running on port 443');
+httpsServer.listen(port, () => {
+  console.log(`HTTPS Server running on port ${port}`);
 });
