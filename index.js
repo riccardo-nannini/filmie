@@ -37,6 +37,7 @@ app.use(function(req, res, next) {
 
 app.use(function(req, res, next) { //http headers
   res.setHeader('Referrer-Policy', 'origin');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
   next();
 })
 
