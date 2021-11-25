@@ -7,6 +7,9 @@ const passport   = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 var SQLiteStore  = require('connect-sqlite3')(session);
 const Database = require('sqlite-async')
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
 require('dotenv').config();
 
 
@@ -104,4 +107,20 @@ app.get('/', (req, res) => {
     path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`)); 
+//app.listen(port, () => console.log(`Listening on port ${port}`)); 
+
+// Listen both http & https ports
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer({
+  key: process.env.privkey.replace(/\\n/gm, '\n'),//fs.readFileSync('./certs/privkey1.pem'),
+  cert: fs.readFileSync('./certs/fullchain1.pem'),
+}, app);
+
+
+httpServer.listen(port, () => {
+  console.log('HTTP Server running on port 80');
+});
+
+httpsServer.listen(443, () => {
+  console.log('HTTPS Server running on port 443');
+});
