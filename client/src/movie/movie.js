@@ -81,13 +81,13 @@ export default function Movie(props) {
         setShowMovie(true);
         setIsRated(data.isRated);
         setMeta({
-          title: 'Filmie: '+ data.title,
+          title: 'Filmie: ' + data.title,
           description: data.overview,
           canonical: 'https://www.filmie.org',
           meta: {
             charset: 'utf-8',
             name: {
-              keywords: 'movie,cinema,film,rele'
+              keywords: 'movie,cinema,film'
             }
           }
         });
@@ -196,7 +196,7 @@ export default function Movie(props) {
     for (let i = 0; i < actors.length; i++) {
       act = act + actors[i].name + " (" + actors[i].character + "), ";
     }
-    setActorsList(act.substring(0, act.length-2))
+    setActorsList(act.substring(0, act.length - 2))
   }, [actors]);
 
   useEffect(() => {
@@ -205,7 +205,7 @@ export default function Movie(props) {
     for (let i = 0; i < directors.length; i++) {
       dir = dir + directors[i] + ", ";
     }
-    setDirectorsList(dir.substring(0, dir.length-2))
+    setDirectorsList(dir.substring(0, dir.length - 2))
   }, [directors]);
 
   function updateRatingDistribution() {
@@ -337,205 +337,205 @@ export default function Movie(props) {
 
   return (
     <DocumentMeta {...meta}>
-    <div className="movieCont" onClick={() => ReactTooltip.hide()}>
-      <Header></Header>
-      <div className="moviemiddle" style={movieInfo === undefined ? null : { backgroundImage: `url(${movieInfo.backdrop})` }}>
-        <div className="movieOverlay" >
-          <CSSTransition
-            in={showMovie}
-            timeout={300}
-            classNames="movieLoad"
-          >
-            <div className="centered" >
-              <div className="poster">
-                {movieInfo === undefined ?
-                  <div className="noImage">
-                  </div>
-                  :
-                  movieInfo.poster === null ?
-                    <div className="brokenImageContainer">
-                      <img className="brokenImage" src={imageNotFound}></img>
-
-                    </div>
-                    :
-                    <img className="moviePoster" src={movieInfo.poster}></img>
-
-                }
-              </div>
-              <div className="movieContent">
-                <div className="movieTitle">
-                  {movieInfo === undefined ? null : movieInfo.title}
-                  <div className="movieYear">{movieInfo === undefined ? null : movieInfo.isReleased ? "(" + movieInfo.year + ")" : null}</div>
-                </div>
-                {movieInfo === undefined ? null : movieInfo.isReleased ? null : <div className="movieReleaseDate2">Release date: <span>{movieInfo.releaseDate}</span></div>}
-                <div className="genresInfo">
-                  {movieInfo === undefined ? null : movieInfo.genres}
-                  <span className="movieDuration"> {movieInfo === undefined ? null : movieInfo.duration === 0 ? null : +movieInfo.duration + " min"} </span>
-                </div>
-                {movieInfo === undefined ? null
-                  :
-                  <div className="movieButtonsContainer">
-                    <div data-tip data-for="ratingDist" className="ratingBar">
-                      <CircularProgressbar styles={{
-                        path: {
-                          stroke: `${rating < 33 ? '#eb1313' : rating < 66 ? '#fcd703' : '#3cab5d'}`,
-                          strokeLinecap: 'butt',
-                          transition: 'stroke-dashoffset 2.5s ease 0s',
-                          transformOrigin: 'center center',
-                        },
-                        trail: {
-                          stroke: 'white',
-                          strokeLinecap: 'butt',
-                          transform: 'rotate(0.25turn)',
-                          transformOrigin: 'center center',
-                        },
-                        text: {
-                          fill: 'white',
-                          fontSize: '34px',
-                        },
-                      }} strokeWidth={9} text={rating === 0 ? "NA" : rating + "%"} value={rating} />
-                    </div>
-                    <ReactTooltip backgroundColor="" className="ratingChart" place="bottom" type="light" effect="solid" id='ratingDist' event="click hover">
-                      <VictoryChart
-                        domainPadding={20}
-                        padding={25}
-                        backgroundComponent={<div className="chartBackground"></div>}
-                        title="Test"
-                      >
-                        <VictoryAxis
-                          tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                          tickFormat={["0.5\u2605", "1\u2605", "1.5\u2605", "2\u2605", "2.5\u2605", "3\u2605", "3.5\u2605", "4\u2605", "4.5\u2605", "5\u2605"]}
-                        />
-                        <VictoryLabel style={{
-                          fontSize: 20,
-                          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
-                        }}
-                          text="Rating distribution"
-                          x={225}
-                          y={30}
-                          textAnchor="middle"
-                        />
-                        <VictoryAxis
-                          dependentAxis
-                          tickFormat={(y) => (`${y % 1 !== 0 ? "" : Math.floor(y)}`)}
-                        />
-                        <VictoryBar
-                          data={ratingDistribution}
-                          x="rating"
-                          y="count"
-                          barWidth={20}
-                          style={{
-                            data: {
-                              fill: "#511170",
-                              fillOpacity: 0.8,
-                            }
-                          }}
-                        />
-                      </VictoryChart>
-                    </ReactTooltip>
-                    <button data-tip data-for="fav" className={isFavorite ? "movieButtonSelected" : "movieButtonNotSelected"} onClick={movieInfo.isAuth ? handleClickFavoriteAuth : handleClickNotAuth}>
-                      <img className="movieButtonIcon" src={favorite}></img>
-                    </button>
-                    <ReactTooltip place="bottom" type="dark" effect="solid" id='fav' >
-                      <span>{isFavorite ? "Remove from favorite" : "Add to favorite"}</span>
-                    </ReactTooltip>
-                    <button data-tip data-for="watch" className={isWatchlist ? "movieButtonSelected" : "movieButtonNotSelected"} onClick={movieInfo.isAuth ? handleClickWatchlist : handleClickNotAuth}>
-                      <img className="movieButtonIcon" src={watchlist}></img>
-                    </button>
-                    <ReactTooltip place="bottom" type="dark" effect="solid" id='watch' >
-                      <span>{isWatchlist ? "Remove from watchlist" : "Add to watchlist"}</span>
-                    </ReactTooltip>
-                    <button data-tip data-for="rate" className={isRated ? "movieButtonSelected" : "movieButtonNotSelected"}>
-                      <img src={star}></img>
-                    </button>
-                    <ReactTooltip className="movieRate" clickable={true} place="bottom" event="click" type="dark" effect="solid" id='rate' >
-                      <ReactStars
-                        count={5}
-                        isHalf={true}
-                        value={movieInfo.rate / 2}
-                        onChange={movieInfo.isAuth ? addRating : handleClickNotAuth}
-                        size={24}
-                        activeColor="#ffd700"
-                      />
-                    </ReactTooltip>
-                  </div>}
-                <div className="movieTagline">
-                  {movieInfo === undefined ? null : movieInfo.tagline}
-                </div>
-                <div className="movieOverview">
-                  {movieInfo === undefined ? null : movieInfo.overview}
-                </div>
-              </div>
-            </div>
-          </CSSTransition>
-          <div className={showMovie === false ? "movieContainerNoAuth" : null}>
+      <div className="movieCont" onClick={() => ReactTooltip.hide()}>
+        <Header></Header>
+        <div className="moviemiddle" style={movieInfo === undefined ? null : { backgroundImage: `url(${movieInfo.backdrop})` }}>
+          <div className="movieOverlay" >
             <CSSTransition
               in={showMovie}
               timeout={300}
               classNames="movieLoad"
             >
-              <div className="movieSecondRow">
-                <div className="movieDetails">
-                <div className="castContainer">
-                    {movieInfo === undefined? null : directorsList === undefined? null : directors === undefined ? null : directors.length >= 2 ? <div className="movieCast"><span>Directors: </span>{directorsList}</div> : <div className="movieCast"><span>Director: </span>{directorsList}</div>}
-                    {movieInfo === undefined? null : actorsList === undefined? null : <div className="movieCast"><span>Cast: </span>{actorsList}</div>}
-                    {movieInfo === undefined? null :  <div className="movieCast"><span>Budget: </span>{movieInfo.budget === '0' ? "Not available " : movieInfo.budget}</div>}
-                    {movieInfo === undefined? null :  <div className="movieCast"><span>Revenue: </span>{movieInfo.revenue === '0' ? "Not available " : movieInfo.revenue}</div>}
-                  </div>
-                  <div className="providersContainer">
-                    {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
-                    <div className="providersList">
-                      {providersList === undefined ? null : providersList.providersBuy.length === 0 ? null : <div className="providersTitle">Buy</div>}
-                      {providersList === undefined ? null : providersList.providersBuy}
+              <div className="centered" >
+                <div className="poster">
+                  {movieInfo === undefined ?
+                    <div className="noImage">
                     </div>
-                    <div className="providersList">
-                      {providersList === undefined ? null : providersList.providersRent.length === 0 ? null : <div className="providersTitle">Rent</div>}
-                      {providersList === undefined ? null : providersList.providersRent}
-                    </div>
-                    <div className="providersList">
-                      {providersList === undefined ? null : providersList.providersFlatrate.length === 0 ? null : <div className="providersTitle">Stream</div>}
-                      {providersList === undefined ? null : providersList.providersFlatrate}
-                    </div>
-                  </div>
-                </div>
+                    :
+                    movieInfo.poster === null ?
+                      <div className="brokenImageContainer">
+                        <img className="brokenImage" src={imageNotFound}></img>
 
-                <div className="movieTrailerContainer">
-                  {trailer === undefined ? null : trailer === null ? null : <iframe title='video' id={10} allowFullScreen frameBorder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
+                      </div>
+                      :
+                      <img className="moviePoster" src={movieInfo.poster}></img>
+
+                  }
+                </div>
+                <div className="movieContent">
+                  <div className="movieTitle">
+                    {movieInfo === undefined ? null : movieInfo.title}
+                    <div className="movieYear">{movieInfo === undefined ? null : movieInfo.isReleased ? "(" + movieInfo.year + ")" : null}</div>
+                  </div>
+                  {movieInfo === undefined ? null : movieInfo.isReleased ? null : <div className="movieReleaseDate2">Release date: <span>{movieInfo.releaseDate}</span></div>}
+                  <div className="genresInfo">
+                    {movieInfo === undefined ? null : movieInfo.genres}
+                    <span className="movieDuration"> {movieInfo === undefined ? null : movieInfo.duration === 0 ? null : +movieInfo.duration + " min"} </span>
+                  </div>
+                  {movieInfo === undefined ? null
+                    :
+                    <div className="movieButtonsContainer">
+                      <div data-tip data-for="ratingDist" className="ratingBar">
+                        <CircularProgressbar styles={{
+                          path: {
+                            stroke: `${rating < 33 ? '#eb1313' : rating < 66 ? '#fcd703' : '#3cab5d'}`,
+                            strokeLinecap: 'butt',
+                            transition: 'stroke-dashoffset 2.5s ease 0s',
+                            transformOrigin: 'center center',
+                          },
+                          trail: {
+                            stroke: 'white',
+                            strokeLinecap: 'butt',
+                            transform: 'rotate(0.25turn)',
+                            transformOrigin: 'center center',
+                          },
+                          text: {
+                            fill: 'white',
+                            fontSize: '34px',
+                          },
+                        }} strokeWidth={9} text={rating === 0 ? "NA" : rating + "%"} value={rating} />
+                      </div>
+                      <ReactTooltip backgroundColor="" className="ratingChart" place="bottom" type="light" effect="solid" id='ratingDist' event="click hover">
+                        <VictoryChart
+                          domainPadding={20}
+                          padding={25}
+                          backgroundComponent={<div className="chartBackground"></div>}
+                          title="Test"
+                        >
+                          <VictoryAxis
+                            tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+                            tickFormat={["0.5\u2605", "1\u2605", "1.5\u2605", "2\u2605", "2.5\u2605", "3\u2605", "3.5\u2605", "4\u2605", "4.5\u2605", "5\u2605"]}
+                          />
+                          <VictoryLabel style={{
+                            fontSize: 20,
+                            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+                          }}
+                            text="Rating distribution"
+                            x={225}
+                            y={30}
+                            textAnchor="middle"
+                          />
+                          <VictoryAxis
+                            dependentAxis
+                            tickFormat={(y) => (`${y % 1 !== 0 ? "" : Math.floor(y)}`)}
+                          />
+                          <VictoryBar
+                            data={ratingDistribution}
+                            x="rating"
+                            y="count"
+                            barWidth={20}
+                            style={{
+                              data: {
+                                fill: "#511170",
+                                fillOpacity: 0.8,
+                              }
+                            }}
+                          />
+                        </VictoryChart>
+                      </ReactTooltip>
+                      <button data-tip data-for="fav" className={isFavorite ? "movieButtonSelected" : "movieButtonNotSelected"} onClick={movieInfo.isAuth ? handleClickFavoriteAuth : handleClickNotAuth}>
+                        <img className="movieButtonIcon" src={favorite}></img>
+                      </button>
+                      <ReactTooltip place="bottom" type="dark" effect="solid" id='fav' >
+                        <span>{isFavorite ? "Remove from favorite" : "Add to favorite"}</span>
+                      </ReactTooltip>
+                      <button data-tip data-for="watch" className={isWatchlist ? "movieButtonSelected" : "movieButtonNotSelected"} onClick={movieInfo.isAuth ? handleClickWatchlist : handleClickNotAuth}>
+                        <img className="movieButtonIcon" src={watchlist}></img>
+                      </button>
+                      <ReactTooltip place="bottom" type="dark" effect="solid" id='watch' >
+                        <span>{isWatchlist ? "Remove from watchlist" : "Add to watchlist"}</span>
+                      </ReactTooltip>
+                      <button data-tip data-for="rate" className={isRated ? "movieButtonSelected" : "movieButtonNotSelected"}>
+                        <img src={star}></img>
+                      </button>
+                      <ReactTooltip className="movieRate" clickable={true} place="bottom" event="click" type="dark" effect="solid" id='rate' >
+                        <ReactStars
+                          count={5}
+                          isHalf={true}
+                          value={movieInfo.rate / 2}
+                          onChange={movieInfo.isAuth ? addRating : handleClickNotAuth}
+                          size={24}
+                          activeColor="#ffd700"
+                        />
+                      </ReactTooltip>
+                    </div>}
+                  <div className="movieTagline">
+                    {movieInfo === undefined ? null : movieInfo.tagline}
+                  </div>
+                  <div className="movieOverview">
+                    {movieInfo === undefined ? null : movieInfo.overview}
+                  </div>
                 </div>
               </div>
             </CSSTransition>
-          </div>
-          <div className={similarMoviesList === undefined ? "movieContainerNoAuth" : "similarMovieContainer"}>
-            <div className="slideTitle">Recommended movies</div>
-            <CSSTransition
-              in={showSimilarMovies}
-              timeout={300}
-              classNames="similarMoviesLoad"
-            >
-              <Carousel
-                responsive={responsive}
-                autoPlay={false}
-                itemClass="movieImage"
-                containerClass="sliderContainer"
-                draggable={true}
-                swipeable={true}
-                infinite={true}
-                partialVisible={false}
-                centerMode={true}
-                autoPlay={true}
-                showDots={false}
-                autoPlaySpeed={7000}
+            <div className={showMovie === false ? "movieContainerNoAuth" : null}>
+              <CSSTransition
+                in={showMovie}
+                timeout={300}
+                classNames="movieLoad"
               >
-                {similarMoviesList === undefined ? <div></div> : similarMoviesList}
-              </Carousel>
+                <div className="movieSecondRow">
+                  <div className="movieDetails">
+                    <div className="castContainer">
+                      {movieInfo === undefined ? null : directorsList === undefined ? null : directors === undefined ? null : directors.length >= 2 ? <div className="movieCast"><span>Directors: </span>{directorsList}</div> : <div className="movieCast"><span>Director: </span>{directorsList}</div>}
+                      {movieInfo === undefined ? null : actorsList === undefined ? null : <div className="movieCast"><span>Cast: </span>{actorsList}</div>}
+                      {movieInfo === undefined ? null : <div className="movieCast"><span>Budget: </span>{movieInfo.budget === '0' ? "Not available " : movieInfo.budget}</div>}
+                      {movieInfo === undefined ? null : <div className="movieCast"><span>Revenue: </span>{movieInfo.revenue === '0' ? "Not available " : movieInfo.revenue}</div>}
+                    </div>
+                    <div className="providersContainer">
+                      {providersList === undefined ? null : <div className="streamText">Watch now! <span className="streamText2">Powered by <a target="_blank" href="https://www.justwatch.com/">JustWatch</a></span></div>}
+                      <div className="providersList">
+                        {providersList === undefined ? null : providersList.providersBuy.length === 0 ? null : <div className="providersTitle">Buy</div>}
+                        {providersList === undefined ? null : providersList.providersBuy}
+                      </div>
+                      <div className="providersList">
+                        {providersList === undefined ? null : providersList.providersRent.length === 0 ? null : <div className="providersTitle">Rent</div>}
+                        {providersList === undefined ? null : providersList.providersRent}
+                      </div>
+                      <div className="providersList">
+                        {providersList === undefined ? null : providersList.providersFlatrate.length === 0 ? null : <div className="providersTitle">Stream</div>}
+                        {providersList === undefined ? null : providersList.providersFlatrate}
+                      </div>
+                    </div>
+                  </div>
 
-            </CSSTransition>
+                  <div className="movieTrailerContainer">
+                    {trailer === undefined ? null : trailer === null ? null : <iframe title='video' id={10} allowFullScreen frameBorder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
+                  </div>
+                </div>
+              </CSSTransition>
+            </div>
+            <div className={similarMoviesList === undefined ? "movieContainerNoAuth" : "similarMovieContainer"}>
+              <div className="slideTitle">Recommended movies</div>
+              <CSSTransition
+                in={showSimilarMovies}
+                timeout={300}
+                classNames="similarMoviesLoad"
+              >
+                <Carousel
+                  responsive={responsive}
+                  autoPlay={false}
+                  itemClass="movieImage"
+                  containerClass="sliderContainer"
+                  draggable={true}
+                  swipeable={true}
+                  infinite={true}
+                  partialVisible={false}
+                  centerMode={true}
+                  autoPlay={true}
+                  showDots={false}
+                  autoPlaySpeed={7000}
+                >
+                  {similarMoviesList === undefined ? <div></div> : similarMoviesList}
+                </Carousel>
+
+              </CSSTransition>
+            </div>
           </div>
-        </div>
 
+        </div>
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
-    </div>
     </DocumentMeta>
   );
 

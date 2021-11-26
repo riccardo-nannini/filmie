@@ -45,3 +45,15 @@
       display: none;
     }
   }
+
+  @media screen and (max-width: 500px) {
+    .copyrightFooter{
+      font-size: 14px;
+      padding-top: 16px;
+
+    }
+    .powered{
+      padding-top: 16px;
+      font-size: 14px;
+    }
+  }

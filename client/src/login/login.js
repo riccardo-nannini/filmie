@@ -3,6 +3,7 @@ import './login.css'
 import Header from '../header/header.js';
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
+import DocumentMeta from 'react-document-meta';
 import Footer from '../footer/footer';
 
 export default function Login() {
@@ -13,6 +14,17 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
 
+  const meta = {
+    title: 'Filmie: Sign in',
+    description: "Sign in with your account",
+    canonical: 'https://www.filmie.org',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'movie,cinema,film,sign-in,login'
+      }
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -42,6 +54,7 @@ export default function Login() {
   }
 
   return (
+    <DocumentMeta {...meta}>
     <div className="container">
       <Header></Header>
       <div className="middleContainer">
@@ -74,5 +87,6 @@ export default function Login() {
       </div>
       <Footer isFixed={true}></Footer>
     </div>
+    </DocumentMeta>
   );
 }

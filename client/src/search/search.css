@@ -68,8 +68,35 @@ form.searchBarMovies::after {
 }
 
 .searchCentered {
-  margin: 2% 18%;
+  margin: 30px 18%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 800px) {
+  .searchCentered{
+    margin: 30px 8%;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .searchCentered{
+    margin: 30px 4%;
+  }
+  form.searchBarMovies input[type=text] {
+    margin-left: 8px;
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .searchCentered{
+    margin: 30px 4%;
+  }
+  form.searchBarMovies input[type=text] {
+    margin-left: 2px;
+    width: 75%;
+  }
 }
