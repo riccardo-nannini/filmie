@@ -15,7 +15,7 @@ export default function Login() {
   const history = useHistory();
 
   const meta = {
-    title: 'Filmie: Sign in',
+    title: 'Filmie | Sign in',
     description: "Sign in with your account",
     canonical: 'https://www.filmie.org',
     meta: {

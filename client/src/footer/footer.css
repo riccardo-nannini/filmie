@@ -38,6 +38,7 @@
     padding-top: 14px;
     color: white;
     text-decoration: inherit;
+    display: ruby;
   }
 
   @media screen and (max-width: 730px) {
@@ -55,5 +56,6 @@
     .powered{
       padding-top: 16px;
       font-size: 14px;
+      margin-right: 60px;
     }
   }

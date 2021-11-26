@@ -10,6 +10,7 @@ import Profile from './profile/profile.js';
 import Movie from './movie/movie.js'
 import Tv from './tv/tv.js'
 import Search from './search/search.js'
+import About from './about/about.js'
 
 
 ReactDOM.render(
@@ -22,7 +23,8 @@ ReactDOM.render(
         <Route path="/profile" exact component={() => <Profile/>}></Route>
         <Route path="/movie/:movieid" component={(props) => <Movie {...props}/>}></Route>
         <Route path="/search" component={(props) => <Search {...props}/>}></Route>
-        <Route path="/tv/:tvid" exact component={(props) => <Tv {...props}/>}></Route>
+        <Route path="/about" component={(props) => <About {...props}/>}></Route>
+        {/*<Route path="/tv/:tvid" exact component={(props) => <Tv {...props}/>}></Route>*/}
       </Switch>
     </Router>
   </React.StrictMode>,

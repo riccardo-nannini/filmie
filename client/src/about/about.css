@@ -1,0 +1,44 @@
+.aboutTextContainer {
+  color: white;
+}
+
+.aboutTitle{
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.aboutText{
+  margin-top: 6px;
+}
+
+.aboutText2{
+  margin-top: 8px;
+}
+
+.middleContainerAbout{
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 730px) {
+  .middleContainerAbout{
+    width: 80%;
+  }
+
+.aboutText{
+  margin-top: 12px;
+}
+
+.aboutText2{
+  margin-top: 14px;
+}
+
+}

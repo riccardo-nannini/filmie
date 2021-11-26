@@ -19,7 +19,7 @@ export default function Search(props) {
   const [noResults, setNoResults] = useState(false);
   
   const meta = {
-    title: 'Filmie: Search',
+    title: 'Filmie | Search',
     description: "Search your favorite movie!",
     canonical: 'https://www.filmie.org',
     meta: {

@@ -29,7 +29,7 @@ export default function Home() {
   const [showUpcoming, setShowUpcoming] = useState(false);
 
   const meta = {
-    title: 'Filmie: Movie Lovers Only',
+    title: 'Filmie | Movie Lovers Only',
     description: "Everything you need to know about movies. Keep track of the latest releases and create a list of your favorite contents!",
     canonical: 'https://www.filmie.org',
     meta: {

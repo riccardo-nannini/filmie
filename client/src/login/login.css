@@ -108,3 +108,17 @@ input[type="password"]{background-color:transparent; font: 15px/24px "Lato", Ari
   box-shadow: 0 1px #666;
   transform: translateY(0px);
 }
+
+@media screen and (max-width: 730px) {
+  
+  .middleContainer{
+    width: 92% !important;
+  }
+
+  .copyright{
+    margin-left: 33% !important;
+    margin-right: 40% !important;
+    margin-top: 30px !important;
+    width: 40%;
+  }
+}

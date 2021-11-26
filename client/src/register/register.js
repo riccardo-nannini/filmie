@@ -17,7 +17,7 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const meta = {
-    title: 'Filmie: Sign up',
+    title: 'Filmie | Sign up',
     description: "Create your Filmie account",
     canonical: 'https://www.filmie.org',
     meta: {

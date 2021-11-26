@@ -17,7 +17,7 @@ export default function Profile() {
   }
 
   const meta = {
-    title: 'Filmie: Profile',
+    title: 'Filmie | Profile',
     description: 'Change your profile settings',
     canonical: 'https://www.filmie.org',
     meta: {
