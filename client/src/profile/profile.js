@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from '../header/header.js';
 import Footer from '../footer/footer.js';
+import DocumentMeta from 'react-document-meta';
 import ProfileNav from './profileSideNav/profileSideNav.js';
 import './profile.css';
 const passVal = require('../register/inputValidation.js');
@@ -14,6 +15,19 @@ export default function Profile() {
     delete: 2,
     overview: 3
   }
+
+  const meta = {
+    title: 'Filmie: Profile',
+    description: 'Change your profile settings',
+    canonical: 'https://www.filmie.org',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'profile,movie,cinema'
+      }
+    }
+  };
+
   const [user, setUser] = useState({});
   const [menu, setMenu] = useState(menuValue.overview)
   const [error, setError] = useState(false);
@@ -111,6 +125,7 @@ export default function Profile() {
 
 
   return (
+    <DocumentMeta {...meta}>
     <div className="profileContainer">
       <Header></Header>
       <div className="middle">
@@ -163,6 +178,7 @@ export default function Profile() {
       </div>
       <Footer></Footer>
     </div>
+    </DocumentMeta>
   );
 
 }

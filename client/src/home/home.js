@@ -4,6 +4,7 @@ import Footer from '../footer/footer.js';
 import Header from '../header/header.js';
 import Carousel from 'react-multi-carousel';
 import { CSSTransition } from 'react-transition-group';
+import DocumentMeta from 'react-document-meta';
 import MovieCard from './movieCard/movieCard.js';
 import 'react-multi-carousel/lib/styles.css';
 import './home.css';
@@ -26,6 +27,18 @@ export default function Home() {
   const [showTrendingMovies, setShowTrendingMovies] = useState(false);
   const [showNowPlaying, setShowNowPlaying] = useState(false);
   const [showUpcoming, setShowUpcoming] = useState(false);
+
+  const meta = {
+    title: 'Filmie: Movie Lovers Only',
+    description: "Everything you need to know about movies. Keep track of the latest releases and create a list of your favorite contents!",
+    canonical: 'https://www.filmie.org',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'movie,cinema,film'
+      }
+    }
+  };
 
   useEffect(() => {
     fetch("/favorite", {
@@ -180,6 +193,7 @@ export default function Home() {
   };
 
   return (
+    <DocumentMeta {...meta}>
     <div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <Header></Header>
@@ -330,6 +344,7 @@ export default function Home() {
       </div>
       <Footer></Footer>
     </div>
+    </DocumentMeta>
   );
 
 }

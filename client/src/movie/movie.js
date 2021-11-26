@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
 import Carousel from 'react-multi-carousel';
 import Provider from './provider/provider.js';
+import DocumentMeta from 'react-document-meta';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from 'victory';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import MovieCard from '../home/movieCard/movieCard.js';
@@ -38,6 +39,17 @@ export default function Movie(props) {
   const [showSimilarMovies, setShowSimilarMovies] = useState(false);
   const [providers, setProviders] = useState();
   const [providersList, setProvidersList] = useState();
+  const [meta, setMeta] = useState({
+    title: 'Filmie: Movie',
+    description: "Movie info",
+    canonical: 'https://www.filmie.org',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'movie,cinema,film'
+      }
+    }
+  });
 
   const history = useHistory();
   const id = props.location.pathname.substring(7);
@@ -68,6 +80,17 @@ export default function Movie(props) {
         setIsWatchlist(data.isWatchlist)
         setShowMovie(true);
         setIsRated(data.isRated);
+        setMeta({
+          title: 'Filmie: '+ data.title,
+          description: data.overview,
+          canonical: 'https://www.filmie.org',
+          meta: {
+            charset: 'utf-8',
+            name: {
+              keywords: 'movie,cinema,film,rele'
+            }
+          }
+        });
       });
   }, []);
 
@@ -277,12 +300,12 @@ export default function Movie(props) {
       slidesToSlide: 3
     },
     desktop0: {
-      breakpoint: { max: 1800, min: 1400 },
-      items: 10,
+      breakpoint: { max: 2048, min: 1800 },
+      items: 8,
       slidesToSlide: 2
     },
     desktop1: {
-      breakpoint: { max: 2048, min: 1400 },
+      breakpoint: { max: 1800, min: 1400 },
       items: 6,
       slidesToSlide: 2
     },
@@ -313,6 +336,7 @@ export default function Movie(props) {
   };
 
   return (
+    <DocumentMeta {...meta}>
     <div className="movieCont" onClick={() => ReactTooltip.hide()}>
       <Header></Header>
       <div className="moviemiddle" style={movieInfo === undefined ? null : { backgroundImage: `url(${movieInfo.backdrop})` }}>
@@ -476,7 +500,7 @@ export default function Movie(props) {
                 </div>
 
                 <div className="movieTrailerContainer">
-                  {trailer === undefined ? null : trailer === null ? null : <iframe title='video' id={10} allowFullScreen frameborder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
+                  {trailer === undefined ? null : trailer === null ? null : <iframe title='video' id={10} allowFullScreen frameBorder="0" className="movieTrailer" src={"https://www.youtube-nocookie.com/embed/" + trailer}></iframe>}
                 </div>
               </div>
             </CSSTransition>
@@ -511,7 +535,8 @@ export default function Movie(props) {
 
       </div>
       <Footer></Footer>
-    </div >
+    </div>
+    </DocumentMeta>
   );
 
 }

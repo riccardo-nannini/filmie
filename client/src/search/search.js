@@ -6,6 +6,7 @@ import SearchMovie from './searchMovie/searchMovie.js';
 import search from '../search.svg'
 import { useHistory } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
+import DocumentMeta from 'react-document-meta';
 import './search.css';
 
 
@@ -16,6 +17,18 @@ export default function Search(props) {
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [noResults, setNoResults] = useState(false);
+  
+  const meta = {
+    title: 'Filmie: Search',
+    description: "Search your favorite movie!",
+    canonical: 'https://www.filmie.org',
+    meta: {
+      charset: 'utf-8',
+      name: {
+        keywords: 'movie,cinema,film,search'
+      }
+    }
+  }
 
   const urlQuery = props.location.search;
   const history = useHistory();
@@ -62,6 +75,7 @@ export default function Search(props) {
   }
 
   return (
+    <DocumentMeta {...meta}>
     <div className="movieCont">
       <Header></Header>
       <div className="background">
@@ -85,6 +99,7 @@ export default function Search(props) {
       </div>
       <Footer></Footer>
     </div>
+    </DocumentMeta>
   );
 
 }

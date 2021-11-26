@@ -320,6 +320,13 @@
     .movieButtonIcon{
         margin-right: 0px;
     }
+    .moviemiddle{
+        background-image: none !important;
+    }
+
+    .movieOverlay{
+        background-image: none !important;
+    }
   }
 
   @media screen and (max-width: 400px) {
@@ -334,4 +341,9 @@
     .movieSecondRow{
         margin: 40px 7% 40px 7%;
     }
+    .movieTitle{
+        font-weight: 600;
+        font-size: 28px;
+    }
+
   }
