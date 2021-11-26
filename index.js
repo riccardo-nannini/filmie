@@ -98,6 +98,7 @@ app.use(require('./routes/getSimilar'))
 app.use(require('./routes/getProviders'))
 app.use(require('./routes/getUpcoming'))
 app.use(require('./routes/getCast'))
+app.use(require('./routes/about'))
 
 
 app.get('/', (req, res) => {

@@ -14,7 +14,7 @@ export default function Footer(props) {
     <div className={isFixed? "footerFixed" : "footer"}>
       <div className="copyrightFooter"><Link className="footerLink" to="/about">About Filmie</Link></div>
       <a href="mailto:info@filmie.org"className="contact">Contact us</a>
-      <a className="powered" href="https://www.themoviedb.org/" target="_blank">Powered by <img src={tmdb}></img></a>
+      <a className="powered" href="https://www.themoviedb.org/" target="_blank">Powered by <img className="tmdbLogo" src={tmdb}></img></a>
     </div> 
 
   );
