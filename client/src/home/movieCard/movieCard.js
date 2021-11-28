@@ -8,7 +8,7 @@ export default function MovieCard(props) {
 
   return (
     <a href={"/movie/" + movie.id} className="movieCardContainer">
-      <img className="movieCard" src={"https://image.tmdb.org/t/p/w220_and_h330_face/" + movie.poster}></img>
+      <img className="movieCard" src={"https://image.tmdb.org/t/p/w440_and_h660_face" + movie.poster}></img>
     </a>);
 
 }
