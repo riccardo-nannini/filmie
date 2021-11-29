@@ -277,7 +277,7 @@ export default function Home() {
                 centerMode={true}
                 autoPlay={true}
                 showDots={false}
-                autoPlaySpeed={8000}
+                autoPlaySpeed={6000}
               >
                 {nowPlayingList === undefined ? <div></div> : nowPlayingList}
               </Carousel>
@@ -305,7 +305,7 @@ export default function Home() {
                 centerMode={true}
                 autoPlay={true}
                 showDots={false}
-                autoPlaySpeed={8000}
+                autoPlaySpeed={6400}
               >
                 {trendingMoviesList === undefined ? <div></div> : trendingMoviesList}
               </Carousel>
@@ -333,7 +333,7 @@ export default function Home() {
                 centerMode={true}
                 autoPlay={true}
                 showDots={false}
-                autoPlaySpeed={8000}
+                autoPlaySpeed={6800}
               >
                 {upcomingList === undefined ? <div></div> : upcomingList}
               </Carousel>
