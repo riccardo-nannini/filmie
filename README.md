@@ -45,7 +45,8 @@ The following is a code snippet of the interactions with the API.<br/>
 Some code has beed deleted in order to keep the snippet short and focus only on the API interaction. The full code can be found [here](https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/routes/movie.js)
 
 ```
-let urlMovie = "https://api.themoviedb.org/3/movie/" + movieid + "?api_key=" + ApiKey + "&language=" + language
+let urlMovie = "https://api.themoviedb.org/3/movie/" 
+  + movieid + "?api_key=" + ApiKey + "&language=" + language
 
   calls.push(axios.get(urlMovie));
   if (req.isAuthenticated()) {
@@ -95,7 +96,7 @@ let urlMovie = "https://api.themoviedb.org/3/movie/" + movieid + "?api_key=" + A
     );
 ```
 
-<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/movie.gif?raw=true" width="700">
+<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/movie.gif?raw=true" width="1000">
 
 ## Chart  :chart_with_upwards_trend:
 The rate distribution chart has been implemented using the [Victory React.js components](https://formidable.com/open-source/victory/).
