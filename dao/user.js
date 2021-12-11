@@ -44,25 +44,17 @@ function authenticate(email, password, cb) {
   })
 };
 
-function authenticateAsync(email, password) {
-  db = conn.db_connection.getConnection();
-  return db.get("SELECT * FROM users WHERE email=?;", [email])
-    .then((user) => {
-      return validPassword(String(password), user.hash, user.salt);
-    })
+function validPassword(password, hash, salt) {
+  var hashVerify = crypto
+    .pbkdf2Sync(password, salt, 10000, 64, "sha512")
+    .toString("hex");
+  return hash === hashVerify;
 }
 
 function addUser(name, surname, email, hash, salt) {
   db = conn.db_connection.getConnection();
   db.run("INSERT INTO users (name, surname, email, hash, salt) VALUES (?,?,?,?,?);"
     ,[name, surname, email, hash, salt]);
-}
-
-function validPassword(password, hash, salt) {
-  var hashVerify = crypto
-    .pbkdf2Sync(password, salt, 10000, 64, "sha512")
-    .toString("hex");
-  return hash === hashVerify;
 }
 
 function updatePassword(email, password) {
@@ -99,5 +91,4 @@ module.exports = {
         deleteUser: deleteUser,
         findByEmail: findByEmail,
         updatePassword: updatePassword,
-        authenticateAsync: authenticateAsync,
       };
