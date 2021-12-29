@@ -35,9 +35,9 @@ export default function SearchMovie(props) {
             <span className="searchMovieYear">{"(" + movie.year + ")"}</span>
           </div>
         </div>
-        <div className="searchOverview">
+        <span className="searchOverview">
           {movie.overview}
-        </div>
+        </span>
       </div>
     </div>
   );

@@ -46,8 +46,8 @@
 .searchMovieYear{
   font-size: 24px;
   margin-left: 7px;
-  font-weight: 500;
-  padding-top: 2.5px;
+  font-weight: 300;
+  padding-top: 1px;
 }
 
 .searchDescription a{
@@ -58,10 +58,55 @@
 .searchDescription{
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .searchOverview{
-  overflow: hidden;
-  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
   margin: 0px 0px 0px 20px;
+}
+
+@media screen and (max-width: 530px) {
+  .searchMovieYear{
+    font-size: 15px;
+    padding-top: 1px;
+  }
+  .searchMovieTitle{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0px 0px 8px 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    text-overflow: ellipsis;
+    overflow-y: hidden;
+  }
+  .searchOverview{
+    margin-top: 0px;
+    font-size: 13px;
+  }
+  .searchDescription{
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .imageNotFoundContainer{
+    height: 141px;
+    width: 94px;
+    border-radius: 5px;
+    background-color: #a8a8a8;
+  }
+  .searchMovieContainer {
+    height: 141px;
+  }
+  .searchMoviePoster{
+    height: 141px;
+    width: 94px;
+  }
 }

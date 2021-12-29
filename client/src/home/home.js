@@ -156,7 +156,6 @@ export default function Home() {
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 10,
       slidesToSlide: 3
@@ -164,6 +163,11 @@ export default function Home() {
     desktop: {
       breakpoint: { max: 2048, min: 1400 },
       items: 8,
+      slidesToSlide: 2
+    },
+    desktop1: {
+      breakpoint: { max: 2048, min: 1400 },
+      items: 6,
       slidesToSlide: 2
     },
     desktop2: {
