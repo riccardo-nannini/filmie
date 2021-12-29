@@ -96,18 +96,18 @@ let urlMovie = "https://api.themoviedb.org/3/movie/"
     );
 ```
 
-<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/assets/movie.gif?raw=true" width="1000">
+<img src="https://github.com/riccardo-nannini/filmie/blob/main/assets/movie.gif?raw=true" width="1000">
 
 ## Chart  :chart_with_upwards_trend:
 The rate distribution chart has been implemented using the [Victory React.js components](https://formidable.com/open-source/victory/).
 
 This chart let users know how the different ratings that contribute to the final rate of a movie are distributed. Given two equal final rates, say 50%, there are countless distribution that can create such a score. For instance in one case the majority of the ratings could be around 40%-60% while another case would have ratings polarized through the ends (the typical situation for the 'you hate it or you love it' movies).
 
-<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/assets/chart.gif?raw=true" width="600">
+<img src="https://github.com/riccardo-nannini/filmie/blob/main/assets/chart.gif?raw=true" width="600">
 
 ## ERD  :floppy_disk:
 <br>
-<img src="https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/assets/ERD.png?raw=true" width="800">
+<img src="https://github.com/riccardo-nannini/filmie/blob/main/assets/ERD.png?raw=true" width="800">
 
 ## Test Strategy :hammer:
 **Unit tests** will be created for every meaningful part of the application.<br>
