@@ -39,17 +39,7 @@ export default function Movie(props) {
   const [showSimilarMovies, setShowSimilarMovies] = useState(false);
   const [providers, setProviders] = useState();
   const [providersList, setProvidersList] = useState();
-  const [meta, setMeta] = useState({
-    title: 'Filmie | Movie',
-    description: "Movie info",
-    canonical: 'https://www.filmie.org',
-    meta: {
-      charset: 'utf-8',
-      name: {
-        keywords: 'movie,cinema,film'
-      }
-    }
-  });
+  const [meta, setMeta] = useState({});
 
   const history = useHistory();
   const id = props.location.pathname.substring(7);
