@@ -157,12 +157,12 @@ export default function Home() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 10,
+      items: 11,
       slidesToSlide: 3
     },
     desktop: {
       breakpoint: { max: 2048, min: 1400 },
-      items: 8,
+      items: 9,
       slidesToSlide: 2
     },
     desktop1: {
@@ -176,22 +176,21 @@ export default function Home() {
       slidesToSlide: 2
     },
     desktop3: {
-      breakpoint: { max: 1210, min: 1060 },
+      breakpoint: { max: 1210, min: 900 },
       items: 4,
       slidesToSlide: 2
     },
     tablet: {
-      breakpoint: { max: 1060, min: 900 },
-      items: 3,
-      slidesToSlide: 2
-    },
-    tablet2: {
       breakpoint: { max: 900, min: 730 },
-      items: 2,
+      items: 3,
       slidesToSlide: 1
     },
     mobile: {
-      breakpoint: { max: 730, min: 0 },
+      breakpoint: { max: 730, min: 550 },
+      items: 2
+    },
+    mobile2: {
+      breakpoint: { max: 550, min: 0 },
       items: 1
     }
   };

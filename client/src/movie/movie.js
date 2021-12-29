@@ -337,20 +337,24 @@ export default function Movie(props) {
               classNames="movieLoad"
             >
               <div className="centered" >
-                <div className="poster">
-                  {movieInfo === undefined ?
+                <div>
+                {movieInfo === undefined ?
+                  <div className="poster">
                     <div className="noImage">
                     </div>
+                  </div>
+
+                  :
+                  movieInfo.poster === null ?
+                    <div className="brokenImageContainer">
+                      <img className="brokenImage" src={imageNotFound}></img>
+                    </div>
                     :
-                    movieInfo.poster === null ?
-                      <div className="brokenImageContainer">
-                        <img className="brokenImage" src={imageNotFound}></img>
-
-                      </div>
-                      :
+                    <div className="poster">
                       <img className="moviePoster" src={movieInfo.poster}></img>
+                    </div>
 
-                  }
+                }
                 </div>
                 <div className="movieContent">
                   <div className="movieTitle">

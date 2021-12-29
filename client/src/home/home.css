@@ -59,18 +59,9 @@
   transition: opacity 1500ms;
 }
 
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 1060px) {
   .movieContainer{
     margin: 40px 20px 30px 20px;
-  }
-
-  form.searchBarForm input[type=text] {
-    margin-left: 20px;
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    width: 300px;
-    background: #f1f1f1;
   }
 }
 

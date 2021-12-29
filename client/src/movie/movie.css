@@ -245,8 +245,8 @@
 }
 
 .brokenImage{
-    width: 200px;
-    margin: 200px 0px 0px 90px;
+    width: 180px;
+    margin: 200px 0px 0px 105px;
     opacity: 0.5;
 }
 
@@ -276,12 +276,15 @@
   
     .poster{
         margin: 50px 10% 0 11%;
-        
     }
 
     .moviePoster{
         width: 300px;
         height: 450px;
+    }
+
+    .brokenImageContainer{
+        display: none;
     }
 
     .movieContent{
