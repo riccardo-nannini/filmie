@@ -1,16 +1,15 @@
-# CS484 Secure Web Application Development
-
-### Team 28 - Fall 2021 
-
-## Filmie :clapper:
+# Filmie :clapper:
 ![example workflow](https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/actions/workflows/main.yml/badge.svg)
+
+<img src="https://github.com/riccardo-nannini/filmie/blob/main/assets/movie.gif?raw=true" width="1000">
 
 The Filmie website is available [here](https://www.filmie.org)<br/><br/>
 Filmie aims at creating a place where *cinephiles* can discover new contents and find any kind of informations about movies.<br/><br/>
 Filmie users can create list of their favorite movies, set up a watch list as well as give ratings.<br/><br/>
 Filmie offers various informations to its users: you can find movies that are being played in theaters based on your country, the latest releases, trending contents and so on. <br/><br/>
 Each movie has a dedicated page where users can find any kind of informations such as trailer, streaming provider (based on your country), plot overview, cast, budget and so on...<br/><br/>
-The website also employs internalization! Try changing your default browser language and navigate the website
+The website also employs internalization! Try changing your default browser language and navigate the website.<br/>
+Filmie uses the TMDB API but is not endorsed or certified by TMDB.
 ## Developer :bust_in_silhouette:
  #### Riccardo Nannini :it:
 - Frontend, Backend, Database
@@ -38,65 +37,6 @@ node index.js
 ```
 
 By default the server will run on port 8080, it is possible to change the port with PORT=*yourport* in a **_.env_** file
-
-## API interaction :electric_plug:
-
-The following is a code snippet of the interactions with the API.<br/>
-Some code has beed deleted in order to keep the snippet short and focus only on the API interaction. The full code can be found [here](https://github.com/UIC-CS484/assignment-2---final-project-repository-team-28/blob/main/routes/movie.js)
-
-```
-let urlMovie = "https://api.themoviedb.org/3/movie/" 
-  + movieid + "?api_key=" + ApiKey + "&language=" + language
-
-  calls.push(axios.get(urlMovie));
-  if (req.isAuthenticated()) {
-    //...
-  }
-
-  Promise.all(calls).then((response) => {
-
-    //...
-
-    let movieData = response[0].data;
-    
-    //build poster and backdrop urls
-    if (movieData.poster_path !== null) poster = "https://image.tmdb.org
-    	/t/p/w600_and_h900_bestv2" + movieData.poster_path;
-    if (movieData.backdrop_path !== null) backdrop = "https://image.tmdb.org
-    	/t/p/w1920_and_h800_multi_faces" + movieData.backdrop_path;
-
-    genres = ""			//API give genres as an array, I want a string
-    for (genre in movieData.genres) {
-      genres += movieData.genres[genre].name;
-      genres += ", "
-    }
-    genres = genres.substring(0, genres.length - 2)
-
-    resp = {
-      id: movieid,
-      year: movieData.release_date,
-      title: movieData.title,
-      duration: movieData.runtime,
-      overview: movieData.overview,
-      tagline: movieData.tagline,
-      poster: poster,
-      backdrop: backdrop,
-      genres: genres,
-      isAuth: req.isAuthenticated(),
-      isFavorite: isFavorite,
-      isWatchlist: isWatchlist,
-      isRated: isRated,
-      rate: rate,
-      budget: numberWithCommas(movieData.budget),	//number formatting
-      revenue: numberWithCommas(movieData.revenue), //number formatting
-    }
-
-    res.json(
-      resp
-    );
-```
-
-<img src="https://github.com/riccardo-nannini/filmie/blob/main/assets/movie.gif?raw=true" width="1000">
 
 ## Chart  :chart_with_upwards_trend:
 The rate distribution chart has been implemented using the [Victory React.js components](https://formidable.com/open-source/victory/).
