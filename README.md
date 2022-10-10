@@ -6,7 +6,6 @@
 The Filmie website is available [here](https://www.filmie.org)<br/><br/>
 Filmie aims at creating a place where *cinephiles* can discover new contents and find any kind of informations about movies.<br/><br/>
 Filmie users can create list of their favorite movies, set up a watch list as well as give ratings.<br/><br/>
-Filmie offers various informations to its users: you can find movies that are being played in theaters based on your country, the latest releases, trending contents and so on. <br/><br/>
 Each movie has a dedicated page where users can find any kind of informations such as trailer, streaming provider (based on your country), plot overview, cast, budget and so on...<br/><br/>
 The website also employs internalization! Try changing your default browser language and navigate the website.<br/>
 Filmie uses the TMDB API but is not endorsed or certified by TMDB.
