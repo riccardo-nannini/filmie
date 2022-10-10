@@ -7,6 +7,7 @@ const passport   = require('passport');
 const LocalStrategy = require("passport-local").Strategy;
 var SQLiteStore  = require('connect-sqlite3')(session);
 const Database = require('sqlite-async')
+const cors = require('cors');
 require('dotenv').config();
 
 
@@ -41,6 +42,9 @@ app.use(function(req, res, next) { //http headers
   next();
 })
 
+app.use(cors({
+  origin: ['https://www.filmie.org', "https://api.themoviedb.org", "https://www.youtube.com", ]
+}));
 
 var session_config = {
   secret: process.env.SECRET || 'secret', //a random unique string key used to authenticate a session
