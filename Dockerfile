@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY ./package.json .
 RUN npm install
+RUN npm i sqlite-async@1.1.2
 
 COPY . .
 
